@@ -8,8 +8,8 @@ input{width:100%;padding:11px;margin:6px 0;border:1px solid #ef9a9a;border-radiu
 button{width:100%;background:#c62828;color:#fff;border:0;padding:12px;border-radius:10px;font-weight:bold}
 .r{background:#ffebee;padding:12px;border-radius:10px;margin-top:10px;font-weight:bold}</style></head><body>
 <div class="h"><h2>MAKHANANI Health Monitor PRO</h2><small>Vukona Press | v2.0 PRO | Offline</small></div>
-<div class="c"><h3>🩸 BP Check</h3><input id="sys" value="125" type="number" placeholder="Systolic"><input id="dia" value="82" type="number" placeholder="Diastolic"><button onclick="bp()">Check BP</button><div id="bpo" class="r">BP 125/82 - Elevated</div></div>
-<div class="c"><h3>❤️ Heart Rate</h3><input id="hr" value="78" type="number"><button onclick="hrf()">Check</button><div id="hro" class="r">78 BPM - Normal</div></div>
+<div class="c"><h3>🩸 BP Check</h3><input id="sys" type="number" min="70" max="250" placeholder="Systolic e.g. 120"><input id="dia" type="number" min="40" max="150" placeholder="Diastolic e.g. 80"><button onclick="bp()">Check BP</button><div id="bpo" class="r">BP 125/82 - Elevated</div></div>
+<div class="c"><h3>❤️ Heart Rate</h3><input id="hr" type="number" min="30" max="200" placeholder="Heart Rate e.g. 72"><button onclick="hrf()">Check</button><div id="hro" class="r">78 BPM - Normal</div></div>
 <div class="c"><h3>⚖️ BMI (NEW)</h3><input id="w" value="70" type="number" placeholder="Weight kg"><input id="ht" value="1.75" type="number" placeholder="Height m"><button onclick="bmi()">Calculate BMI</button><div id="bmiO" class="r"></div></div>
 <div class="c"><h3>🍬 Blood Sugar (NEW)</h3><input id="sugar" value="5.4" type="number" step="0.1"><button onclick="sug()">Check Sugar</button><div id="sugarO" class="r"></div></div>
 <div class="c"><h3>📊 History</h3><div id="hist" class="r">No records yet - checks will save here</div><button onclick="clearH()">Clear History</button></div>
@@ -17,8 +17,35 @@ button{width:100%;background:#c62828;color:#fff;border:0;padding:12px;border-rad
 <script>
 let history=JSON.parse(localStorage.getItem('healthHist')||'[]');function save(t){history.unshift(new Date().toLocaleTimeString()+': '+t);if(history.length>10)history.pop();localStorage.setItem('healthHist',JSON.stringify(history));showH()}
 function showH(){hist.innerHTML=history.join('<br>')||'No records'}showH();
-function bp(){let s=+sys.value,d=+dia.value;let cat=s<120&&d<80?'Normal':s<130&&d<85?'Elevated':s<140&&d<90?'Stage 1 High':'High - See Doctor';let txt=`BP ${s}/${d} - ${cat}`;bpo.innerHTML=txt;save(txt)}
-function hrf(){let h=+hr.value;let t=h<60?'Low (Bradycardia)':h<=100?'Normal':'High (Tachycardia)';let txt=`${h} BPM - ${t}`;hro.innerHTML=txt;save(txt)}
+function checkBP(){
+let sys=parseFloat(document.getElementById('sys').value)||0;
+let dia=parseFloat(document.getElementById('dia').value)||0;
+let res=document.getElementById('bpResult');
+if(sys<70 || sys>250 || dia<40 || dia>150){
+   res.innerHTML=`❌ Invalid! Sys must 70-250, Dia 40-150<br>You entered ${sys}/${dia}`;
+   res.style.display='block'; return;
+}
+let status="";
+if(sys<90 || dia<60) status="Low - See Doctor";
+else if(sys<=120 && dia<=80) status="Normal ✅";
+else if(sys<=129 && dia<=80) status="Elevated ⚠️";
+else if(sys<=139 || dia<=89) status="High (Stage 1) ⚠️ - See Doctor";
+else status="High (Stage 2) 🔴 - See Doctor Urgently!";
+res.style.display='block';
+res.innerHTML=`BP ${sys}/${dia} - ${status}`;
+// save to history
+let h=JSON.parse(localStorage.getItem('healthHistory')||'[]');
+h.unshift({time:new Date().toLocaleTimeString(),type:'BP',value:`${sys}/${dia} ${status}`});
+localStorage.setItem('healthHistory',JSON.stringify(h.slice(0,20)));
+}
+
+function checkHR(){
+let hr=parseFloat(document.getElementById('hr').value)||0;
+let res=document.getElementById('hrResult');
+if(hr<30 || hr>200){res.innerHTML=`❌ Invalid HR! Must 30-200 BPM`; res.style.display='block'; return;}
+let s=hr<60?'Low (Bradycardia) - If dizzy see doctor':hr<=100?'Normal ✅':'High (Tachycardia) ⚠️';
+res.style.display='block'; res.innerHTML=`${hr} BPM - ${s}`;
+}
 function bmi(){let wgt=+w.value, hgt=+ht.value, b=wgt/(hgt*hgt);let cat=b<18.5?'Underweight':b<25?'Normal':b<30?'Overweight':'Obese';bmiO.innerHTML=`BMI: ${b.toFixed(1)} - ${cat}`;save(`BMI ${b.toFixed(1)} ${cat}`)}
 function sug(){let g=+sugar.value;let cat=g<3.9?'Low':g<=5.6?'Normal':g<=6.9?'Pre-Diabetes':'High - Diabetes risk';sugarO.innerHTML=`${g} mmol/L - ${cat}`;save(`Sugar ${g} ${cat}`)}
 function clearH(){history=[];localStorage.removeItem('healthHist');showH()}
