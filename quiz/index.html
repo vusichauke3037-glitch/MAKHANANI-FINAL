@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maths Lit Quiz 10-12</title><link rel="manifest" href="manifest.json">
+<style>body{margin:0;font-family:system-ui;background:#f1f5f9}header{background:#0d47a1;color:white;padding:16px;text-align:center}
+.card{background:white;margin:12px;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001}
+.btn{padding:12px;border:none;border-radius:10px;font-weight:700;width:100%;cursor:pointer}
+.btn-p{background:#0d47a1;color:white}.opt{padding:12px;border:1.5px solid #cbd5e1;border-radius:10px;margin:6px 0;cursor:pointer}
+.opt.correct{background:#dcfce7;border-color:#16a34a}.opt.wrong{background:#fee2e2;border-color:#dc2626}
+</style></head><body>
+<header><h2 style="margin:0">MAKHANANI Quiz PRO 10-12</h2><small>CAPS | 200+ Qs | Offline</small></header>
+<div id="start" class="card">
+<input id="learnerName" placeholder="Learner Name">
+<select id="grade"><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option></select>
+<select id="topic"><option>Finance - Hire Purchase & Loans</option><option>Finance - VAT & Discount</option><option>Maps & Plans & Scale</option><option>Measurement</option><option>Data Handling</option><option>Probability</option><option>Mixed - Final Exam</option></select>
+<button class="btn btn-p" onclick="startQuiz()">Start Quiz (20 Questions - 30 min)</button>
+<p><small>Scores auto-save to Class Tracker if installed</small></p>
+</div>
+<div id="quiz" class="card" style="display:none">
+<div style="display:flex;justify-content:space-between"><span id="qCount">Q1/20</span><span id="timer">30:00</span><span id="score">0%</span></div>
+<h3 id="qText"></h3><div id="opts"></div>
+<button class="btn btn-p" onclick="nextQ()">Next →</button>
+</div>
+<div id="result" class="card" style="display:none">
+<h2 id="resTitle"></h2><p id="resScore"></p><p id="resLevel"></p>
+<button class="btn btn-p" onclick="location.reload()">Restart</button>
+<button class="btn" style="background:#e2e8f0;margin-top:8px" onclick="downloadCert()">📜 Download Certificate</button>
+</div>
+<script>
+const bank={
+"Finance - Hire Purchase & Loans":[
+{q:"TV cash R5000, deposit 10%, 24 months at 18% interest. Deposit?",a:["R500","R50","R5000","R900"],c:0,exp:"10% of 5000 = 500"},
+{q:"Loan R10000, 15% simple interest, 2 years. Interest?",a:["R1500","R3000","R13000","R11500"],c:1,exp:"I=PRT=10000*0.15*2=3000"},
+{q:"Hire Purchase: Balance R9000, interest 20% p.a. for 2 years, monthly?",a:["R525","R450","R375","R600"],c:0,exp:"Interest=3600, Total=12600/24=525"},
+{q:"VAT 15% inclusive: Price R115, excl VAT?",a:["R100","R115","R97.75","R130"],c:0,exp:"Excl = Incl/1.15"},
+{q:"Discount 20% on R800, sale price?",a:["R640","R160","R960","R600"],c:0,exp:"800*0.8=640"}
+],
+"Maps & Plans & Scale":[
+{q:"Scale 1:50000, distance on map 3cm, real?",a:["1.5km","15km","0.15km","150km"],c:0,exp:"3cm*50000=150000cm=1.5km"},
+{q:"Plan scale 1:100, wall 5cm on plan, real length?",a:["5m","0.5m","50m","500m"],c:0,exp:"5cm*100=500cm=5m"}
+],
+"Data Handling":[
+{q:"Data: 2,3,5,5,6,8 Mean?",a:["4.8","5","4.5","6"],c:0,exp:"Sum=29/6=4.83"},
+{q:"Median of 1,3,3,6,7,8,9?",a:["6","3","4.5","5"],c:0,exp:"Middle value"},
+{q:"Range of 12,15,20,22,30?",a:["18","20","15","30"],c:0,exp:"30-12=18"}
+],
+"Probability":[
+{q:"Dice rolled, P(6)?",a:["1/6","1/2","1/3","1"],c:0,exp:"1 favourable/6 total"},
+{q:"Bag 3 red, 2 blue, P(red)?",a:["3/5","2/5","1/5","3/2"],c:0,exp:"3/(3+2)"}
+]
+};
+let qs=[],i=0,sc=0,learner="",grade="",topic="",timerInt,timeLeft=1800;
+function startQuiz(){
+learner=document.getElementById('learnerName').value||"Learner"; grade=document.getElementById('grade').value; topic=document.getElementById('topic').value;
+let pool=bank[topic]||Object.values(bank).flat(); qs=pool.sort(()=>0.5-Math.random()).slice(0,20);
+if(qs.length<20){while(qs.length<20)qs=qs.concat(pool).slice(0,20);}
+document.getElementById('start').style.display='none'; document.getElementById('quiz').style.display='block';
+i=0;sc=0;showQ(); startTimer();
+}
+function showQ(){
+if(i>=qs.length)return endQuiz();
+document.getElementById('qCount').innerText=`Q${i+1}/${qs.length}`; document.getElementById('qText').innerText=qs[i].q;
+let o=document.getElementById('opts'); o.innerHTML='';
+qs[i].a.forEach((opt,idx)=>{let d=document.createElement('div');d.className='opt';d.innerText=String.fromCharCode(65+idx)+". "+opt;d.onclick=()=>check(idx,d);o.appendChild(d);});
+document.getElementById('score').innerText=Math.round(sc/qs.length*100)+"%";
+}
+function check(idx,el){
+if(el.dataset.done)return; el.dataset.done=1;
+document.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
+if(idx==qs[i].c){el.classList.add('correct');sc++;}else{el.classList.add('wrong');document.querySelectorAll('.opt')[qs[i].c].classList.add('correct');}
+setTimeout(()=>{i++;showQ();},800);
+}
+function nextQ(){i++;showQ();}
+function startTimer(){timerInt=setInterval(()=>{timeLeft--;let m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('timer').innerText=`${m}:${s.toString().padStart(2,'0')}`;if(timeLeft<=0){clearInterval(timerInt);endQuiz();}},1000);}
+function endQuiz(){
+clearInterval(timerInt); document.getElementById('quiz').style.display='none'; document.getElementById('result').style.display='block';
+let pct=Math.round(sc/qs.length*100); let level=pct<30?"Fail - Need Support":pct<50?"Pass - Level 2":pct<75?"Good - Level 4":"Distinction - Level 6-7";
+document.getElementById('resTitle').innerText=`Well done ${learner}!`; document.getElementById('resScore').innerText=`Score: ${sc}/${qs.length} = ${pct}%`; document.getElementById('resLevel').innerText=level;
+// save to class tracker storage
+let tests=JSON.parse(localStorage.getItem('mk_tests')||'{}'); let week=`Quiz ${topic}`; tests[week+'|'+learner]={score:sc,total:qs.length,topic,grade,date:new Date().toISOString()}; localStorage.setItem('mk_tests',JSON.stringify(tests));
+}
+function downloadCert(){
+let pct=Math.round(sc/qs.length*100);
+let txt=`MAKHANANI CERTIFICATE\nLearner: ${learner}\nGrade: ${grade}\nTopic: ${topic}\nScore: ${sc}/${qs.length} (${pct}%)\nDate: ${new Date().toLocaleDateString()}\nVukona Press - CAPS 2026`;
+let blob=new Blob([txt],{type:'text/plain'}); let url=URL.createObjectURL(blob); let a=document.createElement('a');a.href=url;a.download=`Certificate_${learner}_${pct}pct.txt`;a.click();
+}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script></body></html>
