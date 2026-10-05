@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAKHANANI Maths Lit CAPS 2026</title>
+<style>*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#e6f0ff}
+.h{background:#174ea6;color:#fff;padding:18px;text-align:center}
+.c{background:#fff;margin:12px;padding:14px;border-radius:12px;box-shadow:0 2px 6px #0002;border-left:5px solid #174ea6}
+input{width:100%;padding:10px;margin:5px 0;border:1px solid #a0b8e0;border-radius:8px}
+button{width:100%;background:#1a64d6;color:#fff;border:0;padding:12px;border-radius:8px;font-weight:bold}
+.r{background:#e8f5e9;padding:10px;border-radius:8px;margin-top:8px}</style></head>
+<body><div class="h"><h2 style="margin:0">MAKHANANI Maths Lit App - CAPS 2026</h2><p>Paper 1 & 2 - Vukona Press</p></div>
+<div class="c"><h3>Simple Interest</h3><input id="p1" value="5000" type="number" placeholder="Principal"><input id="r1" value="10" type="number" placeholder="Rate %"><input id="y1" value="3" type="number" placeholder="Years"><button onclick="si()">Calculate</button><div id="o1" class="r"></div></div>
+<div class="c"><h3>Compound Interest</h3><input id="p2" value="5000" type="number"><input id="r2" value="10" type="number"><input id="y2" value="3" type="number"><button onclick="ci()">Calculate</button><div id="o2" class="r"></div></div>
+<div class="c"><h3>VAT 15%</h3><input id="price" value="965" type="number"><button onclick="vat()">Calculate</button><div id="o3" class="r"></div></div>
+<div class="c" style="text-align:center"><a href="health/">Open Health Monitor →</a><p>Vukona Press - Offline Ready</p></div>
+<script>function si(){let p=+p1.value,r=+r1.value/100,y=+y1.value,i=p*r*y;o1.innerHTML='Interest R'+i.toFixed(2)+'<br>Total R'+(p+i).toFixed(2)}function ci(){let p=+p2.value,r=+r2.value/100,y=+y2.value,a=p*Math.pow(1+r,y);o2.innerHTML='Amount R'+a.toFixed(2)+'<br>Interest R'+(a-p).toFixed(2)}function vat(){let p=+price.value;let v=p*0.15;o3.innerHTML='VAT R'+v.toFixed(2)+' Total R'+(p+v).toFixed(2)}</script></body></html>

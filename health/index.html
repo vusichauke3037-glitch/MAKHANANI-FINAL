@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAKHANANI Health</title>
+<style>*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#ffe6e6}
+.h{background:#c62828;color:#fff;padding:18px;text-align:center}
+.c{background:#fff;margin:12px;padding:14px;border-radius:12px;border-left:5px solid #c62828}
+input{width:100%;padding:10px;margin:5px 0;border:1px solid #ef9a9a;border-radius:8px}
+button{width:100%;background:#c62828;color:#fff;border:0;padding:12px;border-radius:8px;font-weight:bold}
+.r{background:#ffebee;padding:10px;border-radius:8px;margin-top:8px}</style></head>
+<body><div class="h"><h2>MAKHANANI Health Monitor</h2><p>Vukona Press</p></div>
+<div class="c"><h3>BP Check</h3><input id="sys" value="125" type="number"><input id="dia" value="82" type="number"><button onclick="bp()">Check</button><div id="bpo" class="r">BP 125/82 - Normal</div></div>
+<div class="c"><h3>Heart Rate</h3><input id="hr" value="78" type="number"><button onclick="hrf()">Check</button><div id="hro" class="r"></div></div>
+<div class="c"><h3>Emergency</h3><p>Call 10177 / 112</p><a href="../">← Back to Maths Lit</a></div>
+<script>function bp(){let s=+sys.value,d=+dia.value;let t=s<120&&d<80?'Normal':s<140&&d<90?'Elevated':'High';bpo.innerHTML='BP '+s+'/'+d+' - '+t}function hrf(){let h=+hr.value;let t=h<60?'Low':h<=100?'Normal':'High';hro.innerHTML=h+' BPM - '+t}</script></body></html>
