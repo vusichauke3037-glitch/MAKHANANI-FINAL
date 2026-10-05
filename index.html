@@ -1,56 +1,117 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAKHANANI Maths Lit PRO - CAPS 2026</title>
 <link rel="manifest" href="manifest.json">
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}</script>
-<style>:root{--b:#174ea6;--bg:#e8efff}*{box-sizing:border-box;font-family:Arial}body{margin:0;background:var(--bg)}
-.h{background:var(--b);color:#fff;padding:20px;text-align:center;position:sticky;top:0;z-index:10}
-.tabs{display:flex;gap:6px;padding:10px;background:#fff;overflow:auto}
-.tab{padding:10px 16px;border-radius:20px;border:1px solid var(--b);cursor:pointer;white-space:nowrap}
-.tab.active{background:var(--b);color:#fff}
-.c{background:#fff;margin:12px;padding:16px;border-radius:14px;box-shadow:0 2px 8px #0002;border-left:6px solid var(--b)}
-input,select{width:100%;padding:11px;margin:6px 0;border:1px solid #a0b8e0;border-radius:10px}
-button{width:100%;background:var(--b);color:#fff;border:0;padding:12px;border-radius:10px;font-weight:bold;font-size:16px;margin-top:6px}
-.r{background:#e8f5e9;padding:12px;border-radius:10px;margin-top:10px;font-weight:bold}
-.hidden{display:none}</style><<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px">
-<button onclick="location.href='./health/'" style="background:#b71c1c;color:white;padding:10px 14px;border:none;border-radius:10px;font-weight:700">🏥 Health</button>
-<button onclick="location.href='./class-tracker/'" style="background:#15803d;color:white;padding:10px 14px;border:none;border-radius:10px;font-weight:700">📋 Class Tracker</button>
-<button onclick="location.href='./quiz/'" style="background:#7c3aed;color:white;padding:10px 14px;border:none;border-radius:10px;font-weight:700">🎓 Quiz 10-12</button>
-</div>><body>
-<div class="h"><h2 style="margin:0">MAKHANANI Maths Lit PRO - CAPS 2026</h2><small>Vukona Press | Offline Ready | Paper 1 & 2 | v2.0 PRO</small></div>
-<div class="tabs">
-<div class="tab active" onclick="show('finance')">💰 Finance</div>
-<div class="tab" onclick="show('measure')">📏 Measure & Maps</div>
-<div class="tab" onclick="show('data')">📊 Data</div>
+<meta name="theme-color" content="#0d47a1">
+<style>
+*{box-sizing:border-box;font-family:system-ui}body{margin:0;background:#f1f5f9}
+header{background:#0d47a1;color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10}
+.nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+.nav button{padding:11px 16px;border:none;border-radius:10px;font-weight:800;cursor:pointer;color:white}
+.card{background:white;margin:12px;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001}
+input{width:100%;padding:12px;margin:6px 0;border:1.5px solid #cbd5e1;border-radius:10px}
+.btn{padding:12px;border:none;border-radius:10px;font-weight:800;width:100%;cursor:pointer;background:#0d47a1;color:white}
+.result{background:#dcfce7;padding:12px;border-radius:10px;margin-top:8px;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+h3{margin:8px 0;color:#0d47a1}
+</style>
+</head>
+<body>
+<header>
+<h1 style="margin:0">MAKHANANI Maths Lit PRO - CAPS 2026</h1>
+<small>Vukona Press | Offline Ready | Paper 1 & 2 | v3.0 PRO | Vusi Chauke</small>
+<div class="nav">
+<button onclick="location.href='./health/'" style="background:#b71c1c">🏥 Health Monitor PRO</button>
+<button onclick="location.href='./class-tracker/'" style="background:#15803d">📋 Class Tracker PRO</button>
+<button onclick="location.href='./quiz/'" style="background:#7c3aed">🎓 Quiz 10-12 PRO</button>
+</div>
+</header>
+
+<!-- HIRE PURCHASE -->
+<div class="card">
+<h3>1. Hire Purchase & Loans</h3>
+<div class="grid2"><input id="price" type="number" placeholder="Cash Price e.g. 7999">
+<input id="depositP" type="number" placeholder="Deposit % e.g. 10"></div>
+<div class="grid2"><input id="interest" type="number" placeholder="Interest % p.a. e.g. 18">
+<input id="months" type="number" placeholder="Months e.g. 24"></div>
+<button class="btn" onclick="calcHP()">Calculate HP</button>
+<div id="hpRes" class="result" style="display:none"></div>
 </div>
 
-<div id="finance">
-<div class="c"><h3>1. Simple Interest</h3><input id="p1" value="5000" type="number" placeholder="Principal"><input id="r1" value="10" type="number" placeholder="Rate %"><input id="y1" value="3" type="number" placeholder="Years"><button onclick="si()">Calculate</button><div id="o1" class="r"></div></div>
-<div class="c"><h3>2. Compound Interest</h3><input id="p2" value="5000" type="number"><input id="r2" value="10" type="number"><input id="y2" value="3" type="number"><button onclick="ci()">Calculate</button><div id="o2" class="r"></div></div>
-<div class="c"><h3>3. Loan Repayment (NEW CAPS)</h3><input id="lp" value="100000" type="number" placeholder="Loan"><input id="lr" value="11.5" type="number" placeholder="Rate %"><input id="ln" value="60" type="number" placeholder="Months"><button onclick="loan()">Monthly Payment</button><div id="oLoan" class="r"></div></div>
-<div class="c"><h3>4. Hire Purchase</h3><input id="hpP" value="8999" type="number" placeholder="Cash Price"><input id="hpD" value="1000" type="number" placeholder="Deposit"><input id="hpR" value="18" type="number" placeholder="Interest %"><input id="hpM" value="24" type="number" placeholder="Months"><button onclick="hp()">Calculate HP</button><div id="oHp" class="r"></div></div>
-<div class="c"><h3>5. VAT, Discount & Exchange</h3><input id="vatP" value="965" type="number" placeholder="Price Excl"><select id="curr"><option value="18.75">USD → ZAR 18.75</option><option value="20.12">EUR → ZAR 20.12</option><option value="0.053">ZAR → USD</option></select><button onclick="vatEx()">Calculate</button><div id="oVat" class="r"></div></div>
+<!-- VAT DISCOUNT -->
+<div class="card">
+<h3>2. VAT, Discount & Exchange</h3>
+<div class="grid2"><input id="vatPrice" type="number" placeholder="Price e.g. 965">
+<input id="vatRate" type="number" value="15"></div>
+<div class="grid2"><button class="btn" onclick="calcVAT()">Calc VAT 15%</button>
+<button class="btn" style="background:#64748b" onclick="calcDiscount()">Discount 20%</button></div>
+<div id="vatRes" class="result" style="display:none"></div>
 </div>
 
-<div id="measure" class="hidden">
-<div class="c"><h3>6. Maps & Scale (1:50 000)</h3><input id="mapD" value="4.5" type="number" placeholder="Map distance cm"><input id="scale" value="50000" type="number"><button onclick="mapCalc()">Real Distance</button><div id="oMap" class="r"></div></div>
-<div class="c"><h3>7. Conversions</h3><select id="conv"><option value="km-m">km → m (x1000)</option><option value="l-ml">L → ml (x1000)</option><option value="kg-g">kg → g (x1000)</option></select><input id="convV" value="2.5" type="number"><button onclick="convCalc()">Convert</button><div id="oConv" class="r"></div></div>
+<!-- BMI QUICK -->
+<div class="card">
+<h3>3. Quick BMI (Link to Health)</h3>
+<div class="grid2"><input id="w" type="number" placeholder="Weight kg">
+<input id="h" type="number" placeholder="Height m e.g. 1.75"></div>
+<button class="btn" style="background:#b71c1c" onclick="calcBMI()">Calc BMI</button>
+<div id="bmiRes" class="result" style="display:none"></div>
 </div>
 
-<div id="data" class="hidden">
-<div class="c"><h3>8. Data Handling - Mean/Median/Mode</h3><input id="dataIn" value="12,15,18,12,20,22" placeholder="e.g. 12,15,18,12"><button onclick="dataCalc()">Analyse</button><div id="oData" class="r"></div><canvas id="chart" width="300" height="120" style="width:100%;margin-top:10px"></canvas></div>
-<div class="c" style="text-align:center"><button onclick="window.print()">📄 Print PDF Report for Lecturer</button><br><a href="health/">Open Health Monitor PRO →</a></div>
+<!-- MAPS -->
+<div class="card">
+<h3>4. Maps & Scale</h3>
+<div class="grid2"><input id="mapCm" type="number" placeholder="Map cm e.g. 3">
+<input id="scale" type="number" placeholder="Scale e.g. 50000"></div>
+<button class="btn" onclick="calcMap()">Calculate Real Distance</button>
+<div id="mapRes" class="result" style="display:none"></div>
+</div>
+
+<!-- DATA -->
+<div class="card">
+<h3>5. Data - Mean / Median / Range</h3>
+<input id="data" placeholder="e.g. 2,3,5,5,6,8">
+<button class="btn" onclick="calcData()">Calculate Data</button>
+<div id="dataRes" class="result" style="display:none"></div>
+</div>
+
+<div class="card" style="background:#dbeafe;text-align:center">
+<b>MAKHANANI FINAL v3.0 PRO - 4 Apps in 1</b><br>
+<small>Maths Lit | Health | Class Tracker | Quiz 10-12<br>
+Tested Offline ✈️ Airplane Mode Works!<br>
+GitHub: vusichauke3037-glitch/MAKHANANI-FINAL</small><br><br>
+<button class="btn" style="width:auto;padding:8px 14px;background:#0d47a1" onclick="if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');alert('App ready offline! Now Install: Chrome ⋮ → Install app')">✅ Enable Offline Install</button>
 </div>
 
 <script>
-function show(id){document.querySelectorAll('#finance,#measure,#data').forEach(e=>e.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));event.target.classList.add('active')}
-function si(){let p=+p1.value,r=+r1.value/100,y=+y1.value,i=p*r*y;o1.innerHTML=`Interest: R${i.toFixed(2)}<br>Total: R${(p+i).toFixed(2)}`}
-function ci(){let p=+p2.value,r=+r2.value/100,y=+y2.value,a=p*Math.pow(1+r,y);o2.innerHTML=`Amount: R${a.toFixed(2)}<br>Interest: R${(a-p).toFixed(2)}`}
-function loan(){let P=+lp.value,annual=+lr.value/100,m=+ln.value, r=annual/12, pay=P*r/(1-Math.pow(1+r,-m));oLoan.innerHTML=`Monthly: R${pay.toFixed(2)}<br>Total: R${(pay*m).toFixed(2)}<br>Interest: R${(pay*m-P).toFixed(2)}`}
-function hp(){let cash=+hpP.value,dep=+hpD.value,rate=+hpR.value/100,months=+hpM.value, principal=cash-dep, interest=principal*rate*(months/12), total=principal+interest, monthly=total/months; oHp.innerHTML=`Loan: R${principal}<br>Interest: R${interest.toFixed(2)}<br>Total Payable: R${total.toFixed(2)}<br>Monthly: R${monthly.toFixed(2)}`}
-function vatEx(){let p=+vatP.value, vat=p*0.15, tot=p+vat, rate=+curr.value, ex=p*rate; oVat.innerHTML=`VAT (15%): R${vat.toFixed(2)}<br>Incl: R${tot.toFixed(2)}<br>Exchange: R${ex.toFixed(2)}`}
-function mapCalc(){let d=+mapD.value, s=+scale.value, real=d*s/100/1000; oMap.innerHTML=`Real: ${real.toFixed(2)} km (${(real*1000).toFixed(0)} m)`}
-function convCalc(){let v=+convV.value, t=conv.value, res=v*1000; oConv.innerHTML=`${v} ${t} = ${res}`}
-function dataCalc(){let arr=dataIn.value.split(',').map(x=>+x.trim()).filter(x=>!isNaN(x)).sort((a,b)=>a-b); let sum=arr.reduce((a,b)=>a+b,0), mean=sum/arr.length, median=arr.length%2?arr[Math.floor(arr.length/2)]:(arr[arr.length/2-1]+arr[arr.length/2])/2; let freq={},max=0,mode=null;arr.forEach(n=>{freq[n]=(freq[n]||0)+1;if(freq[n]>max){max=freq[n];mode=n}});oData.innerHTML=`Mean: ${mean.toFixed(2)} | Median: ${median} | Mode: ${mode}<br>Range: ${Math.max(...arr)-Math.min(...arr)} | Count: ${arr.length}`;let c=document.getElementById('chart'),ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);let maxV=Math.max(...arr);arr.forEach((v,i)=>{let h=(v/maxV)*80;ctx.fillStyle='#174ea6';ctx.fillRect(i*300/arr.length+2,100-h,20,h)})}
-if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(x=>x.unregister()))}
-</script></body></html>
+function calcHP(){
+let p=parseFloat(price.value)||0; let dP=parseFloat(depositP.value)||0; let r=parseFloat(interest.value)||0; let m=parseFloat(months.value)||0;
+let dep=p*dP/100; let bal=p-dep; let intr=bal*r/100*(m/12); let tot=bal+intr; let mon=tot/m;
+hpRes.style.display='block'; hpRes.innerHTML=`Deposit: R${dep.toFixed(2)}<br>Loan: R${bal.toFixed(2)}<br>Interest: R${intr.toFixed(2)}<br>Total Payable: R${tot.toFixed(2)}<br>Monthly: R${mon.toFixed(2)}`;
+}
+function calcVAT(){
+let pr=parseFloat(vatPrice.value)||0; let rate=parseFloat(vatRate.value)||15;
+let vat=pr*rate/100; let incl=pr+vat;
+vatRes.style.display='block'; vatRes.innerHTML=`VAT ${rate}%: R${vat.toFixed(2)} on R${pr}<br>Total incl: R${incl.toFixed(2)}<br>Excl from Incl R${pr}: R${(pr/1.15).toFixed(2)}`;
+}
+function calcDiscount(){
+let pr=parseFloat(vatPrice.value)||0; let disc=pr*0.2; vatRes.style.display='block'; vatRes.innerHTML=`Discount 20%: -R${disc.toFixed(2)}<br>Sale Price: R${(pr-disc).toFixed(2)}`;
+}
+function calcBMI(){
+let W=parseFloat(w.value)||0; let H=parseFloat(h.value)||0; if(!H)return; let bmi=W/(H*H); let s=bmi<18.5?'Underweight':bmi<25?'Normal':bmi<30?'Overweight':'Obese';
+bmiRes.style.display='block'; bmiRes.innerHTML=`BMI: ${bmi.toFixed(1)} - ${s}<br><small>Full check in Health PRO →</small>`;
+}
+function calcMap(){
+let cm=parseFloat(mapCm.value)||0; let sc=parseFloat(scale.value)||50000; let realCm=cm*sc; let km=realCm/100000;
+mapRes.style.display='block'; mapRes.innerHTML=`Real: ${realCm.toFixed(0)} cm = ${(realCm/100).toFixed(1)} m = ${km.toFixed(2)} km`;
+}
+function calcData(){
+let arr=data.value.split(',').map(x=>parseFloat(x.trim())).filter(x=>!isNaN(x)); if(!arr.length)return;
+let sum=arr.reduce((a,b)=>a+b,0); let mean=sum/arr.length; let sorted=[...arr].sort((a,b)=>a-b); let mid=Math.floor(sorted.length/2); let median=sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2; let range=Math.max(...arr)-Math.min(...arr);
+dataRes.style.display='block'; dataRes.innerHTML=`Mean: ${mean.toFixed(2)}<br>Median: ${median}<br>Range: ${range}<br>Count: ${arr.length}`;
+}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+</script>
+</body>
+</html>
