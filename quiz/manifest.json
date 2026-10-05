@@ -1,0 +1,9 @@
+{
+  "name": "MAKHANANI Class Tracker PRO",
+  "short_name": "ClassTracker",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0d47a1",
+  "theme_color": "#0d47a1",
+  "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/2991/2991108.png","sizes": "512x512","type": "image/png"}]
+}
