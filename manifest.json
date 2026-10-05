@@ -1,0 +1,14 @@
+{
+  "name": "MAKHANANI Maths Lit PRO",
+  "short_name": "MAKHANANI Maths",
+  "description": "CAPS 2026 Maths Literacy - Offline",
+  "start_url": "/MAKHANANI-FINAL/",
+  "display": "standalone",
+  "background_color": "#0d47a1",
+  "theme_color": "#0d47a1",
+  "icons": [{
+      "src": "https://cdn-icons-png.flaticon.com/512/1087/1087815.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }]
+}
