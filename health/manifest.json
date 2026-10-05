@@ -1,0 +1,9 @@
+{
+  "name": "MAKHANANI Health Monitor PRO",
+  "short_name": "Health PRO",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#b71c1c",
+  "theme_color": "#b71c1c",
+  "icons": [{"src": "https://cdn-icons-png.flaticon.com/512/2966/2966327.png","sizes": "512x512","type": "image/png"}]
+}
