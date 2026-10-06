@@ -1,36 +1,22 @@
 {
-  "name": "MAKHANANI Super App v5.0 - 5-in-1 Education Suite",
+  "name": "Makhanani Super App v5.0 - 5-in-1 Education Suite",
   "short_name": "Makhanani 5.0",
-  "description": "Vukona Press | CAPS 2026 | Offline PWA by Vusi Chauke - 5 Apps: Maths Lit, Health, Class Tracker, Quiz, Games",
+  "description": "Vukona Press | CAPS 2026 | Offline PWA by Vusi Chauke",
   "start_url": "./",
   "display": "standalone",
-  "orientation": "any",
   "background_color": "#0d47a1",
   "theme_color": "#0d47a1",
   "scope": "./",
   "lang": "en",
   "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    {"src":"https://cdn-icons-png.flaticon.com/512/3135/3135715.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"https://cdn-icons-png.flaticon.com/512/3135/3135715.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ],
   "shortcuts": [
-    {"name": "Maths Lit PRO","short_name":"Maths","url":"./","description":"CAPS Maths Literacy Calculator","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2331/2331853.png","sizes":"192x192"}]},
-    {"name": "Health Monitor PRO","short_name":"Health","url":"./health/","description":"Student Wellness Tracking"},
-    {"name": "Class Tracker PRO","short_name":"Tracker","url":"./class-tracker/","description":"Attendance & Class Management"},
-    {"name": "Quiz 10-12 PRO","short_name":"Quiz","url":"./quiz/","description":"CAPS Grade 10-12 Quizzes"},
-    {"name": "Games PRO","short_name":"Games","url":"./games/","description":"Educational Maths Games"}
-  ],
-  "screenshots": [
-    {"src":"https://via.placeholder.com/1080x1920/0d47a1/ffffff?text=MAKHANANI+v5.0","sizes":"1080x1920","type":"image/png","form_factor":"narrow"}
+    {"name":"Maths Lit PRO","url":"./","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2331/2331853.png","sizes":"192x192","type":"image/png"}]},
+    {"name":"Health Monitor","url":"./health/","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2331/2331853.png","sizes":"192x192","type":"image/png"}]},
+    {"name":"Class Tracker","url":"./class-tracker/","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2331/2331853.png","sizes":"192x192","type":"image/png"}]},
+    {"name":"Quiz 10-12","url":"./quiz/","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2331/2331853.png","sizes":"192x192","type":"image/png"}]},
+    {"name":"Games PRO","url":"./games/","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2331/2331853.png","sizes":"192x192","type":"image/png"}]}
   ]
 }
