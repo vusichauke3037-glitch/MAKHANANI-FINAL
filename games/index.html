@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAKHANANI Games PRO</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#db2777">
+<style>
+*{box-sizing:border-box;font-family:system-ui}body{margin:0;background:#fdf2f8}
+header{background:#db2777;color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:10}
+.tabs{display:flex;background:#fff;position:sticky;top:88px;z-index:9;box-shadow:0 2px 6px #0001}
+.tabs button{flex:1;padding:12px;border:none;background:#fff;font-weight:800;cursor:pointer;border-bottom:3px solid transparent}
+.tabs button.active{border-color:#db2777;color:#db2777;background:#fce7f3}
+.card{background:#fff;margin:10px;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001}
+.btn{padding:12px;border:none;border-radius:12px;font-weight:800;cursor:pointer}
+.btn-pink{background:#db2777;color:#fff;width:100%}.btn-gray{background:#e2e8f0}
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.item{border:2px solid #fce7f3;border-radius:12px;padding:10px;text-align:center}
+.score{font-size:28px;font-weight:900;text-align:center;color:#db2777}
+input{width:100%;padding:10px;border:1.5px solid #fbcfe8;border-radius:10px;margin:5px 0}
+</style>
+</head>
+<body>
+<header>
+<h2 style="margin:0">🎮 MAKHANANI Games PRO</h2>
+<small>Learn Maths Lit by Playing | Offline | Vusi Chauke</small>
+<div style="margin-top:8px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+<button class="btn btn-gray" onclick="location.href='../'">🧮 Maths Lit</button>
+<button class="btn btn-gray" onclick="location.href='../class-tracker/'">📋 Tracker</button>
+<button class="btn btn-gray" onclick="location.href='../quiz/'">🎓 Quiz</button>
+</div>
+</header>
+<div class="tabs">
+<button id="t1" class="active" onclick="show(1)">🏪 Tycoon</button>
+<button id="t2" onclick="show(2)">🏗️ Builder</button>
+<button id="t3" onclick="show(3)">📊 Dash</button>
+</div>
 
+<!-- GAME 1 TYCOON -->
+<div id="tab1" class="card">
+<div class="score">💰 R<span id="money">500</span> | Day <span id="day">1</span>/10</div>
+<p><b>Spaza Shop Tycoon</b> — Buy stock, add 15% VAT, give discount, make profit!</p>
+<div class="shop">
+<div class="item"><b>Bread</b><br>Cost R12<br><button class="btn btn-pink" onclick="buy('Bread',12,18)">Stock @ R18</button></div>
+<div class="item"><b>Cold Drink</b><br>Cost R15<br><button class="btn btn-pink" onclick="buy('Drink',15,22)">Stock @ R22</button></div>
+<div class="item"><b>Airtime</b><br>Cost R10<br><button class="btn btn-pink" onclick="buy('Airtime',10,12)">Stock @ R12</button></div>
+<div class="item"><b>Chips</b><br>Cost R8<br><button class="btn btn-pink" onclick="buy('Chips',8,14)">Stock @ R14</button></div>
+</div>
+<div style="margin-top:10px">
+<b>Customer:</b> <span id="custReq">Wants 2x Bread + 10% discount. Total incl VAT?</span><br>
+<input id="custAns" type="number" placeholder="Your answer e.g. 35.60">
+<button class="btn btn-pink" onclick="sell()">💸 Sell & Calculate</button>
+<div id="tycoonLog" style="margin-top:8px;font-size:13px"></div>
+</div>
+</div>
+
+<!-- GAME 2 BUILDER -->
+<div id="tab2" class="card" style="display:none">
+<div class="score">🏗️ Score <span id="bScore">0</span> | Level <span id="bLevel">1</span></div>
+<h3>Builder Rush — Maps & Measurement</h3>
+<p id="bQuestion">Map scale 1:200, house 4cm long on plan = real length?</p>
+<div id="bOpts"></div>
+<div id="bFeedback" style="margin-top:8px;font-weight:800"></div>
+<button class="btn btn-pink" style="display:none" id="bNext" onclick="nextBuild()">Next House →</button>
+</div>
+
+<!-- GAME 3 DASH -->
+<div id="tab3" class="card" style="display:none">
+<div class="score">⚡ <span id="dScore">0</span> pts | ⏱️ <span id="dTime">60</span>s</div>
+<h3>Data Dash — Mean, Median, Mode in 60 sec!</h3>
+<p id="dQuestion">Loading...</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="dOpts"></div>
+<div id="dFeedback"></div>
+<button class="btn btn-pink" onclick="startDash()">▶️ START 60s DASH</button>
+<p><small>High Score: <span id="dHigh">0</span> (saved offline)</small></p>
+</div>
+
+<script>
+function show(n){[1,2,3].forEach(i=>{document.getElementById('tab'+i).style.display=i==n?'block':'none';document.getElementById('t'+i).classList.toggle('active',i==n);});}
+
+// GAME 1
+let money=500, day=1;
+let customers=[
+{q:"Customer wants 2x Bread @ R18 each + 15% VAT, then 10% discount. Final price?",calc:()=>{let t=36*1.15*0.9;return t.toFixed(2);}},
+{q:"Customer buys 3x Chips @ R14 + VAT 15%. Total?",calc:()=>{return (42*1.15).toFixed(2);}},
+{q:"Customer buys Drink R22, wants 20% discount, then VAT 15%. Pay?",calc:()=>{return (22*0.8*1.15).toFixed(2);}},
+{q:"Buy stock R100, sell with 30% profit + 15% VAT. Selling price?",calc:()=>{return (130*1.15).toFixed(2);}},
+];
+let curCust=customers[0];
+function buy(name,cost,sellP){if(money<cost*5){alert('No money! Sell first');return;} money-=cost*5; document.getElementById('money').textContent=money; curCust=customers[Math.floor(Math.random()*customers.length)]; document.getElementById('custReq').textContent=curCust.q;}
+function sell(){
+let ans=parseFloat(custAns.value); let correct=parseFloat(curCust.calc());
+if(Math.abs(ans-correct)<0.5){money+=correct; money=Math.round(money); document.getElementById('money').textContent=money; tycoonLog.innerHTML=`✅ Correct! R${correct} added. Profit!`; day++; document.getElementById('day').textContent=day; if(day>10){alert('You finished 10 days! You made R'+money+' 🎉'); money=500; day=1;} } else {tycoonLog.innerHTML=`❌ Wrong! Correct was R${correct}. Try again: ${curCust.q}`;}
+}
+
+// GAME 2
+let bQ=[
+{q:"Map scale 1:200, house 4cm on plan = real?",a:["8m","0.8m","80m","4m"],c:0},
+{q:"Room area 5m x 4m =?",a:["20m²","9m²","20m","9m²"],c:0},
+{q:"Volume of JoJo tank 1m x1.2m =?",a:["1.2m³","3.2m³","1.2m","1200L & 1.2m³"],c:3},
+{q:"Scale 1:50000, 2cm on map =?",a:["1km","100m","10km","0.1km"],c:0},
+{q:"Floor tile 0.5m x0.5m, how many for 20m² room?",a:["80 tiles","40","20","100"],c:0},
+];
+let bi=0,bScoreV=0;
+function renderBuild(){let q=bQ[bi]; document.getElementById('bQuestion').textContent=`House ${bi+1}: ${q.q}`; let o=document.getElementById('bOpts'); o.innerHTML=''; q.a.forEach((t,i)=>{let b=document.createElement('button'); b.className='btn btn-gray'; b.style.width='100%'; b.style.margin='4px 0'; b.textContent=t; b.onclick=()=>{if(i==q.c){bScoreV+=10; document.getElementById('bScore').textContent=bScoreV; document.getElementById('bFeedback').textContent='✅ Correct! +10';} else {document.getElementById('bFeedback').textContent='❌ Wrong! Correct: '+q.a[q.c];} document.getElementById('bNext').style.display='block';}; o.appendChild(b);});}
+function nextBuild(){bi=(bi+1)%bQ.length; document.getElementById('bLevel').textContent=Math.floor(bScoreV/30)+1; document.getElementById('bFeedback').textContent=''; document.getElementById('bNext').style.display='none'; renderBuild();}
+renderBuild();
+
+// GAME 3
+let dScoreV=0, dTimeV=60, dInt=null;
+let dBank=[
+{q:"Mean of 2,4,6?",a:[4,3,5,6],c:0},{q:"Median 1,3,9,10,12?",a:[9,6,10,3],c:0},{q:"Mode 2,3,3,5?",a:[3,2,5,2],c:0},
+{q:"Range 5,2,9,1?",a:[8,9,7,10],c:0},{q:"Mean 5,5,5,5?",a:[5,0,20,10],c:0},{q:"Median 2,4,4,7,10,10?",a:[5.5,4,7,6],c:0},
+];
+function startDash(){dScoreV=0; dTimeV=60; document.getElementById('dScore').textContent=0; clearInterval(dInt); dInt=setInterval(()=>{dTimeV--; document.getElementById('dTime').textContent=dTimeV; if(dTimeV<=0){clearInterval(dInt); let high=Math.max(parseInt(localStorage.getItem('mk_dash_high')||0),dScoreV); localStorage.setItem('mk_dash_high',high); document.getElementById('dHigh').textContent=high; alert('Time up! Score '+dScoreV);}},1000); nextDash();}
+function nextDash(){let q=dBank[Math.floor(Math.random()*dBank.length)]; document.getElementById('dQuestion').textContent=q.q; let o=document.getElementById('dOpts'); o.innerHTML=''; q.a.forEach((v,i)=>{let b=document.createElement('button'); b.className='btn btn-gray'; b.textContent=v; b.onclick=()=>{if(i==q.c){dScoreV+=5; document.getElementById('dScore').textContent=dScoreV; document.getElementById('dFeedback').textContent='✅';} else {document.getElementById('dFeedback').textContent='❌ '+q.a[q.c];} setTimeout(nextDash,400);}; o.appendChild(b);});}
+document.getElementById('dHigh').textContent=localStorage.getItem('mk_dash_high')||0;
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
