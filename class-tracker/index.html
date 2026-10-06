@@ -1,87 +1,192 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maths Lit Quiz 10-12</title><link rel="manifest" href="manifest.json">
-<style>body{margin:0;font-family:system-ui;background:#f1f5f9}header{background:#0d47a1;color:white;padding:16px;text-align:center}
-.card{background:white;margin:12px;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001}
-.btn{padding:12px;border:none;border-radius:10px;font-weight:700;width:100%;cursor:pointer}
-.btn-p{background:#0d47a1;color:white}.opt{padding:12px;border:1.5px solid #cbd5e1;border-radius:10px;margin:6px 0;cursor:pointer}
-.opt.correct{background:#dcfce7;border-color:#16a34a}.opt.wrong{background:#fee2e2;border-color:#dc2626}
-</style></head><body>
-<header><h2 style="margin:0">MAKHANANI Quiz PRO 10-12</h2><small>CAPS | 200+ Qs | Offline</small></header>
-<div id="start" class="card">
-<input id="learnerName" placeholder="Learner Name">
-<select id="grade"><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option></select>
-<select id="topic"><option>Finance - Hire Purchase & Loans</option><option>Finance - VAT & Discount</option><option>Maps & Plans & Scale</option><option>Measurement</option><option>Data Handling</option><option>Probability</option><option>Mixed - Final Exam</option></select>
-<button class="btn btn-p" onclick="startQuiz()">Start Quiz (20 Questions - 30 min)</button>
-<p><small>Scores auto-save to Class Tracker if installed</small></p>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAKHANANI Class Tracker PRO</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#15803d">
+<style>
+*{box-sizing:border-box;font-family:system-ui,Segoe UI}body{margin:0;background:#f1f5f9}
+header{background:#15803d;color:#fff;padding:14px;text-align:center;position:sticky;top:0;z-index:10}
+.tabs{display:flex;background:#fff;position:sticky;top:72px;z-index:9;box-shadow:0 2px 6px #0001}
+.tabs button{flex:1;padding:12px;border:none;background:#fff;font-weight:800;cursor:pointer;border-bottom:3px solid transparent}
+.tabs button.active{border-color:#15803d;color:#15803d;background:#dcfce7}
+.card{background:#fff;margin:10px;border-radius:14px;padding:12px;box-shadow:0 2px 8px #0001}
+input,select{width:100%;padding:11px;margin:5px 0;border:1.5px solid #cbd5e1;border-radius:10px}
+.btn{padding:11px 14px;border:none;border-radius:10px;font-weight:800;cursor:pointer}
+.btn-green{background:#15803d;color:#fff}.btn-gray{background:#e2e8f0}.btn-red{background:#b91c1c;color:#fff}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{border:1px solid #e2e8f0;padding:6px;text-align:left}
+.badge{padding:2px 8px;border-radius:99px;font-size:12px;font-weight:800}
+.present{background:#dcfce7;color:#166534}.absent{background:#fee2e2;color:#991b1b}.late{background:#fef9c3;color:#854d0e}
+.small{font-size:12px;color:#64748b}
+</style>
+</head>
+<body>
+<header>
+<h2 style="margin:0">📋 MAKHANANI Class Tracker PRO</h2>
+<small>Vukona Press | Offline | CAPS 2026 | Vusi Chauke</small>
+<div style="margin-top:8px">
+<button class="btn btn-gray" onclick="location.href='../'">🏠 Maths Lit</button>
+<button class="btn btn-gray" onclick="location.href='../health/'">🏥 Health</button>
+<button class="btn btn-gray" onclick="location.href='../quiz/'">🎓 Quiz</button>
 </div>
-<div id="quiz" class="card" style="display:none">
-<div style="display:flex;justify-content:space-between"><span id="qCount">Q1/20</span><span id="timer">30:00</span><span id="score">0%</span></div>
-<h3 id="qText"></h3><div id="opts"></div>
-<button class="btn btn-p" onclick="nextQ()">Next →</button>
+</header>
+<div class="tabs">
+<button id="t1" class="active" onclick="showTab(1)">👥 Students</button>
+<button id="t2" onclick="showTab(2)">📋 Attendance</button>
+<button id="t3" onclick="showTab(3)">📝 Weekly Tests</button>
+<button id="t4" onclick="showTab(4)">📊 Performance</button>
 </div>
-<div id="result" class="card" style="display:none">
-<h2 id="resTitle"></h2><p id="resScore"></p><p id="resLevel"></p>
-<button class="btn btn-p" onclick="location.reload()">Restart</button>
-<button class="btn" style="background:#e2e8f0;margin-top:8px" onclick="downloadCert()">📜 Download Certificate</button>
+
+<!-- TAB 1 -->
+<div id="tab1" class="card">
+<h3>1. Add Student</h3>
+<div class="grid2">
+<input id="sName" placeholder="Full Name e.g. Thabo Makhubela">
+<input id="sNo" placeholder="Student No e.g. 202601">
 </div>
+<div class="grid2">
+<select id="sClass"><option>12A</option><option>12B</option><option>12C</option><option>11A</option><option>11B</option><option>10A</option></select>
+<button class="btn btn-green" onclick="addStudent()">+ Add Student</button>
+</div>
+<div style="margin-top:10px" class="row">
+<button class="btn btn-gray" onclick="exportCSV('students')">⬇ Export Students CSV</button>
+<button class="btn btn-red" onclick="clearAll()">🗑 Clear All</button>
+</div>
+<table id="studentTable" style="margin-top:10px"><thead><tr><th>#</th><th>Name</th><th>Class</th><th>Action</th></tr></thead><tbody></tbody></table>
+</div>
+
+<!-- TAB 2 -->
+<div id="tab2" class="card" style="display:none">
+<h3>2. Attendance Register</h3>
+<div class="grid2">
+<input id="attDate" type="date">
+<select id="attClassFilter" onchange="renderAttendance()"><option value="ALL">ALL Classes</option><option>12A</option><option>12B</option><option>12C</option><option>11A</option><option>11B</option><option>10A</option></select>
+</div>
+<div class="row" style="margin:8px 0">
+<button class="btn btn-green" onclick="markAll('Present')">Mark All Present</button>
+<button class="btn btn-gray" onclick="saveAttendance()">💾 Save Attendance</button>
+<button class="btn btn-gray" onclick="exportCSV('attendance')">⬇ Export Attendance</button>
+</div>
+<div id="attList"></div>
+<small class="small">Saved in phone - works offline ✈️</small>
+</div>
+
+<!-- TAB 3 -->
+<div id="tab3" class="card" style="display:none">
+<h3>3. Weekly Tests (12 Weeks)</h3>
+<div class="grid2">
+<select id="testWeek"><option>Week 1</option><option>Week 2</option><option>Week 3</option><option>Week 4</option><option>Week 5</option><option>Week 6</option><option>Week 7</option><option>Week 8</option><option>Week 9</option><option>Week 10</option><option>Week 11</option><option>Week 12</option></select>
+<input id="testTopic" placeholder="Topic e.g. Finance - Hire Purchase">
+</div>
+<div class="grid2">
+<select id="testStudent"></select>
+<input id="testScore" type="number" placeholder="Score e.g. 15">
+</div>
+<div class="grid2">
+<input id="testTotal" type="number" value="20">
+<button class="btn btn-green" onclick="addTest()">+ Save Mark</button>
+</div>
+<table id="testTable" style="margin-top:10px"><thead><tr><th>Week</th><th>Student</th><th>Topic</th><th>Score</th><th>%</th></tr></thead><tbody></tbody></table>
+<div class="row" style="margin-top:8px"><button class="btn btn-gray" onclick="exportCSV('tests')">⬇ Export Tests CSV</button></div>
+</div>
+
+<!-- TAB 4 -->
+<div id="tab4" class="card" style="display:none">
+<h3>4. Performance Dashboard</h3>
+<select id="perfStudent" onchange="renderPerf()"></select>
+<canvas id="perfCanvas" width="320" height="160" style="width:100%;background:#f8fafc;border-radius:10px;margin-top:8px"></canvas>
+<div id="perfStats" style="margin-top:10px"></div>
+<h4>Class Ranking & At Risk (<50%)</h4>
+<div id="ranking"></div>
+</div>
+
 <script>
-const bank={
-"Finance - Hire Purchase & Loans":[
-{q:"TV cash R5000, deposit 10%, 24 months at 18% interest. Deposit?",a:["R500","R50","R5000","R900"],c:0,exp:"10% of 5000 = 500"},
-{q:"Loan R10000, 15% simple interest, 2 years. Interest?",a:["R1500","R3000","R13000","R11500"],c:1,exp:"I=PRT=10000*0.15*2=3000"},
-{q:"Hire Purchase: Balance R9000, interest 20% p.a. for 2 years, monthly?",a:["R525","R450","R375","R600"],c:0,exp:"Interest=3600, Total=12600/24=525"},
-{q:"VAT 15% inclusive: Price R115, excl VAT?",a:["R100","R115","R97.75","R130"],c:0,exp:"Excl = Incl/1.15"},
-{q:"Discount 20% on R800, sale price?",a:["R640","R160","R960","R600"],c:0,exp:"800*0.8=640"}
-],
-"Maps & Plans & Scale":[
-{q:"Scale 1:50000, distance on map 3cm, real?",a:["1.5km","15km","0.15km","150km"],c:0,exp:"3cm*50000=150000cm=1.5km"},
-{q:"Plan scale 1:100, wall 5cm on plan, real length?",a:["5m","0.5m","50m","500m"],c:0,exp:"5cm*100=500cm=5m"}
-],
-"Data Handling":[
-{q:"Data: 2,3,5,5,6,8 Mean?",a:["4.8","5","4.5","6"],c:0,exp:"Sum=29/6=4.83"},
-{q:"Median of 1,3,3,6,7,8,9?",a:["6","3","4.5","5"],c:0,exp:"Middle value"},
-{q:"Range of 12,15,20,22,30?",a:["18","20","15","30"],c:0,exp:"30-12=18"}
-],
-"Probability":[
-{q:"Dice rolled, P(6)?",a:["1/6","1/2","1/3","1"],c:0,exp:"1 favourable/6 total"},
-{q:"Bag 3 red, 2 blue, P(red)?",a:["3/5","2/5","1/5","3/2"],c:0,exp:"3/(3+2)"}
-]
-};
-let qs=[],i=0,sc=0,learner="",grade="",topic="",timerInt,timeLeft=1800;
-function startQuiz(){
-learner=document.getElementById('learnerName').value||"Learner"; grade=document.getElementById('grade').value; topic=document.getElementById('topic').value;
-let pool=bank[topic]||Object.values(bank).flat(); qs=pool.sort(()=>0.5-Math.random()).slice(0,20);
-if(qs.length<20){while(qs.length<20)qs=qs.concat(pool).slice(0,20);}
-document.getElementById('start').style.display='none'; document.getElementById('quiz').style.display='block';
-i=0;sc=0;showQ(); startTimer();
+let db = JSON.parse(localStorage.getItem('mk_class_db')||'{"students":[],"attendance":{},"tests":[]}');
+function saveDB(){localStorage.setItem('mk_class_db',JSON.stringify(db));}
+function showTab(n){[1,2,3,4].forEach(i=>{document.getElementById('tab'+i).style.display=i==n?'block':'none';document.getElementById('t'+i).classList.toggle('active',i==n);});if(n==4)renderPerf();}
+function addStudent(){
+let name=sName.value.trim(); let no=sNo.value.trim(); let cls=sClass.value;
+if(!name){alert('Enter name');return;}
+db.students.push({id:Date.now(),name,no,class:cls});
+sName.value='';sNo.value='';saveDB();renderStudents();
 }
-function showQ(){
-if(i>=qs.length)return endQuiz();
-document.getElementById('qCount').innerText=`Q${i+1}/${qs.length}`; document.getElementById('qText').innerText=qs[i].q;
-let o=document.getElementById('opts'); o.innerHTML='';
-qs[i].a.forEach((opt,idx)=>{let d=document.createElement('div');d.className='opt';d.innerText=String.fromCharCode(65+idx)+". "+opt;d.onclick=()=>check(idx,d);o.appendChild(d);});
-document.getElementById('score').innerText=Math.round(sc/qs.length*100)+"%";
+function deleteStudent(id){if(!confirm('Delete?'))return;db.students=db.students.filter(s=>s.id!=id);saveDB();renderStudents();}
+function renderStudents(){
+let tb=document.querySelector('#studentTable tbody');tb.innerHTML='';
+db.students.forEach((s,i)=>{
+   tb.innerHTML+=`<tr><td>${i+1}</td><td>${s.name}<br><small>${s.no}</small></td><td>${s.class}</td><td><button onclick="deleteStudent(${s.id})">❌</button></td></tr>`;
+});
+let opts=db.students.map(s=>`<option value="${s.id}">${s.name} (${s.class})</option>`).join('');
+document.getElementById('testStudent').innerHTML=opts;
+document.getElementById('perfStudent').innerHTML=opts;
 }
-function check(idx,el){
-if(el.dataset.done)return; el.dataset.done=1;
-document.querySelectorAll('.opt').forEach(o=>o.style.pointerEvents='none');
-if(idx==qs[i].c){el.classList.add('correct');sc++;}else{el.classList.add('wrong');document.querySelectorAll('.opt')[qs[i].c].classList.add('correct');}
-setTimeout(()=>{i++;showQ();},800);
+function renderAttendance(){
+let date=attDate.value||new Date().toISOString().slice(0,10); attDate.value=date;
+let filter=attClassFilter.value;
+let list=document.getElementById('attList'); list.innerHTML='';
+let filtered=db.students.filter(s=>filter=='ALL'||s.class==filter);
+let dayData=db.attendance[date]||{};
+filtered.forEach(s=>{
+   let cur=dayData[s.id]||'Present';
+   list.innerHTML+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px solid #eee">
+   <div><b>${s.name}</b><br><small>${s.class} • ${s.no}</small></div>
+   <select id="att_${s.id}" style="width:120px"><option ${cur=='Present'?'selected':''}>Present</option><option ${cur=='Absent'?'selected':''}>Absent</option><option ${cur=='Late'?'selected':''}>Late</option></select></div>`;
+});
 }
-function nextQ(){i++;showQ();}
-function startTimer(){timerInt=setInterval(()=>{timeLeft--;let m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('timer').innerText=`${m}:${s.toString().padStart(2,'0')}`;if(timeLeft<=0){clearInterval(timerInt);endQuiz();}},1000);}
-function endQuiz(){
-clearInterval(timerInt); document.getElementById('quiz').style.display='none'; document.getElementById('result').style.display='block';
-let pct=Math.round(sc/qs.length*100); let level=pct<30?"Fail - Need Support":pct<50?"Pass - Level 2":pct<75?"Good - Level 4":"Distinction - Level 6-7";
-document.getElementById('resTitle').innerText=`Well done ${learner}!`; document.getElementById('resScore').innerText=`Score: ${sc}/${qs.length} = ${pct}%`; document.getElementById('resLevel').innerText=level;
-// save to class tracker storage
-let tests=JSON.parse(localStorage.getItem('mk_tests')||'{}'); let week=`Quiz ${topic}`; tests[week+'|'+learner]={score:sc,total:qs.length,topic,grade,date:new Date().toISOString()}; localStorage.setItem('mk_tests',JSON.stringify(tests));
+function markAll(v){db.students.forEach(s=>{let el=document.getElementById('att_'+s.id); if(el) el.value=v;});}
+function saveAttendance(){
+let date=attDate.value; if(!date){alert('Pick date');return;}
+db.attendance[date]=db.attendance[date]||{};
+db.students.forEach(s=>{let el=document.getElementById('att_'+s.id); if(el) db.attendance[date][s.id]=el.value;});
+saveDB();alert('Attendance saved for '+date+' ✅');
 }
-function downloadCert(){
-let pct=Math.round(sc/qs.length*100);
-let txt=`MAKHANANI CERTIFICATE\nLearner: ${learner}\nGrade: ${grade}\nTopic: ${topic}\nScore: ${sc}/${qs.length} (${pct}%)\nDate: ${new Date().toLocaleDateString()}\nVukona Press - CAPS 2026`;
-let blob=new Blob([txt],{type:'text/plain'}); let url=URL.createObjectURL(blob); let a=document.createElement('a');a.href=url;a.download=`Certificate_${learner}_${pct}pct.txt`;a.click();
+function addTest(){
+let week=testWeek.value; let topic=testTopic.value.trim()||'General'; let sid=parseInt(testStudent.value); let score=parseFloat(testScore.value); let total=parseFloat(testTotal.value)||20;
+if(!sid||isNaN(score)){alert('Select student + score');return;}
+let stu=db.students.find(s=>s.id==sid); let pct=(score/total*100);
+db.tests.push({id:Date.now(),week,topic,studentId:sid,studentName:stu.name,class:stu.class,score,total,pct:Math.round(pct)});
+saveDB(); testScore.value=''; renderTests();
 }
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
-</script></body></html>
+function renderTests(){
+let tb=document.querySelector('#testTable tbody'); tb.innerHTML='';
+db.tests.slice().reverse().slice(0,50).forEach(t=>{
+   tb.innerHTML+=`<tr><td>${t.week}</td><td>${t.studentName}</td><td>${t.topic}</td><td>${t.score}/${t.total}</td><td><b style="color:${t.pct<50?'red':'green'}">${t.pct}%</b></td></tr>`;
+});
+}
+function renderPerf(){
+let sid=parseInt(perfStudent.value); if(!sid) return;
+let tests=db.tests.filter(t=>t.studentId==sid).sort((a,b)=>a.id-b.id);
+let c=document.getElementById('perfCanvas'); let ctx=c.getContext('2d'); ctx.clearRect(0,0,c.width,c.height);
+if(!tests.length){document.getElementById('perfStats').innerHTML='No tests yet'; return;}
+// draw simple line
+ctx.strokeStyle='#15803d'; ctx.lineWidth=3; ctx.beginPath();
+tests.forEach((t,i)=>{let x=20+i*(280/Math.max(1,tests.length-1)); let y=140-t.pct*1.2; if(i==0)ctx.moveTo(x,y); else ctx.lineTo(x,y);});
+ctx.stroke();
+tests.forEach((t,i)=>{let x=20+i*(280/Math.max(1,tests.length-1)); let y=140-t.pct*1.2; ctx.fillStyle='#15803d'; ctx.beginPath(); ctx.arc(x,y,4,0,6.28); ctx.fill();});
+let avg=Math.round(tests.reduce((a,b)=>a+b.pct,0)/tests.length);
+let attKeys=Object.keys(db.attendance); let present=attKeys.filter(d=>db.attendance[d][sid]=='Present').length;
+let attPct=attKeys.length?Math.round(present/attKeys.length*100):0;
+document.getElementById('perfStats').innerHTML=`<div class="grid2"><div class="card" style="margin:0">Avg: <b>${avg}%</b></div><div class="card" style="margin:0">Attendance: <b>${attPct}%</b></div></div><small>${tests.map(t=>t.week+':'+t.pct+'%').join(' | ')}</small>`;
+// ranking
+let map={}; db.tests.forEach(t=>{map[t.studentId]=map[t.studentId]||{name:t.studentName,class:t.class,scores:[]}; map[t.studentId].scores.push(t.pct);});
+let ranking=Object.entries(map).map(([id,o])=>({id,name:o.name,class:o.class,avg:Math.round(o.scores.reduce((a,b)=>a+b,0)/o.scores.length)})).sort((a,b)=>b.avg-a.avg);
+let html='<table><tr><th>Rank</th><th>Name</th><th>Avg</th><th>Status</th></tr>';
+ranking.forEach((r,i)=>{html+=`<tr><td>${i+1}</td><td>${r.name} (${r.class})</td><td>${r.avg}%</td><td>${r.avg<50?'<span class="badge absent">At Risk</span>':'<span class="badge present">OK</span>'}</td></tr>`;});
+html+='</table>'; document.getElementById('ranking').innerHTML=html;
+}
+function exportCSV(type){
+let csv=''; if(type=='students'){csv='Name,No,Class\n'+db.students.map(s=>`"${s.name}",${s.no},${s.class}`).join('\n');}
+if(type=='attendance'){csv='Date,Student,Class,Status\n'; for(let d in db.attendance){for(let sid in db.attendance[d]){let st=db.students.find(s=>s.id==sid); if(st) csv+=`${d},"${st.name}",${st.class},${db.attendance[d][sid]}\n`;}}}
+if(type=='tests'){csv='Week,Topic,Student,Class,Score,Total,Percent\n'+db.tests.map(t=>`${t.week},"${t.topic}","${t.studentName}",${t.class},${t.score},${t.total},${t.pct}%`).join('\n');}
+let blob=new Blob([csv],{type:'text/csv'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=type+'.csv'; a.click();
+}
+function clearAll(){if(!confirm('Clear ALL students, attendance, tests?'))return; db={students:[],attendance:{},tests:[]}; saveDB(); renderStudents(); renderAttendance(); renderTests();}
+
+attDate.valueAsDate=new Date(); renderStudents(); renderAttendance(); renderTests();
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
