@@ -1,76 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAKHANANI v6.2.1 + Class Tracker</title>
-<link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#0a194e">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATHS LIT APP v7.0 - All CAPS + Class Tracker</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#0a194e">
 <style>
-body{margin:0;font-family:system-ui;background:#eef2ff;color:#0a194e;}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#eef2ff;color:#0a194e;}
 header{background:#0a194e;color:#ffcc00;padding:14px;text-align:center;position:sticky;top:0;z-index:30;}
-.tabs{display:flex;overflow-x:auto;gap:8px;padding:10px;background:white;position:sticky;top:58px;z-index:29;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.tabs{display:flex;overflow-x:auto;gap:8px;padding:10px;background:white;position:sticky;top:60px;z-index:29;box-shadow:0 2px 8px rgba(0,0,0,.1);}
 .tabs button{white-space:nowrap;padding:10px 16px;border-radius:22px;border:1.5px solid #0a194e;background:white;font-weight:800;cursor:pointer;}
 .tabs button.active{background:#0a194e;color:#ffcc00;}
 .tabcontent{display:none;padding:12px;padding-bottom:100px;}
-.card{background:white;border-radius:20px;padding:14px;margin:10px 0;box-shadow:0 4px 16px rgba(10,25,78,.07);}
-.badge{background:#ffcc00;color:#0a194e;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:900;display:inline-block;}
-.btn{padding:12px 16px;border:none;border-radius:12px;font-weight:800;cursor:pointer;}
-.btn-y{background:#ffcc00;color:#0a194e;width:100%;}.btn-d{background:#0a194e;color:#ffcc00;}
-input,select{padding:10px 12px;border-radius:12px;border:1.5px solid #d0d7e8;width:100%;box-sizing:border-box;}
-table{width:100%;border-collapse:collapse;font-size:13px;}th,td{border:1px solid #e5e8f0;padding:8px;text-align:center;}th{background:#0a194e;color:#ffcc00;}
-.present{background:#e8f5e9;}.absent{background:#ffebee;}
-</style></head>
+.card{background:white;border-radius:20px;padding:14px;margin:10px 0;box-shadow:0 4px 16px rgba(0,0,0,.06);}
+.badge{background:#ffcc00;color:#0a194e;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:900;}
+.btn{padding:12px 16px;border:none;border-radius:12px;font-weight:800;cursor:pointer;width:100%;}
+.btn-y{background:#ffcc00;color:#0a194e;}.btn-d{background:#0a194e;color:#ffcc00;}
+input,select{padding:10px;border-radius:12px;border:1.5px solid #d0d7e8;width:100%;}
+table{width:100%;border-collapse:collapse;font-size:13px;}th,td{border:1px solid #e5e8f0;padding:7px;text-align:center;}th{background:#0a194e;color:#ffcc00;font-size:11px;}
+.present{background:#e8f5e9}.absent{background:#ffebee}
+</style>
+</head>
 <body>
-<header><b>MAKHANANI v6.2.1 • CAPS 2026 COMPLETE</b><br><small>Vukona Press • 100% Offline • Grade 10-12 • Class Tracker</small></header>
+<header>
+<b>MATHS LIT v7.0 • CAPS 2026 COMPLETE</b><br>
+<small>Vukona Press • 100% Offline • 7 Classes Per Grade • All Topics</small>
+</header>
+
 <div class="tabs">
-<button onclick="openTab(event,'tracker')" class="active">📊 Tracker</button>
-<button onclick="openTab(event,'class')">👩‍🏫 Class</button>
+<button onclick="openTab(event,'class')" class="active">👩‍🏫 Class (7)</button>
+<button onclick="openTab(event,'tracker')">📊 CAPS Topics</button>
 <button onclick="openTab(event,'daily')">📅 Daily</button>
 <button onclick="openTab(event,'weekly')">📝 Weekly</button>
 <button onclick="openTab(event,'games')">🎮 Games</button>
 <button onclick="openTab(event,'quiz')">🧠 Quiz</button>
 </div>
 
-<div id="tracker" class="tabcontent" style="display:block;">
-<div style="text-align:center;"><span class="badge">⭐ CAPS 2026 COMPLETE • 11 Subjects</span></div>
-<div class="card"><h3>Grade <select id="gSel" onchange="renderTracker()" style="width:90px;display:inline;"><option>10</option><option>11</option><option>12</option></select> Progress</h3><div id="trackerList"></div><small id="progText">0% completed • Saved offline</small><div style="background:#e5e8f0;height:10px;border-radius:10px;margin-top:6px;"><div id="progBar" style="background:#0a194e;height:10px;width:0%;border-radius:10px;"></div></div></div>
-<div class="card"><b>Search CAPS Topics</b><input id="searchBox" placeholder="e.g. VAT, Maps, Tax..." oninput="renderTracker()"></div>
+<!-- CLASS TRACKER - 7 CLASSES -->
+<div id="class" class="tabcontent" style="display:block;">
+<div class="card" style="background:#0a194e;color:white;display:flex;justify-content:space-between;">
+<div><b style="color:#ffcc00;">Grade <span id="cdGrade">10</span> • <span id="cdClass">10A</span> • <span id="cdLearners">0</span> learners</b><br><small id="attDate2"></small></div>
+<span class="badge">7 CLASSES</span>
 </div>
 
-<div id="class" class="tabcontent">
-<div class="card" style="background:#0a194e;color:white;display:flex;justify-content:space-between;"><div><b style="color:#ffcc00;">Grade <span id="cdGrade">10</span> • <span id="cdClass">10A</span></b><br><small><span id="cdLearners">0</span> learners • <span id="attDate2"></span></small></div><span class="badge">TEACHER</span></div>
-<div class="card"><div style="display:flex;gap:8px;"><select id="gradeSel" onchange="updateClassOptions();loadClass()"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select><select id="classSel" onchange="loadClass()"><option>10A</option><option>10B</option><option>10C</option><option>10D</option><option>10E</option></select></div><div style="display:flex;gap:8px;margin-top:8px;"><input id="newLearner" placeholder="Learner full name"><button class="btn btn-d" onclick="addLearner()" style="width:90px;">+ Add</button></div></div>
-<div class="card"><b>📋 Attendance Register - <span id="attDate"></span></b><div style="display:flex;gap:8px;margin:8px 0;"><button class="btn" style="background:#22c55e;color:white;flex:1;" onclick="markAll()">All Present</button><button class="btn" style="background:#f1f5f9;flex:1;" onclick="exportCSV()">Export CSV</button></div><div style="max-height:320px;overflow:auto;border:1px solid #e5e8f0;border-radius:12px;"><table><thead><tr><th>#</th><th style="text-align:left;">Name</th><th>Status</th><th>Action</th></tr></thead><tbody id="attBody"></tbody></table></div><small>Present: <b id="presentCount">0</b>/<span id="totalCount">0</span> • Absent: <b id="absentCount">0</b></small></div>
-<div class="card"><b>📈 Performance Tracker</b><br><small>Daily(10%) + Weekly(30%) + Quiz(10%) + Game(10%) + Exam(40%)</small><div style="overflow:auto;margin-top:8px;border:1px solid #e5e8f0;border-radius:12px;"><table><thead><tr><th style="text-align:left;">Learner</th><th>D/5</th><th>W/20</th><th>Q/10</th><th>G/20</th><th>Ex/100</th><th>Avg%</th><th>Level</th></tr></thead><tbody id="perfBody"></tbody></table></div><div style="display:grid;grid-template-columns:1fr 58px 58px 52px 52px 62px;gap:6px;margin-top:10px;"><input id="perfName" placeholder="Name"><input id="perfDaily" type="number" placeholder="D"><input id="perfWeekly" type="number" placeholder="W"><input id="perfQuiz" type="number" placeholder="Q"><input id="perfGame" type="number" placeholder="G"><input id="perfExam" type="number" placeholder="Ex"></div><button class="btn btn-y" onclick="addPerf()" style="margin-top:8px;">Save Performance</button><div id="classStats" class="card" style="background:#f8fafc;font-size:12px;"></div></div>
-<div class="card"><b>🏫 5 Classes Overview - Grade <span id="ovGrade">10</span></b><div id="overview" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;"></div></div>
+<div class="card">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+<select id="gradeSel" onchange="updateClassOptions();loadClass()"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select>
+<select id="classSel" onchange="loadClass()"><option>10A</option><option>10B</option><option>10C</option><option>10D</option><option>10E</option><option>10F</option><option>10G</option></select>
+</div>
+<div style="display:flex;gap:8px;margin-top:8px;">
+<input id="newLearner" placeholder="Add learner e.g. Thabo Nkosi">
+<button class="btn btn-d" onclick="addLearner()" style="width:90px;">+ Add</button>
+</div>
 </div>
 
-<div id="daily" class="tabcontent"><div id="dailyList"></div></div>
-<div id="weekly" class="tabcontent"><div class="card"><h3>Week <span id="wn">1</span> • <span id="wt">Finance</span></h3><b id="ws">0/20</b> Best <b id="wb">0/20</b><button class="btn btn-y" onclick="startWeekly()">Start Test</button></div><div id="schedule"></div></div>
-<div id="games" class="tabcontent"><div class="card" style="background:#0a194e;color:white;text-align:center;"><h2>VAT 15% - 60s</h2><b id="vTime">60</b> | <b id="vScore">0/20</b> | Best <b id="vBest">0</b><h1 id="vQ" style="color:#ffcc00;">R 73 + 15% =?</h1><input id="vAns" type="number"><button class="btn btn-y" onclick="checkVAT()">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;width:100%;" onclick="startVAT()">▶ Start</button></div></div>
-<div id="quiz" class="tabcontent"><div class="card"><div id="quizQ">Click Start</div><div id="quizOpts"></div><button class="btn btn-y" onclick="startQuiz()">Start Quiz</button><p>Score <b id="qScore">0</b> Best <b id="qBest">0</b></p></div></div>
+<div class="card">
+<b>📋 Attendance Register - <span id="attDate"></span></b>
+<div style="display:flex;gap:8px;margin:8px 0;">
+<button class="btn" style="background:#22c55e;color:white;flex:1;" onclick="markAll()">All Present</button>
+<button class="btn" style="background:#f1f5f9;flex:1;" onclick="exportCSV()">Export CSV</button>
+</div>
+<div style="max-height:300px;overflow:auto;border:1px solid #e5e8f0;border-radius:12px;">
+<table><thead><tr><th>#</th><th style="text-align:left;">Name</th><th>Status</th><th>Action</th></tr></thead><tbody id="attBody"></tbody></table>
+</div>
+<small>Present: <b id="presentCount">0</b>/<span id="totalCount">0</span> • Absent: <b id="absentCount">0</b></small>
+</div>
+
+<div class="card">
+<b>📈 Performance Tracker</b><br><small>Daily(10%)+Weekly(30%)+Quiz(10%)+Game(10%)+Exam(40%) = 100% • Levels 1-7</small>
+<div style="overflow:auto;margin-top:8px;border:1px solid #e5e8f0;border-radius:12px;">
+<table><thead><tr><th style="text-align:left;">Learner</th><th>D/5</th><th>W/20</th><th>Q/10</th><th>G/20</th><th>E/100</th><th>Avg%</th><th>Level</th></tr></thead><tbody id="perfBody"></tbody></table>
+</div>
+<div style="display:grid;grid-template-columns:1fr 50px 50px 45px 45px 55px;gap:5px;margin-top:10px;">
+<input id="perfName" placeholder="Name"><input id="perfDaily" type="number" placeholder="D"><input id="perfWeekly" type="number" placeholder="W"><input id="perfQuiz" type="number" placeholder="Q"><input id="perfGame" type="number" placeholder="G"><input id="perfExam" type="number" placeholder="Ex">
+</div>
+<button class="btn btn-y" onclick="addPerf()" style="margin-top:8px;">Save Marks</button>
+<div id="classStats" style="margin-top:8px;background:#f8fafc;padding:8px;border-radius:10px;font-size:12px;"></div>
+</div>
+
+<div class="card">
+<b>🏫 7 Classes Overview - Grade <span id="ovGrade">10</span></b>
+<div id="overview" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;"></div>
+</div>
+</div>
+
+<!-- CAPS TOPICS - ALL APPROVED -->
+<div id="tracker" class="tabcontent">
+<div style="text-align:center;"><span class="badge">⭐ ALL CAPS TOPICS • Gr10-12 • 15 Topics</span></div>
+<div class="card"><h3>Grade <select id="gSel" onchange="renderTracker()" style="width:90px;display:inline;"><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> Topics</h3><div id="trackerList"></div><small id="progText">0% completed</small><div style="background:#e5e8f0;height:10px;border-radius:10px;margin-top:6px;"><div id="progBar" style="background:#0a194e;height:10px;width:0%;border-radius:10px;"></div></div></div>
+</div>
+
+<!-- DAILY ACTIVITIES -->
+<div id="daily" class="tabcontent">
+<div class="card" style="background:#0a194e;color:white;"><b style="color:#ffcc00;">Grade <span id="dg">10</span> • <span id="dt">Finance</span> • Week <span id="dw">1</span></b> Mon-Fri CAPS</div>
+<div class="card"><select id="gradePick" onchange="loadDaily()"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select><select id="topicPick" onchange="loadDaily()" style="margin-top:8px;"><option value="Finance">Finance - VAT, Income, Budgets</option><option value="Measurement">Measurement - Conversions, Area</option><option value="Maps">Maps & Scale 1:50000</option><option value="Data">Data Handling - Mean, Median</option><option value="Probability">Probability - Tree Diagrams</option><option value="Interest">Interest & Loans</option><option value="Tax">Tax, Inflation, Growth</option></select></div>
+<div id="dailyList"></div>
+<div class="card" style="text-align:center;"><b id="dp">0/5</b> completed today<div style="background:#e5e8f0;height:8px;border-radius:10px;margin-top:6px;"><div id="dbar" style="background:#0a194e;height:8px;width:0%;border-radius:10px;"></div></div></div>
+</div>
+
+<!-- WEEKLY ACTIVITIES -->
+<div id="weekly" class="tabcontent">
+<div class="card"><span class="badge">WEEKLY ACTIVITIES • 20 MARKS</span><h3>Week <span id="wn">1</span> • <span id="wt">Finance</span></h3><div style="display:flex;justify-content:space-around;text-align:center;"><div>Score<br><b id="ws" style="font-size:26px;">0/20</b></div><div>Best<br><b id="wb" style="font-size:26px;">0/20</b></div></div><button class="btn btn-y" onclick="startWeekly()" style="margin-top:12px;">Start Weekly Activity (10 Qs)</button></div>
+<div class="card"><b>📅 11 Weeks CAPS Activities</b><div id="schedule" style="margin-top:8px;"></div></div>
+<div class="card"><b>Weekly Activity Types (DBE):</b><br><small>Week 1-2: Finance VAT • Week 3-4: Measurement & Maps • Week 5-6: Data & Probability • Week 7-8: Interest • Week 9-10: Tax & Growth • Week 11: MOCK EXAM 100 Marks</small></div>
+</div>
+
+<!-- GAMES -->
+<div id="games" class="tabcontent">
+<div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">VAT SPEED GAME</span><h2>VAT 15% - 60s Challenge</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="vTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="vScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="vBest" style="font-size:26px;">0</b></div></div><h1 id="vQ" style="color:#ffcc00;">R 73 + 15% =?</h1><input id="vAns" type="number" placeholder="Answer"><button class="btn btn-y" onclick="checkVAT()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startVAT()">▶ Start Game</button></div>
+<div class="card"><b>Other Games (Coming in v7.1):</b><br><small>• Interest Calculator Race • Map Scale Puzzle • Data Mean Challenge • Probability Dice</small></div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="tabcontent">
+<div class="card"><span class="badge">DBE EXAM STYLE</span><h3>Quiz</h3><div id="quizQ" style="font-size:18px;font-weight:700;margin:10px 0;">Click Start</div><div id="quizOpts"></div><button class="btn btn-y" onclick="startQuiz()">Start Quiz</button><p>Score <b id="qScore">0</b> Best <b id="qBest">0</b></p></div>
+</div>
 
 <script>
-function openTab(e,n){document.querySelectorAll('.tabcontent').forEach(t=>t.style.display='none');document.getElementById(n).style.display='block';document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));e.currentTarget.classList.add('active');if(n=='class')loadClass();}
-const capsTopics=[{g:10,t:"Finance - VAT 15%",d:"VAT incl/excl"},{g:10,t:"Measurement - Conversions",d:"m to km, g to kg"},{g:10,t:"Maps & Scale",d:"1:50000"},{g:10,t:"Data - Mean Median Mode",d:"Average"},{g:11,t:"Interest & Loans",d:"Simple Compound"},{g:12,t:"Tax - PAYE",d:"Brackets"}];
-function renderTracker(){let g=document.getElementById('gSel').value;let q=document.getElementById('searchBox').value.toLowerCase();let list=capsTopics.filter(x=>x.g==g&&x.t.toLowerCase().includes(q));let html="";let done=0;list.forEach(it=>{let k='trk_'+it.t;let isDone=localStorage.getItem(k)=='1';if(isDone)done++;html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border:1.5px solid #e5e8f0;border-radius:16px;margin:8px 0;background:${isDone?'#e8f5e9':'white'}"><div><b>${it.t}</b><br><small>${it.d}</small></div><button onclick="toggleT('${it.t}')" style="border:none;width:44px;height:44px;border-radius:50%;background:${isDone?'#22c55e':'#0a194e'};color:white;">${isDone?'✓':'+'}</button></div>`;});document.getElementById('trackerList').innerHTML=html;let pct=list.length?Math.round(done/list.length*100):0;document.getElementById('progBar').style.width=pct+'%';document.getElementById('progText').innerText=pct+'% completed • Saved offline';}
-function toggleT(t){let k='trk_'+t;localStorage.getItem(k)=='1'?localStorage.removeItem(k):localStorage.setItem(k,'1');renderTracker();}renderTracker();
-function getKey(){return 'class_'+document.getElementById('gradeSel').value+'_'+document.getElementById('classSel').value;}function getPerfKey(){return 'perf_'+getKey();}
-function updateClassOptions(){let grade=document.getElementById('gradeSel').value;let sel=document.getElementById('classSel');let cur=sel.value;let opts=['A','B','C','D','E'].map(l=>grade+l);let newVal=opts.includes(cur)?cur:opts[0];sel.innerHTML=opts.map(o=>`<option ${o==newVal?'selected':''}>${o}</option>`).join('');}
+function openTab(e,n){document.querySelectorAll('.tabcontent').forEach(t=>t.style.display='none');document.getElementById(n).style.display='block';document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));e.currentTarget.classList.add('active');if(n=='class')loadClass();if(n=='daily')loadDaily();if(n=='tracker')renderTracker();}
+const allCaps=[
+{g:10,t:"Finance - VAT 15%",d:"VAT incl/excl, Income, Expenditure, Budgets"},
+{g:10,t:"Finance - Income & Budgets",d:"Salary, Budget planning"},
+{g:10,t:"Measurement - Conversions",d:"m↔km, g↔kg, ml↔L, time"},
+{g:10,t:"Measurement - Area & Perimeter",d:"Rectangle, Triangle, Circle"},
+{g:10,t:"Maps & Scale",d:"1:50000, Distance, Bar Scale"},
+{g:10,t:"Data - Mean Median Mode",d:"Average, Range"},
+{g:10,t:"Data - Graphs",d:"Bar, Line, Pie"},
+{g:11,t:"Interest - Simple & Compound",d:"I=P×r×t, A=P(1+r)^n"},
+{g:11,t:"Loans & Investments",d:"Repayments, Hire purchase"},
+{g:11,t:"Inflation & CPI",d:"Inflation rate, Real value"},
+{g:11,t:"Tax - VAT & Income",d:"PAYE tables"},
+{g:12,t:"Tax - PAYE & UIF",d:"Tax brackets, Rebates"},
+{g:12,t:"Growth Charts - Compound",d:"Business growth"},
+{g:12,t:"Probability - Tree & Venn",d:"Dice, Cards, Dependent"},
+{g:12,t:"Data - Box & Whisker",d:"Quartiles, Outliers"}
+];
+function renderTracker(){let g=document.getElementById('gSel').value;let list=allCaps.filter(x=>x.g==g);let html="";let done=0;list.forEach(it=>{let k='trk_'+it.t;let isDone=localStorage.getItem(k)=='1';if(isDone)done++;html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border:1.5px solid #e5e8f0;border-radius:16px;margin:8px 0;background:${isDone?'#e8f5e9':'white'}"><div style="text-align:left;"><b>${it.t}</b><br><small>${it.d}</small></div><button onclick="toggleT('${it.t.replace(/'/g,"\\'")}')" style="border:none;width:44px;height:44px;border-radius:50%;background:${isDone?'#22c55e':'#0a194e'};color:white;font-size:18px;">${isDone?'✓':'+'}</button></div>`;});document.getElementById('trackerList').innerHTML=html;let pct=list.length?Math.round(done/list.length*100):0;document.getElementById('progBar').style.width=pct+'%';document.getElementById('progText').innerText=pct+'% completed • '+done+'/'+list.length+' topics • Saved offline';}
+function toggleT(t){let k='trk_'+t;localStorage.getItem(k)=='1'?localStorage.removeItem(k):localStorage.setItem(k,'1');renderTracker();}
+renderTracker();
+
+// CLASS TRACKER - 7 CLASSES A-G
+function getKey(){return 'class_'+document.getElementById('gradeSel').value+'_'+document.getElementById('classSel').value;}
+function getPerfKey(){return 'perf_'+getKey();}
+function updateClassOptions(){let grade=document.getElementById('gradeSel').value;let sel=document.getElementById('classSel');let cur=sel.value;let opts=['A','B','C','D','E','F','G'].map(l=>grade+l);let newVal=opts.includes(cur)?cur:opts[0];sel.innerHTML=opts.map(o=>`<option ${o==newVal?'selected':''}>${o}</option>`).join('');}
 function loadClass(){updateClassOptions();document.getElementById('cdGrade').innerText=document.getElementById('gradeSel').value;document.getElementById('cdClass').innerText=document.getElementById('classSel').value;document.getElementById('ovGrade').innerText=document.getElementById('gradeSel').value;renderAttendance();renderPerf();renderOverview();}
-function addLearner(){let name=document.getElementById('newLearner').value.trim();if(!name)return;let key=getKey();let list=JSON.parse(localStorage.getItem(key)||'[]');list.push({name,present:1});localStorage.setItem(key,JSON.stringify(list));document.getElementById('newLearner').value='';renderAttendance();renderOverview();}
-function renderAttendance(){let key=getKey();let list=JSON.parse(localStorage.getItem(key)||'[]');document.getElementById('cdLearners').innerText=list.length;let d=new Date().toLocaleDateString();document.getElementById('attDate').innerText=d;document.getElementById('attDate2').innerText=d;let body=document.getElementById('attBody');body.innerHTML='';let p=0;list.forEach((s,i)=>{if(s.present)p++;body.innerHTML+=`<tr class="${s.present?'present':'absent'}"><td>${i+1}</td><td style="text-align:left;font-weight:600;">${s.name}</td><td>${s.present?'✅ Present':'❌ Absent'}</td><td><button onclick="toggleAtt(${i})" style="padding:6px 10px;border:none;border-radius:8px;background:${s.present?'#ffcc00':'#22c55e'};">${s.present?'Absent':'Present'}</button> <button onclick="delLearner(${i})" style="background:#fee2e2;border:none;border-radius:8px;padding:6px;">✕</button></td></tr>`;});document.getElementById('presentCount').innerText=p;document.getElementById('totalCount').innerText=list.length;document.getElementById('absentCount').innerText=list.length-p;}
+function addLearner(){let name=document.getElementById('newLearner').value.trim();if(!name)return;let key=getKey();let list=JSON.parse(localStorage.getItem(key)||'[]');if(list.length>=60)return alert('Max 60 learners per class');list.push({name,present:1});localStorage.setItem(key,JSON.stringify(list));document.getElementById('newLearner').value='';renderAttendance();renderOverview();}
+function renderAttendance(){let key=getKey();let list=JSON.parse(localStorage.getItem(key)||'[]');document.getElementById('cdLearners').innerText=list.length;let d=new Date().toLocaleDateString();document.getElementById('attDate').innerText=d;document.getElementById('attDate2').innerText=d;let body=document.getElementById('attBody');body.innerHTML='';let p=0;list.forEach((s,i)=>{if(s.present)p++;body.innerHTML+=`<tr class="${s.present?'present':'absent'}"><td>${i+1}</td><td style="text-align:left;font-weight:700;">${s.name}</td><td>${s.present?'✅ Present':'❌ Absent'}</td><td><button onclick="toggleAtt(${i})" style="padding:6px 10px;border:none;border-radius:8px;background:${s.present?'#ffcc00':'#22c55e'};font-weight:700;">${s.present?'Absent':'Present'}</button> <button onclick="delLearner(${i})" style="background:#fee2e2;border:none;border-radius:8px;padding:6px;">✕</button></td></tr>`;});document.getElementById('presentCount').innerText=p;document.getElementById('totalCount').innerText=list.length;document.getElementById('absentCount').innerText=list.length-p;}
 function toggleAtt(i){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l[i].present=l[i].present?0:1;localStorage.setItem(k,JSON.stringify(l));renderAttendance();}
-function delLearner(i){if(!confirm('Delete?'))return;let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l.splice(i,1);localStorage.setItem(k,JSON.stringify(l));renderAttendance();renderOverview();}
+function delLearner(i){if(!confirm('Delete learner?'))return;let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l.splice(i,1);localStorage.setItem(k,JSON.stringify(l));renderAttendance();renderOverview();}
 function markAll(){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l.forEach(x=>x.present=1);localStorage.setItem(k,JSON.stringify(l));renderAttendance();}
-function exportCSV(){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');let csv='No,Name,Status,Date,Class\n'+l.map((x,i)=>`${i+1},"${x.name}",${x.present?'Present':'Absent'},${new Date().toLocaleDateString()},${k}`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`Attendance_${k}.csv`;a.click();}
-function addPerf(){let name=document.getElementById('perfName').value.trim();if(!name)return alert('Name');let d=Math.min(5,parseInt(document.getElementById('perfDaily').value||0));let w=Math.min(20,parseInt(document.getElementById('perfWeekly').value||0));let q=Math.min(10,parseInt(document.getElementById('perfQuiz').value||0));let g=Math.min(20,parseInt(document.getElementById('perfGame').value||0));let ex=Math.min(100,parseInt(document.getElementById('perfExam').value||0));let avg=((d/5*10)+(w/20*30)+(q/10*10)+(g/20*10)+(ex/100*40)).toFixed(1);let key=getPerfKey();let list=JSON.parse(localStorage.getItem(key)||'[]');let idx=list.findIndex(x=>x.name.toLowerCase()==name.toLowerCase());let level=avg>=80?'7 Outstanding':avg>=60?'5 Substantial':avg>=40?'3 Moderate':'1 Not Achieved';let rec={name,d,w,q,g,ex,avg,level};if(idx>=0)list[idx]=rec;else list.push(rec);localStorage.setItem(key,JSON.stringify(list));['perfName','perfDaily','perfWeekly','perfQuiz','perfGame','perfExam'].forEach(id=>document.getElementById(id).value='');renderPerf();renderOverview();}
-function renderPerf(){let key=getPerfKey();let list=JSON.parse(localStorage.getItem(key)||'[]');let body=document.getElementById('perfBody');body.innerHTML='';list.sort((a,b)=>b.avg-a.avg).forEach(r=>{body.innerHTML+=`<tr><td style="text-align:left;font-weight:600;">${r.name}</td><td>${r.d}</td><td>${r.w}</td><td>${r.q}</td><td>${r.g}</td><td>${r.ex}</td><td><b>${r.avg}%</b></td><td style="font-size:10px;">${r.level}</td></tr>`;});if(list.length){let avgAll=(list.reduce((s,x)=>s+parseFloat(x.avg),0)/list.length).toFixed(1);let pass=list.filter(x=>parseFloat(x.avg)>=40).length;document.getElementById('classStats').innerHTML=`Class Avg: ${avgAll}% • Pass: ${Math.round(pass/list.length*100)}% • Top: ${list[0].name} ${list[0].avg}%`;}else document.getElementById('classStats').innerHTML='No data yet';}
-function renderOverview(){let grade=document.getElementById('gradeSel').value;let div=document.getElementById('overview');div.innerHTML='';['A','B','C','D','E'].forEach(l=>{let k='class_'+grade+'_'+grade+l;let list=JSON.parse(localStorage.getItem(k)||'[]');let pk='perf_'+k;let perf=JSON.parse(localStorage.getItem(pk)||'[]');let avg=perf.length?(perf.reduce((s,x)=>s+parseFloat(x.avg),0)/perf.length).toFixed(0)+'%':'--';div.innerHTML+=`<div class="card" style="margin:0;text-align:center;"><b>${grade+l}</b><br><small>${list.length} learners</small><br><b style="font-size:20px;">${avg}</b></div>`;});}
+function exportCSV(){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');if(!l.length)return alert('No learners');let csv='No,Name,Status,Date,Class\n'+l.map((x,i)=>`${i+1},"${x.name}",${x.present?'Present':'Absent'},${new Date().toLocaleDateString()},${k}`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`Attendance_${k}_${new Date().toISOString().split('T')[0]}.csv`;a.click();}
+function addPerf(){let name=document.getElementById('perfName').value.trim();if(!name)return alert('Enter name');let d=Math.min(5,parseInt(document.getElementById('perfDaily').value||0));let w=Math.min(20,parseInt(document.getElementById('perfWeekly').value||0));let q=Math.min(10,parseInt(document.getElementById('perfQuiz').value||0));let g=Math.min(20,parseInt(document.getElementById('perfGame').value||0));let ex=Math.min(100,parseInt(document.getElementById('perfExam').value||0));let avg=((d/5*10)+(w/20*30)+(q/10*10)+(g/20*10)+(ex/100*40)).toFixed(1);let key=getPerfKey();let list=JSON.parse(localStorage.getItem(key)||'[]');let idx=list.findIndex(x=>x.name.toLowerCase()==name.toLowerCase());let level=avg>=80?'7 Outstanding':avg>=70?'6 Meritorious':avg>=60?'5 Substantial':avg>=50?'4 Adequate':avg>=40?'3 Moderate':avg>=30?'2 Elementary':'1 Not Achieved';let rec={name,d,w,q,g,ex,avg,level};if(idx>=0)list[idx]=rec;else list.push(rec);localStorage.setItem(key,JSON.stringify(list));['perfName','perfDaily','perfWeekly','perfQuiz','perfGame','perfExam'].forEach(id=>document.getElementById(id).value='');renderPerf();renderOverview();}
+function renderPerf(){let key=getPerfKey();let list=JSON.parse(localStorage.getItem(key)||'[]');let body=document.getElementById('perfBody');body.innerHTML='';list.sort((a,b)=>b.avg-a.avg).forEach(r=>{body.innerHTML+=`<tr><td style="text-align:left;font-weight:700;">${r.name}</td><td>${r.d}</td><td>${r.w}</td><td>${r.q}</td><td>${r.g}</td><td>${r.ex}</td><td><b>${r.avg}%</b></td><td style="font-size:10px;">${r.level}</td></tr>`;});if(list.length){let avgAll=(list.reduce((s,x)=>s+parseFloat(x.avg),0)/list.length).toFixed(1);let pass=list.filter(x=>parseFloat(x.avg)>=40).length;document.getElementById('classStats').innerHTML=`Class Avg: <b>${avgAll}%</b> • Pass: <b>${Math.round(pass/list.length*100)}%</b> (${pass}/${list.length}) • Top: <b>${list[0].name} ${list[0].avg}%</b>`;}else document.getElementById('classStats').innerHTML='No data yet - add marks above. Formula: Daily 10% + Weekly 30% + Quiz 10% + Game 10% + Exam 40%';}
+function renderOverview(){let grade=document.getElementById('gradeSel').value;let div=document.getElementById('overview');div.innerHTML='';['A','B','C','D','E','F','G'].forEach(l=>{let k='class_'+grade+'_'+grade+l;let list=JSON.parse(localStorage.getItem(k)||'[]');let pk='perf_'+k;let perf=JSON.parse(localStorage.getItem(pk)||'[]');let avg=perf.length?(perf.reduce((s,x)=>s+parseFloat(x.avg),0)/perf.length).toFixed(0)+'%':'--';div.innerHTML+=`<div class="card" style="margin:0;text-align:center;padding:10px;"><b>${grade+l}</b><br><small>${list.length} learners</small><br><b style="font-size:20px;">${avg}</b></div>`;});}
 loadClass();
-// Keep other tabs working (short versions)
-const bank=[{q:"R250 excl 15%?",a:["R287.5","R265"],c:0},{q:"Mean 5,7,8,10?",a:["7.5","8"],c:0}];
-let vScore=0,vTime=60,iv=null,vAns=0;function startVAT(){vScore=0;vTime=60;document.getElementById('vScore').innerText=vScore+'/20';nextVAT();clearInterval(iv);iv=setInterval(()=>{vTime--;document.getElementById('vTime').innerText=vTime;if(vTime<=0){clearInterval(iv);alert('Score '+vScore);}},1000);}function nextVAT(){let b=Math.floor(Math.random()*900)+50;vAns=Math.round(b*1.15*100)/100;document.getElementById('vQ').innerText='R '+b+' + 15% =?';}function checkVAT(){let u=parseFloat(document.getElementById('vAns').value);if(Math.abs(u-vAns)<0.5){vScore++;document.getElementById('vScore').innerText=vScore+'/20';}document.getElementById('vAns').value='';nextVAT();}
-function startWeekly(){alert('Weekly test uses Quiz bank - 20 marks');}
-function startQuiz(){document.getElementById('quizQ').innerText=bank[0].q;}
+
+// DAILY & WEEKLY
+const dailyData={
+Finance:{Mon:{type:"THEORY",icon:"📖",title:"VAT 15%",task:"Incl=Excl×1.15, Excl=Incl÷1.15. Learn 2 formulas",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"R200 excl → R230 incl",task:"VAT=R30. Try R500 excl",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"10 Sums",task:"R100+15%, R250+15%, R230 incl→excl",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"VAT Speed Game",task:"Play Games tab, get 15/20",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Shop Challenge",task:"Take 3 items, calc incl price",time:"30m"}},
+Measurement:{Mon:{type:"THEORY",icon:"📖",title:"Conversions",task:"1000m=1km, 1000g=1kg, 1000ml=1L",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"5km to m",task:"5×1000=5000m",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"Area",task:"Rect, Triangle, Circle area",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"Measurement Quiz",task:"10 Qs",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Measure House",task:"Measure room area",time:"30m"}},
+Maps:{Mon:{type:"THEORY",icon:"📖",title:"Scale",task:"1:50000 means 1cm=50000cm=0.5km",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"3cm =?",task:"3×0.5=1.5km",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"Map Distance",task:"Measure 5 distances on map",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"Map Quiz",task:"5 Qs",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Walk & Map",task:"Map school to home",time:"30m"}},
+Data:{Mon:{type:"THEORY",icon:"📖",title:"Mean Median Mode",task:"Mean=avg, Median=middle, Mode=most",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"2,5,7,7,9",task:"Mean6 Median7 Mode7 Range7",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"Bar Graph",task:"Draw bar graph 5 friends ages",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"Data Quiz",task:"10 Qs",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Survey",task:"Survey 10 learners fav subject",time:"30m"}}
+};
+function loadDaily(){let grade=document.getElementById('gradePick').value;let topic=document.getElementById('topicPick').value;document.getElementById('dg').innerText=grade;document.getElementById('dt').innerText=topic;let data=dailyData[topic]||dailyData['Finance'];let days=["Mon","Tue","Wed","Thu","Fri"];let full={Mon:"Monday - Theory",Tue:"Tuesday - Example",Wed:"Wednesday - Practice",Thu:"Thursday - Quiz",Fri:"Friday - Real Life"};let html="";days.forEach(d=>{let it=data[d]||data['Mon'];let isDone=localStorage.getItem('daily_'+topic+'_'+d)=='1';html+=`<div class="card" style="border-left:6px solid ${isDone?'#22c55e':'#ffcc00'};background:${isDone?'#e8f5e9':'white'}"><small style="background:#0a194e;color:#ffcc00;padding:3px 8px;border-radius:8px;font-weight:800;">${it.type}</small><br><b>${it.icon} ${full[d]}: ${it.title}</b><br><small>${it.task}</small><br><small>⏱ ${it.time}</small><br><button onclick="completeDaily('${topic}','${d}')" style="margin-top:8px;background:${isDone?'#22c55e':'#0a194e'};color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:800;">${isDone?'✓ Done':'Do Task'}</button></div>`;});document.getElementById('dailyList').innerHTML=html;updateBar(topic);}
+function completeDaily(t,d){let k='daily_'+t+'_'+d;localStorage.getItem(k)=='1'?localStorage.removeItem(k):localStorage.setItem(k,'1');loadDaily();}
+function updateBar(t){let c=0;["Mon","Tue","Wed","Thu","Fri"].forEach(d=>{if(localStorage.getItem('daily_'+t+'_'+d)=='1')c++;});document.getElementById('dp').innerText=c+'/5';document.getElementById('dbar').style.width=c/5*100+'%';}
+document.getElementById('dw').innerText=Math.ceil((Date.now()-new Date(new Date().getFullYear(),0,1))/604800000);
+loadDaily();
+
+// WEEKLY ACTIVITIES
+const bank=[{q:"Shirt R250 excl VAT 15%. Incl?",a:["R287.50","R265","R300"],c:0},{q:"Mean 5,7,8,10?",a:["7.5","8","7"],c:0},{q:"Map 1:50000 3cm=?km",a:["1.5km","15km"],c:0},{q:"R5000 @8% 2yrs Simple?",a:["R800","R400"],c:0},{q:"Dice even prob?",a:["1/2","1/3"],c:0}];
+let wBest=parseInt(localStorage.getItem('vp_best')||0);document.getElementById('wb').innerText=wBest+'/20';
+let curW=Math.ceil((Date.now()-new Date(new Date().getFullYear(),0,1))/604800000);if(curW>11)curW=11;document.getElementById('wn').innerText=curW;
+const capsSchedule=[{w:1,t:"Finance VAT"},{w:2,t:"Finance Budgets"},{w:3,t:"Measurement"},{w:4,t:"Maps Scale"},{w:5,t:"Data Handling"},{w:6,t:"Probability"},{w:7,t:"Interest Loans"},{w:8,t:"Inflation Tax"},{w:9,t:"Growth Charts"},{w:10,t:"Finance Gr12"},{w:11,t:"MOCK EXAM 100"}];
+document.getElementById('wt').innerText=capsSchedule[curW-1].t;
+document.getElementById('schedule').innerHTML=capsSchedule.map((it,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1.5px solid #e5e8f0;border-radius:12px;margin:5px 0;"><span>Week ${it.w} • ${it.t}</span><span style="${i+1==curW?'background:#ffcc00':'background:#e5e8f0'};padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">${i+1==curW?'Due Now':'Pending'}</span></div>`).join('');
+function startWeekly(){let sc=0;for(let i=0;i<10;i++){let b=bank[i%bank.length];let a=prompt((i+1)+'/10 Weekly Activity: '+b.q+'\n0='+b.a[0]+' 1='+b.a[1]+' 2='+(b.a[2]||''));if(parseInt(a)==b.c)sc+=2;}document.getElementById('ws').innerText=sc+'/20';if(sc>wBest){localStorage.setItem('vp_best',sc);document.getElementById('wb').innerText=sc+'/20';alert('🏆 New Best '+sc+'/20 saved!');}else alert('Score '+sc+'/20');}
+
+// GAMES
+let vScore=0,vTime=60,iv=null,vAns=0;
+function startVAT(){vScore=0;vTime=60;document.getElementById('vScore').innerText=vScore+'/20';nextVAT();clearInterval(iv);iv=setInterval(()=>{vTime--;document.getElementById('vTime').innerText=vTime;if(vTime<=0){clearInterval(iv);alert('Time up! Score '+vScore);let b=parseInt(localStorage.getItem('vBest')||0);if(vScore>b){localStorage.setItem('vBest',vScore);document.getElementById('vBest').innerText=vScore;}}},1000);}
+function nextVAT(){let base=Math.floor(Math.random()*900)+50;vAns=Math.round(base*1.15*100)/100;document.getElementById('vQ').innerText='R '+base+' + 15% =?';}
+function checkVAT(){let u=parseFloat(document.getElementById('vAns').value);if(Math.abs(u-vAns)<0.5){vScore++;document.getElementById('vScore').innerText=vScore+'/20';}document.getElementById('vAns').value='';nextVAT();}
+document.getElementById('vBest').innerText=localStorage.getItem('vBest')||0;
+
+// QUIZ
+let qi=0,qs=0;function startQuiz(){qi=0;qs=0;showQ();}function showQ(){if(qi>=bank.length){document.getElementById('quizQ').innerText="Done! Score "+qs+"/"+bank.length;let best=parseInt(localStorage.getItem('qBest')||0);if(qs>best){localStorage.setItem('qBest',qs);document.getElementById('qBest').innerText=qs;}return;}let it=bank[qi];document.getElementById('quizQ').innerText=it.q;let h="";it.a.forEach((op,i)=>{h+=`<button onclick="ansQ(${i})" class="btn" style="background:#f1f5f9;margin:4px 0;text-align:left;">${op}</button>`;});document.getElementById('quizOpts').innerHTML=h;}
+function ansQ(i){if(i==bank[qi].c)qs++;document.getElementById('qScore').innerText=qs;qi++;showQ();}
+document.getElementById('qBest').innerText=localStorage.getItem('qBest')||0;
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
 </script>
 </body>
 </html>
