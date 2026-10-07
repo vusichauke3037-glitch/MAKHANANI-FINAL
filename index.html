@@ -106,11 +106,95 @@ table{width:100%;border-collapse:collapse;font-size:13px;}th,td{border:1px solid
 <div class="card"><b>Weekly Activity Types (DBE):</b><br><small>Week 1-2: Finance VAT • Week 3-4: Measurement & Maps • Week 5-6: Data & Probability • Week 7-8: Interest • Week 9-10: Tax & Growth • Week 11: MOCK EXAM 100 Marks</small></div>
 </div>
 
-<!-- GAMES -->
+<!-- GAMES - 6 GAMES NOW -->
 <div id="games" class="tabcontent">
-<div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">VAT SPEED GAME</span><h2>VAT 15% - 60s Challenge</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="vTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="vScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="vBest" style="font-size:26px;">0</b></div></div><h1 id="vQ" style="color:#ffcc00;">R 73 + 15% =?</h1><input id="vAns" type="number" placeholder="Answer"><button class="btn btn-y" onclick="checkVAT()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startVAT()">▶ Start Game</button></div>
-<div class="card"><b>Other Games (Coming in v7.1):</b><br><small>• Interest Calculator Race • Map Scale Puzzle • Data Mean Challenge • Probability Dice</small></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+<button onclick="showGame('vat')" class="btn" style="background:#0a194e;color:#ffcc00;">VAT Speed</button>
+<button onclick="showGame('interest')" class="btn" style="background:white;border:1.5px solid #0a194e;">Interest Race</button>
+<button onclick="showGame('map')" class="btn" style="background:white;border:1.5px solid #0a194e;">Map Scale</button>
+<button onclick="showGame('data')" class="btn" style="background:white;border:1.5px solid #0a194e;">Data Mean</button>
+<button onclick="showGame('prob')" class="btn" style="background:white;border:1.5px solid #0a194e;">Probability</button>
+<button onclick="showGame('tax')" class="btn" style="background:white;border:1.5px solid #0a194e;">Tax Brackets</button>
 </div>
+
+<!-- GAME 1: VAT -->
+<div id="game-vat" class="gameBox">
+<div class="card" style="background:#0a194e;color:white;text-align:center;">
+<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">VAT SPEED GAME</span>
+<h2>VAT 15% - 60s</h2>
+<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="vTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="vScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="vBest" style="font-size:26px;">0</b></div></div>
+<h1 id="vQ" style="color:#ffcc00;">R 73 + 15% =?</h1>
+<input id="vAns" type="number" placeholder="Answer"><button class="btn btn-y" onclick="checkVAT()" style="margin-top:8px;">Submit</button><br><br>
+<button class="btn" style="background:white;color:#0a194e;" onclick="startVAT()">▶ Start 60s</button>
+</div>
+</div>
+
+<!-- GAME 2: INTEREST -->
+<div id="game-interest" class="gameBox" style="display:none;">
+<div class="card" style="background:#0a194e;color:white;text-align:center;">
+<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">INTEREST RACE</span>
+<h2>Simple: I=P×r×t</h2>
+<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="iTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="iScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="iBest" style="font-size:26px;">0</b></div></div>
+<h2 id="iQ" style="color:#ffcc00;">R5000 @8% 2yrs =?</h2>
+<input id="iAns" type="number" placeholder="Interest only"><button class="btn btn-y" onclick="checkInterest()" style="margin-top:8px;">Submit</button><br><br>
+<button class="btn" style="background:white;color:#0a194e;" onclick="startInterest()">▶ Start</button>
+</div>
+</div>
+
+<!-- GAME 3: MAP -->
+<div id="game-map" class="gameBox" style="display:none;">
+<div class="card" style="background:#0a194e;color:white;text-align:center;">
+<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">MAP SCALE</span>
+<h2>Scale 1:50000</h2>
+<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="mTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="mScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="mBest" style="font-size:26px;">0</b></div></div>
+<h2 id="mQ" style="color:#ffcc00;">3cm on map =? km</h2>
+<input id="mAns" type="number" placeholder="km"><button class="btn btn-y" onclick="checkMap()" style="margin-top:8px;">Submit</button><br><br>
+<button class="btn" style="background:white;color:#0a194e;" onclick="startMap()">▶ Start</button>
+</div>
+</div>
+
+<!-- GAME 4: DATA -->
+<div id="game-data" class="gameBox" style="display:none;">
+<div class="card" style="background:#0a194e;color:white;text-align:center;">
+<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">DATA MEAN</span>
+<h2>Find Mean</h2>
+<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="dTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="dScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="dBest" style="font-size:26px;">0</b></div></div>
+<h2 id="dQ" style="color:#ffcc00;">2,5,7,7,9 =?</h2>
+<input id="dAns" type="number" placeholder="Mean"><button class="btn btn-y" onclick="checkData()" style="margin-top:8px;">Submit</button><br><br>
+<button class="btn" style="background:white;color:#0a194e;" onclick="startData()">▶ Start</button>
+</div>
+</div>
+
+<!-- GAME 5: PROBABILITY -->
+<div id="game-prob" class="gameBox" style="display:none;">
+<div class="card" style="background:#0a194e;color:white;text-align:center;">
+<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">PROBABILITY DICE</span>
+<h2>Dice & Cards</h2>
+<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="pTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="pScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="pBest" style="font-size:26px;">0</b></div></div>
+<h2 id="pQ" style="color:#ffcc00;">P(even) on dice =?</h2>
+<input id="pAns" type="text" placeholder="e.g. 1/2 or 0.5"><button class="btn btn-y" onclick="checkProb()" style="margin-top:8px;">Submit</button><br><br>
+<button class="btn" style="background:white;color:#0a194e;" onclick="startProb()">▶ Start</button>
+</div>
+</div>
+
+<!-- GAME 6: TAX -->
+<div id="game-tax" class="gameBox" style="display:none;">
+<div class="card" style="background:#0a194e;color:white;text-align:center;">
+<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">TAX BRACKETS</span>
+<h2>PAYE Tax</h2>
+<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="tTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="tScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="tBest" style="font-size:26px;">0</b></div></div>
+<h2 id="tQ" style="color:#ffcc00;">R300k @18% =?</h2>
+<input id="tAns" type="number" placeholder="Tax"><button class="btn btn-y" onclick="checkTax()" style="margin-top:8px;">Submit</button><br><br>
+<button class="btn" style="background:white;color:#0a194e;" onclick="startTax()">▶ Start</button>
+</div>
+</div>
+
+<div class="card" style="text-align:center;"><small>Games count for Performance Tracker: G/20 • Best scores saved offline</small><div id="gamesTotal" style="margin-top:6px;font-weight:800;"></div></div>
+</div>
+
+<script>
+function showGame(g){document.querySelectorAll('.gameBox').forEach(b=>b.style.display='none');document.getElementById('game-'+g).style.display='block';}
+</script>
 
 <!-- QUIZ -->
 <div id="quiz" class="tabcontent">
@@ -190,6 +274,44 @@ let qi=0,qs=0;function startQuiz(){qi=0;qs=0;showQ();}function showQ(){if(qi>=ba
 function ansQ(i){if(i==bank[qi].c)qs++;document.getElementById('qScore').innerText=qs;qi++;showQ();}
 document.getElementById('qBest').innerText=localStorage.getItem('qBest')||0;
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
+// INTEREST GAME
+let iScore=0,iTime=60,iv2=null,iAnsNum=0;
+function startInterest(){iScore=0;iTime=60;document.getElementById('iScore').innerText=iScore+'/20';nextInterest();clearInterval(iv2);iv2=setInterval(()=>{iTime--;document.getElementById('iTime').innerText=iTime;if(iTime<=0){clearInterval(iv2);let b=parseInt(localStorage.getItem('iBest')||0);if(iScore>b){localStorage.setItem('iBest',iScore);document.getElementById('iBest').innerText=iScore;}}},1000);}
+function nextInterest(){let P=Math.floor(Math.random()*9000)+1000;let r=[5,8,10,12][Math.floor(Math.random()*4)];let t=[1,2,3][Math.floor(Math.random()*3)];iAnsNum=P*r/100*t;document.getElementById('iQ').innerText=`R${P} @${r}% ${t}yrs =?`;}
+function checkInterest(){let u=parseFloat(document.getElementById('iAns').value);if(Math.abs(u-iAnsNum)<1){iScore++;document.getElementById('iScore').innerText=iScore+'/20';}document.getElementById('iAns').value='';nextInterest();}
+document.getElementById('iBest').innerText=localStorage.getItem('iBest')||0;
+
+// MAP GAME
+let mScore=0,mTime=60,iv3=null,mAnsNum=0;
+function startMap(){mScore=0;mTime=60;document.getElementById('mScore').innerText=mScore+'/20';nextMap();clearInterval(iv3);iv3=setInterval(()=>{mTime--;document.getElementById('mTime').innerText=mTime;if(mTime<=0){clearInterval(iv3);let b=parseInt(localStorage.getItem('mBest')||0);if(mScore>b){localStorage.setItem('mBest',mScore);document.getElementById('mBest').innerText=mScore;}}},1000);}
+function nextMap(){let cm=Math.floor(Math.random()*9)+1;mAnsNum=cm*0.5;document.getElementById('mQ').innerText=`${cm}cm on map (1:50000) =? km`;}
+function checkMap(){let u=parseFloat(document.getElementById('mAns').value);if(Math.abs(u-mAnsNum)<0.01){mScore++;document.getElementById('mScore').innerText=mScore+'/20';}document.getElementById('mAns').value='';nextMap();}
+document.getElementById('mBest').innerText=localStorage.getItem('mBest')||0;
+
+// DATA GAME
+let dScore=0,dTime=60,iv4=null,dAnsNum=0;
+function startData(){dScore=0;dTime=60;document.getElementById('dScore').innerText=dScore+'/20';nextData();clearInterval(iv4);iv4=setInterval(()=>{dTime--;document.getElementById('dTime').innerText=dTime;if(dTime<=0){clearInterval(iv4);let b=parseInt(localStorage.getItem('dBest')||0);if(dScore>b){localStorage.setItem('dBest',dScore);document.getElementById('dBest').innerText=dScore;}}},1000);}
+function nextData(){let nums=[2,5,7,7,9];let sh=nums.sort(()=>0.5-Math.random()).slice(0,4);sh.push(Math.floor(Math.random()*10));dAnsNum=(sh.reduce((a,b)=>a+b,0)/sh.length).toFixed(1);document.getElementById('dQ').innerHTML=sh.join(', ')+' = Mean?';}
+function checkData(){let u=parseFloat(document.getElementById('dAns').value);if(Math.abs(u-parseFloat(dAnsNum))<0.6){dScore++;document.getElementById('dScore').innerText=dScore+'/20';}document.getElementById('dAns').value='';nextData();}
+document.getElementById('dBest').innerText=localStorage.getItem('dBest')||0;
+
+// PROB GAME
+let pScore=0,pTime=60,iv5=null,pAnsStr="1/2";
+const probQs=[{q:"P(even) on dice =?",a:["1/2","0.5","3/6"]},{q:"P(6) on dice =?",a:["1/6","0.166"]},{q:"P(red card) =?",a:["1/2","0.5"]},{q:"P(Ace) =?",a:["1/13","4/52"]}];
+function startProb(){pScore=0;pTime=60;document.getElementById('pScore').innerText=pScore+'/20';nextProb();clearInterval(iv5);iv5=setInterval(()=>{pTime--;document.getElementById('pTime').innerText=pTime;if(pTime<=0){clearInterval(iv5);let b=parseInt(localStorage.getItem('pBest')||0);if(pScore>b){localStorage.setItem('pBest',pScore);document.getElementById('pBest').innerText=pScore;}}},1000);}
+function nextProb(){let q=probQs[Math.floor(Math.random()*probQs.length)];pAnsStr=q.a[0];document.getElementById('pQ').innerText=q.q;}
+function checkProb(){let u=document.getElementById('pAns').value.trim().toLowerCase();let cur=probQs.find(x=>x.q==document.getElementById('pQ').innerText);if(cur && cur.a.includes(u)){pScore++;document.getElementById('pScore').innerText=pScore+'/20';}document.getElementById('pAns').value='';nextProb();}
+document.getElementById('pBest').innerText=localStorage.getItem('pBest')||0;
+
+// TAX GAME
+let tScore=0,tTime=60,iv6=null,tAnsNum=0;
+function startTax(){tScore=0;tTime=60;document.getElementById('tScore').innerText=tScore+'/20';nextTax();clearInterval(iv6);iv6=setInterval(()=>{tTime--;document.getElementById('tTime').innerText=tTime;if(tTime<=0){clearInterval(iv6);let b=parseInt(localStorage.getItem('tBest')||0);if(tScore>b){localStorage.setItem('tBest',tScore);document.getElementById('tBest').innerText=tScore;}}},1000);}
+function nextTax(){let inc=[237000,300000,400000,500000][Math.floor(Math.random()*4)];let rate=inc<=237100?18:inc<=370500?26:31;tAnsNum=Math.round(inc*rate/100);document.getElementById('tQ').innerText=`R${inc} @${rate}% =?`;}
+function checkTax(){let u=parseFloat(document.getElementById('tAns').value);if(Math.abs(u-tAnsNum)<100){tScore++;document.getElementById('tScore').innerText=tScore+'/20';}document.getElementById('tAns').value='';nextTax();}
+document.getElementById('tBest').innerText=localStorage.getItem('tBest')||0;
+
+// UPDATE TOTAL GAMES SCORE FOR PERFORMANCE TRACKER
+setInterval(()=>{let total=(vScore||0)+(iScore||0)+(mScore||0)+(dScore||0)+(pScore||0)+(tScore||0);let el=document.getElementById('gamesTotal');if(el)el.innerText=`Total Games Score: ${total} | VAT:${vScore||0} Interest:${iScore||0} Map:${mScore||0} Data:${dScore||0} Prob:${pScore||0} Tax:${tScore||0}`;},1000);
 </script>
 </body>
 </html>
