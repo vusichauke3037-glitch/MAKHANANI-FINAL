@@ -1,112 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MATHS LIT APP v7.1 - 6 Games + 7 Classes</title>
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#0a194e">
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#eef2ff;color:#0a194e;}
-header{background:#0a194e;color:#ffcc00;padding:14px;text-align:center;position:sticky;top:0;z-index:30;}
-.tabs{display:flex;overflow-x:auto;gap:8px;padding:10px;background:white;position:sticky;top:60px;z-index:29;box-shadow:0 2px 8px rgba(0,0,0,.1);}
-.tabs button{white-space:nowrap;padding:10px 16px;border-radius:22px;border:1.5px solid #0a194e;background:white;font-weight:800;cursor:pointer;}
-.tabs button.active{background:#0a194e;color:#ffcc00;}
-.tabcontent{display:none;padding:12px;padding-bottom:100px;}
-.card{background:white;border-radius:20px;padding:14px;margin:10px 0;box-shadow:0 4px 16px rgba(0,0,0,.06);}
-.badge{background:#ffcc00;color:#0a194e;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:900;}
-.btn{padding:12px 16px;border:none;border-radius:12px;font-weight:800;cursor:pointer;width:100%;}
-.btn-y{background:#ffcc00;color:#0a194e;}.btn-d{background:#0a194e;color:#ffcc00;}
-input,select{padding:10px;border-radius:12px;border:1.5px solid #d0d7e8;width:100%;}
-table{width:100%;border-collapse:collapse;font-size:13px;}th,td{border:1px solid #e5e8f0;padding:7px;text-align:center;}th{background:#0a194e;color:#ffcc00;font-size:11px;}
-.present{background:#e8f5e9}.absent{background:#ffebee}
-</style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAKHANANI Maths Lit PRO v8.0 - CAPS 2026</title>
+<link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#0a194e">
+<style>*{box-sizing:border-box}body{margin:0;font-family:system-ui;background:#eef2ff;color:#0a194e}header{background:#0a194e;color:#ffcc00;padding:14px;text-align:center;position:sticky;top:0;z-index:30}.tabs{display:flex;overflow-x:auto;gap:8px;padding:10px;background:white;position:sticky;top:70px;z-index:29;box-shadow:0 2px 8px rgba(0,0,0,.1)}.tabs button{white-space:nowrap;padding:10px 16px;border-radius:22px;border:1.5px solid #0a194e;background:white;font-weight:800;cursor:pointer}.tabs button.active{background:#0a194e;color:#ffcc00}.tabcontent{display:none;padding:12px;padding-bottom:100px}.card{background:white;border-radius:20px;padding:14px;margin:10px 0;box-shadow:0 4px 16px rgba(0,0,0,.06)}.badge{background:#ffcc00;color:#0a194e;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:900}.btn{padding:12px 16px;border:none;border-radius:12px;font-weight:800;cursor:pointer;width:100%}.btn-y{background:#ffcc00;color:#0a194e}.btn-d{background:#0a194e;color:#ffcc00}input,select{padding:12px;border-radius:12px;border:1.5px solid #d0d7e8;width:100%;margin:5px 0}table{width:100%;border-collapse:collapse;font-size:13px}th,td{border:1px solid #e5e8f0;padding:7px;text-align:center}th{background:#0a194e;color:#ffcc00;font-size:11px}.present{background:#e8f5e9}.absent{background:#ffebee}</style>
 </head>
 <body>
-<header>
-<b>MATHS LIT v7.1 • CAPS 2026 COMPLETE 6 GAMES</b>
-<small>Vukona Press • 100% Offline • 7 Classes Per Grade • All Topics</small>
-</header>
-
+<header><b>MAKHANANI Maths Lit PRO - CAPS 2026</b><br><small>Vukona Press | Offline Ready | Paper 1 & 2 | v8.0 PRO | Vusi Chauke | 6 Games + 7 Classes + Calculators</small></header>
 <div class="tabs">
-<button onclick="openTab(event,'class')" class="active">👩‍🏫 Class (7)</button>
-<button onclick="openTab(event,'tracker')">📊 CAPS Topics</button>
+<button onclick="openTab(event,'calc')" class="active">🧮 Maths Lit</button>
+<button onclick="openTab(event,'class')">👩‍🏫 Class (7)</button>
+<button onclick="openTab(event,'tracker')">📊 CAPS</button>
 <button onclick="openTab(event,'daily')">📅 Daily</button>
 <button onclick="openTab(event,'weekly')">📝 Weekly</button>
-<button onclick="openTab(event,'games')">🎮 Games</button>
+<button onclick="openTab(event,'games')">🎮 Games (6)</button>
 <button onclick="openTab(event,'quiz')">🧠 Quiz</button>
 </div>
 
-<!-- CLASS TRACKER - 7 CLASSES -->
-<div id="class" class="tabcontent" style="display:block;">
-<div class="card" style="background:#0a194e;color:white;display:flex;justify-content:space-between;">
-<div><b style="color:#ffcc00;">Grade <span id="cdGrade">10</span> • <span id="cdClass">10A</span> • <span id="cdLearners">0</span> learners</b><br><small id="attDate2"></small></div>
-<span class="badge">7 CLASSES</span>
+<!-- CALCULATORS - FROM YOUR v3.0 SCREENSHOT -->
+<div id="calc" class="tabcontent" style="display:block;">
+<div class="card"><h3>1. Hire Purchase & Loans</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input id="hpCash" placeholder="Cash Price e.g. 7999"><input id="hpDep" placeholder="Deposit % e.g. 10"><input id="hpInt" placeholder="Interest % p.a. e.g. 18"><input id="hpMonths" placeholder="Months e.g. 24"></div><button class="btn btn-d" onclick="calcHP()" style="margin-top:8px;">Calculate HP</button><div id="hpRes" style="margin-top:8px;background:#f8fafc;padding:10px;border-radius:12px;"></div></div>
+<div class="card"><h3>2. VAT, Discount & Exchange</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input id="vatAmt" placeholder="Amount e.g. 250"><input id="vatPerc" placeholder="VAT/Disc % e.g. 15"></div><button class="btn btn-d" onclick="calcVAT2()">Calc VAT Incl/Excl</button><div id="vatRes2" style="margin-top:8px;background:#f8fafc;padding:10px;border-radius:12px;"></div></div>
+<div class="card"><h3>3. Measurement & Maps</h3><input id="mapCm" placeholder="Map cm e.g. 3"><select id="mapScale"><option value="50000">1:50000 (0.5km per cm)</option><option value="10000">1:10000</option><option value="100000">1:100000</option></select><button class="btn btn-d" onclick="calcMap2()">Convert Map to Real</button><div id="mapRes2" style="margin-top:8px;background:#f8fafc;padding:10px;border-radius:12px;"></div></div>
+<div class="card"><h3>4. Finance - Interest</h3><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;"><input id="intP" placeholder="Principal"><input id="intR" placeholder="Rate %"><input id="intT" placeholder="Years"></div><button class="btn btn-d" onclick="calcInt()">Calc Simple Interest</button><div id="intRes" style="margin-top:8px;background:#f8fafc;padding:10px;border-radius:12px;"></div></div>
 </div>
 
-<div class="card">
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-<select id="gradeSel" onchange="updateClassOptions();loadClass()"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select>
-<select id="classSel" onchange="loadClass()"><option>10A</option><option>10B</option><option>10C</option><option>10D</option><option>10E</option><option>10F</option><option>10G</option></select>
-</div>
-<div style="display:flex;gap:8px;margin-top:8px;">
-<input id="newLearner" placeholder="Add learner e.g. Thabo Nkosi">
-<button class="btn btn-d" onclick="addLearner()" style="width:90px;">+ Add</button>
-</div>
+<!-- CLASS TRACKER 7 CLASSES -->
+<div id="class" class="tabcontent">
+<div class="card" style="background:#0a194e;color:white;display:flex;justify-content:space-between;"><div><b style="color:#ffcc00;">Grade <span id="cdGrade">10</span> • <span id="cdClass">10A</span> • <span id="cdLearners">0</span></b><br><small id="attDate2"></small></div><span class="badge">7 CLASSES</span></div>
+<div class="card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><select id="gradeSel" onchange="updateClassOptions();loadClass()"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select><select id="classSel" onchange="loadClass()"><option>10A</option><option>10B</option><option>10C</option><option>10D</option><option>10E</option><option>10F</option><option>10G</option></select></div><div style="display:flex;gap:8px;margin-top:8px;"><input id="newLearner" placeholder="Add learner e.g. Thabo Nkosi"><button class="btn btn-d" onclick="addLearner()" style="width:90px;">+ Add</button></div></div>
+<div class="card"><b>📋 Attendance - <span id="attDate"></span></b><div style="display:flex;gap:8px;margin:8px 0;"><button class="btn" style="background:#22c55e;color:white;flex:1;" onclick="markAll()">All Present</button><button class="btn" style="background:#f1f5f9;flex:1;" onclick="exportCSV()">Export CSV</button></div><div style="max-height:300px;overflow:auto;border:1px solid #e5e8f0;border-radius:12px;"><table><thead><tr><th>#</th><th style="text-align:left;">Name</th><th>Status</th><th>Action</th></tr></thead><tbody id="attBody"></tbody></table></div><small>Present: <b id="presentCount">0</b>/<span id="totalCount">0</span> Absent: <b id="absentCount">0</b></small></div>
+<div class="card"><b>📈 Performance Tracker</b><br><small>D(10%)+W(30%)+Q(10%)+G(10%)+E(40%)=Avg Level 1-7</small><div style="overflow:auto;margin-top:8px;border:1px solid #e5e8f0;border-radius:12px;"><table><thead><tr><th style="text-align:left;">Learner</th><th>D/5</th><th>W/20</th><th>Q/10</th><th>G/20</th><th>E/100</th><th>Avg%</th><th>Level</th></tr></thead><tbody id="perfBody"></tbody></table></div><div style="display:grid;grid-template-columns:1fr 50px 50px 45px 45px 55px;gap:5px;margin-top:10px;"><input id="perfName" placeholder="Name"><input id="perfDaily" type="number" placeholder="D"><input id="perfWeekly" type="number" placeholder="W"><input id="perfQuiz" type="number" placeholder="Q"><input id="perfGame" type="number" placeholder="G"><input id="perfExam" type="number" placeholder="Ex"></div><button class="btn btn-y" onclick="addPerf()" style="margin-top:8px;">Save Marks</button><div id="classStats" style="margin-top:8px;background:#f8fafc;padding:8px;border-radius:10px;font-size:12px;"></div></div>
+<div class="card"><b>🏫 7 Classes Overview - Grade <span id="ovGrade">10</span></b><div id="overview" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;"></div></div>
 </div>
 
-<div class="card">
-<b>📋 Attendance Register - <span id="attDate"></span></b>
-<div style="display:flex;gap:8px;margin:8px 0;">
-<button class="btn" style="background:#22c55e;color:white;flex:1;" onclick="markAll()">All Present</button>
-<button class="btn" style="background:#f1f5f9;flex:1;" onclick="exportCSV()">Export CSV</button>
-</div>
-<div style="max-height:300px;overflow:auto;border:1px solid #e5e8f0;border-radius:12px;">
-<table><thead><tr><th>#</th><th style="text-align:left;">Name</th><th>Status</th><th>Action</th></tr></thead><tbody id="attBody"></tbody></table>
-</div>
-<small>Present: <b id="presentCount">0</b>/<span id="totalCount">0</span> • Absent: <b id="absentCount">0</b></small>
-</div>
+<div id="tracker" class="tabcontent"><div style="text-align:center;"><span class="badge">ALL CAPS TOPICS • 15 Topics</span></div><div class="card"><h3>Grade <select id="gSel" onchange="renderTracker()" style="width:90px;display:inline;"><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> Topics</h3><div id="trackerList"></div><small id="progText">0%</small><div style="background:#e5e8f0;height:10px;border-radius:10px;margin-top:6px;"><div id="progBar" style="background:#0a194e;height:10px;width:0%;border-radius:10px;"></div></div></div></div>
 
-<div class="card">
-<b>📈 Performance Tracker</b><br><small>Daily(10%)+Weekly(30%)+Quiz(10%)+Game(10%)+Exam(40%) = 100% • Levels 1-7</small>
-<div style="overflow:auto;margin-top:8px;border:1px solid #e5e8f0;border-radius:12px;">
-<table><thead><tr><th style="text-align:left;">Learner</th><th>D/5</th><th>W/20</th><th>Q/10</th><th>G/20</th><th>E/100</th><th>Avg%</th><th>Level</th></tr></thead><tbody id="perfBody"></tbody></table>
-</div>
-<div style="display:grid;grid-template-columns:1fr 50px 50px 45px 45px 55px;gap:5px;margin-top:10px;">
-<input id="perfName" placeholder="Name"><input id="perfDaily" type="number" placeholder="D"><input id="perfWeekly" type="number" placeholder="W"><input id="perfQuiz" type="number" placeholder="Q"><input id="perfGame" type="number" placeholder="G"><input id="perfExam" type="number" placeholder="Ex">
-</div>
-<button class="btn btn-y" onclick="addPerf()" style="margin-top:8px;">Save Marks</button>
-<div id="classStats" style="margin-top:8px;background:#f8fafc;padding:8px;border-radius:10px;font-size:12px;"></div>
-</div>
+<div id="daily" class="tabcontent"><div class="card" style="background:#0a194e;color:white;"><b style="color:#ffcc00;">Grade <span id="dg">10</span> • <span id="dt">Finance</span></b> Mon-Fri</div><div class="card"><select id="gradePick" onchange="loadDaily()"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select><select id="topicPick" onchange="loadDaily()" style="margin-top:8px;"><option value="Finance">Finance - VAT, Income</option><option value="Measurement">Measurement</option><option value="Maps">Maps & Scale</option><option value="Data">Data Handling</option></select></div><div id="dailyList"></div></div>
 
-<div class="card">
-<b>🏫 7 Classes Overview - Grade <span id="ovGrade">10</span></b>
-<div id="overview" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;"></div>
-</div>
-</div>
+<div id="weekly" class="tabcontent"><div class="card"><span class="badge">WEEKLY • 20 MARKS</span><h3>Week <span id="wn">1</span> • <span id="wt">Finance</span></h3><div style="display:flex;justify-content:space-around;text-align:center;"><div>Score<br><b id="ws" style="font-size:26px;">0/20</b></div><div>Best<br><b id="wb" style="font-size:26px;">0/20</b></div></div><button class="btn btn-y" onclick="startWeekly()" style="margin-top:12px;">Start Weekly (10 Qs)</button></div><div class="card"><b>📅 11 Weeks</b><div id="schedule" style="margin-top:8px;"></div></div></div>
 
-<!-- CAPS TOPICS - ALL APPROVED -->
-<div id="tracker" class="tabcontent">
-<div style="text-align:center;"><span class="badge">⭐ ALL CAPS TOPICS • Gr10-12 • 15 Topics</span></div>
-<div class="card"><h3>Grade <select id="gSel" onchange="renderTracker()" style="width:90px;display:inline;"><option value="10">10</option><option value="11">11</option><option value="12">12</option></select> Topics</h3><div id="trackerList"></div><small id="progText">0% completed</small><div style="background:#e5e8f0;height:10px;border-radius:10px;margin-top:6px;"><div id="progBar" style="background:#0a194e;height:10px;width:0%;border-radius:10px;"></div></div></div>
-</div>
-
-<!-- DAILY ACTIVITIES -->
-<div id="daily" class="tabcontent">
-<div class="card" style="background:#0a194e;color:white;"><b style="color:#ffcc00;">Grade <span id="dg">10</span> • <span id="dt">Finance</span> • Week <span id="dw">1</span></b> Mon-Fri CAPS</div>
-<div class="card"><select id="gradePick" onchange="loadDaily()"><option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option></select><select id="topicPick" onchange="loadDaily()" style="margin-top:8px;"><option value="Finance">Finance - VAT, Income, Budgets</option><option value="Measurement">Measurement - Conversions, Area</option><option value="Maps">Maps & Scale 1:50000</option><option value="Data">Data Handling - Mean, Median</option><option value="Probability">Probability - Tree Diagrams</option><option value="Interest">Interest & Loans</option><option value="Tax">Tax, Inflation, Growth</option></select></div>
-<div id="dailyList"></div>
-<div class="card" style="text-align:center;"><b id="dp">0/5</b> completed today<div style="background:#e5e8f0;height:8px;border-radius:10px;margin-top:6px;"><div id="dbar" style="background:#0a194e;height:8px;width:0%;border-radius:10px;"></div></div></div>
-</div>
-
-<!-- WEEKLY ACTIVITIES -->
-<div id="weekly" class="tabcontent">
-<div class="card"><span class="badge">WEEKLY ACTIVITIES • 20 MARKS</span><h3>Week <span id="wn">1</span> • <span id="wt">Finance</span></h3><div style="display:flex;justify-content:space-around;text-align:center;"><div>Score<br><b id="ws" style="font-size:26px;">0/20</b></div><div>Best<br><b id="wb" style="font-size:26px;">0/20</b></div></div><button class="btn btn-y" onclick="startWeekly()" style="margin-top:12px;">Start Weekly Activity (10 Qs)</button></div>
-<div class="card"><b>📅 11 Weeks CAPS Activities</b><div id="schedule" style="margin-top:8px;"></div></div>
-<div class="card"><b>Weekly Activity Types (DBE):</b><br><small>Week 1-2: Finance VAT • Week 3-4: Measurement & Maps • Week 5-6: Data & Probability • Week 7-8: Interest • Week 9-10: Tax & Growth • Week 11: MOCK EXAM 100 Marks</small></div>
-</div>
-
-<!-- GAMES - 6 GAMES NOW -->
 <div id="games" class="tabcontent">
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
 <button onclick="showGame('vat')" class="btn" style="background:#0a194e;color:#ffcc00;">VAT Speed</button>
@@ -114,204 +48,51 @@ table{width:100%;border-collapse:collapse;font-size:13px;}th,td{border:1px solid
 <button onclick="showGame('map')" class="btn" style="background:white;border:1.5px solid #0a194e;">Map Scale</button>
 <button onclick="showGame('data')" class="btn" style="background:white;border:1.5px solid #0a194e;">Data Mean</button>
 <button onclick="showGame('prob')" class="btn" style="background:white;border:1.5px solid #0a194e;">Probability</button>
-<button onclick="showGame('tax')" class="btn" style="background:white;border:1.5px solid #0a194e;">Tax Brackets</button>
+<button onclick="showGame('tax')" class="btn" style="background:white;border:1.5px solid #0a194e;">Tax</button>
+</div>
+<div id="game-vat" class="gameBox"><div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">VAT SPEED</span><h2>VAT 15% - 60s</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="vTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="vScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="vBest" style="font-size:26px;">0</b></div></div><h1 id="vQ" style="color:#ffcc00;">R 73 + 15% =?</h1><input id="vAns" type="number" placeholder="Answer"><button class="btn btn-y" onclick="checkVAT()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startVAT()">▶ Start 60s</button></div></div>
+<div id="game-interest" class="gameBox" style="display:none;"><div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">INTEREST RACE</span><h2 id="iQ">R5000 @8% 2yrs =?</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="iTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="iScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="iBest" style="font-size:26px;">0</b></div></div><input id="iAns" type="number" placeholder="Interest"><button class="btn btn-y" onclick="checkInterest()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startInterest()">▶ Start</button></div></div>
+<div id="game-map" class="gameBox" style="display:none;"><div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">MAP SCALE</span><h2 id="mQ">3cm =? km</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="mTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="mScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="mBest" style="font-size:26px;">0</b></div></div><input id="mAns" type="number" placeholder="km"><button class="btn btn-y" onclick="checkMap()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startMap()">▶ Start</button></div></div>
+<div id="game-data" class="gameBox" style="display:none;"><div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">DATA MEAN</span><h2 id="dQ">2,5,7,7,9 =?</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="dTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="dScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="dBest" style="font-size:26px;">0</b></div></div><input id="dAns" type="number" placeholder="Mean"><button class="btn btn-y" onclick="checkData()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startData()">▶ Start</button></div></div>
+<div id="game-prob" class="gameBox" style="display:none;"><div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">PROBABILITY</span><h2 id="pQ">P(even) =?</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="pTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="pScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="pBest" style="font-size:26px;">0</b></div></div><input id="pAns" type="text" placeholder="e.g. 1/2"><button class="btn btn-y" onclick="checkProb()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startProb()">▶ Start</button></div></div>
+<div id="game-tax" class="gameBox" style="display:none;"><div class="card" style="background:#0a194e;color:white;text-align:center;"><span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">TAX</span><h2 id="tQ">R300k @18% =?</h2><div style="display:flex;justify-content:space-around;"><div>Time<br><b id="tTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="tScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="tBest" style="font-size:26px;">0</b></div></div><input id="tAns" type="number" placeholder="Tax"><button class="btn btn-y" onclick="checkTax()" style="margin-top:8px;">Submit</button><br><br><button class="btn" style="background:white;color:#0a194e;" onclick="startTax()">▶ Start</button></div></div>
 </div>
 
-<!-- GAME 1: VAT -->
-<div id="game-vat" class="gameBox">
-<div class="card" style="background:#0a194e;color:white;text-align:center;">
-<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">VAT SPEED GAME</span>
-<h2>VAT 15% - 60s</h2>
-<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="vTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="vScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="vBest" style="font-size:26px;">0</b></div></div>
-<h1 id="vQ" style="color:#ffcc00;">R 73 + 15% =?</h1>
-<input id="vAns" type="number" placeholder="Answer"><button class="btn btn-y" onclick="checkVAT()" style="margin-top:8px;">Submit</button><br><br>
-<button class="btn" style="background:white;color:#0a194e;" onclick="startVAT()">▶ Start 60s</button>
-</div>
-</div>
-
-<!-- GAME 2: INTEREST -->
-<div id="game-interest" class="gameBox" style="display:none;">
-<div class="card" style="background:#0a194e;color:white;text-align:center;">
-<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">INTEREST RACE</span>
-<h2>Simple: I=P×r×t</h2>
-<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="iTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="iScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="iBest" style="font-size:26px;">0</b></div></div>
-<h2 id="iQ" style="color:#ffcc00;">R5000 @8% 2yrs =?</h2>
-<input id="iAns" type="number" placeholder="Interest only"><button class="btn btn-y" onclick="checkInterest()" style="margin-top:8px;">Submit</button><br><br>
-<button class="btn" style="background:white;color:#0a194e;" onclick="startInterest()">▶ Start</button>
-</div>
-</div>
-
-<!-- GAME 3: MAP -->
-<div id="game-map" class="gameBox" style="display:none;">
-<div class="card" style="background:#0a194e;color:white;text-align:center;">
-<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">MAP SCALE</span>
-<h2>Scale 1:50000</h2>
-<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="mTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="mScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="mBest" style="font-size:26px;">0</b></div></div>
-<h2 id="mQ" style="color:#ffcc00;">3cm on map =? km</h2>
-<input id="mAns" type="number" placeholder="km"><button class="btn btn-y" onclick="checkMap()" style="margin-top:8px;">Submit</button><br><br>
-<button class="btn" style="background:white;color:#0a194e;" onclick="startMap()">▶ Start</button>
-</div>
-</div>
-
-<!-- GAME 4: DATA -->
-<div id="game-data" class="gameBox" style="display:none;">
-<div class="card" style="background:#0a194e;color:white;text-align:center;">
-<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">DATA MEAN</span>
-<h2>Find Mean</h2>
-<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="dTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="dScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="dBest" style="font-size:26px;">0</b></div></div>
-<h2 id="dQ" style="color:#ffcc00;">2,5,7,7,9 =?</h2>
-<input id="dAns" type="number" placeholder="Mean"><button class="btn btn-y" onclick="checkData()" style="margin-top:8px;">Submit</button><br><br>
-<button class="btn" style="background:white;color:#0a194e;" onclick="startData()">▶ Start</button>
-</div>
-</div>
-
-<!-- GAME 5: PROBABILITY -->
-<div id="game-prob" class="gameBox" style="display:none;">
-<div class="card" style="background:#0a194e;color:white;text-align:center;">
-<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">PROBABILITY DICE</span>
-<h2>Dice & Cards</h2>
-<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="pTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="pScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="pBest" style="font-size:26px;">0</b></div></div>
-<h2 id="pQ" style="color:#ffcc00;">P(even) on dice =?</h2>
-<input id="pAns" type="text" placeholder="e.g. 1/2 or 0.5"><button class="btn btn-y" onclick="checkProb()" style="margin-top:8px;">Submit</button><br><br>
-<button class="btn" style="background:white;color:#0a194e;" onclick="startProb()">▶ Start</button>
-</div>
-</div>
-
-<!-- GAME 6: TAX -->
-<div id="game-tax" class="gameBox" style="display:none;">
-<div class="card" style="background:#0a194e;color:white;text-align:center;">
-<span style="background:#ffcc00;color:#0a194e;padding:5px 10px;border-radius:10px;font-weight:900;">TAX BRACKETS</span>
-<h2>PAYE Tax</h2>
-<div style="display:flex;justify-content:space-around;"><div>Time<br><b id="tTime" style="font-size:26px;color:#ffcc00;">60</b></div><div>Score<br><b id="tScore" style="font-size:26px;">0/20</b></div><div>Best<br><b id="tBest" style="font-size:26px;">0</b></div></div>
-<h2 id="tQ" style="color:#ffcc00;">R300k @18% =?</h2>
-<input id="tAns" type="number" placeholder="Tax"><button class="btn btn-y" onclick="checkTax()" style="margin-top:8px;">Submit</button><br><br>
-<button class="btn" style="background:white;color:#0a194e;" onclick="startTax()">▶ Start</button>
-</div>
-</div>
-
-<div class="card" style="text-align:center;"><small>Games count for Performance Tracker: G/20 • Best scores saved offline</small><div id="gamesTotal" style="margin-top:6px;font-weight:800;"></div></div>
-</div>
-
-<script>
-function showGame(g){document.querySelectorAll('.gameBox').forEach(b=>b.style.display='none');document.getElementById('game-'+g).style.display='block';}
-</script>
-
-<!-- QUIZ -->
-<div id="quiz" class="tabcontent">
-<div class="card"><span class="badge">DBE EXAM STYLE</span><h3>Quiz</h3><div id="quizQ" style="font-size:18px;font-weight:700;margin:10px 0;">Click Start</div><div id="quizOpts"></div><button class="btn btn-y" onclick="startQuiz()">Start Quiz</button><p>Score <b id="qScore">0</b> Best <b id="qBest">0</b></p></div>
-</div>
+<div id="quiz" class="tabcontent"><div class="card"><span class="badge">DBE EXAM STYLE</span><h3>Quiz</h3><div id="quizQ" style="font-size:18px;font-weight:700;margin:10px 0;">Click Start</div><div id="quizOpts"></div><button class="btn btn-y" onclick="startQuiz()">Start Quiz</button><p>Score <b id="qScore">0</b> Best <b id="qBest">0</b></p></div></div>
 
 <script>
 function openTab(e,n){document.querySelectorAll('.tabcontent').forEach(t=>t.style.display='none');document.getElementById(n).style.display='block';document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));e.currentTarget.classList.add('active');if(n=='class')loadClass();if(n=='daily')loadDaily();if(n=='tracker')renderTracker();}
-const allCaps=[
-{g:10,t:"Finance - VAT 15%",d:"VAT incl/excl, Income, Expenditure, Budgets"},
-{g:10,t:"Finance - Income & Budgets",d:"Salary, Budget planning"},
-{g:10,t:"Measurement - Conversions",d:"m↔km, g↔kg, ml↔L, time"},
-{g:10,t:"Measurement - Area & Perimeter",d:"Rectangle, Triangle, Circle"},
-{g:10,t:"Maps & Scale",d:"1:50000, Distance, Bar Scale"},
-{g:10,t:"Data - Mean Median Mode",d:"Average, Range"},
-{g:10,t:"Data - Graphs",d:"Bar, Line, Pie"},
-{g:11,t:"Interest - Simple & Compound",d:"I=P×r×t, A=P(1+r)^n"},
-{g:11,t:"Loans & Investments",d:"Repayments, Hire purchase"},
-{g:11,t:"Inflation & CPI",d:"Inflation rate, Real value"},
-{g:11,t:"Tax - VAT & Income",d:"PAYE tables"},
-{g:12,t:"Tax - PAYE & UIF",d:"Tax brackets, Rebates"},
-{g:12,t:"Growth Charts - Compound",d:"Business growth"},
-{g:12,t:"Probability - Tree & Venn",d:"Dice, Cards, Dependent"},
-{g:12,t:"Data - Box & Whisker",d:"Quartiles, Outliers"}
-];
-function renderTracker(){let g=document.getElementById('gSel').value;let list=allCaps.filter(x=>x.g==g);let html="";let done=0;list.forEach(it=>{let k='trk_'+it.t;let isDone=localStorage.getItem(k)=='1';if(isDone)done++;html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border:1.5px solid #e5e8f0;border-radius:16px;margin:8px 0;background:${isDone?'#e8f5e9':'white'}"><div style="text-align:left;"><b>${it.t}</b><br><small>${it.d}</small></div><button onclick="toggleT('${it.t.replace(/'/g,"\\'")}')" style="border:none;width:44px;height:44px;border-radius:50%;background:${isDone?'#22c55e':'#0a194e'};color:white;font-size:18px;">${isDone?'✓':'+'}</button></div>`;});document.getElementById('trackerList').innerHTML=html;let pct=list.length?Math.round(done/list.length*100):0;document.getElementById('progBar').style.width=pct+'%';document.getElementById('progText').innerText=pct+'% completed • '+done+'/'+list.length+' topics • Saved offline';}
-function toggleT(t){let k='trk_'+t;localStorage.getItem(k)=='1'?localStorage.removeItem(k):localStorage.setItem(k,'1');renderTracker();}
-renderTracker();
-
-// CLASS TRACKER - 7 CLASSES A-G
-function getKey(){return 'class_'+document.getElementById('gradeSel').value+'_'+document.getElementById('classSel').value;}
-function getPerfKey(){return 'perf_'+getKey();}
-function updateClassOptions(){let grade=document.getElementById('gradeSel').value;let sel=document.getElementById('classSel');let cur=sel.value;let opts=['A','B','C','D','E','F','G'].map(l=>grade+l);let newVal=opts.includes(cur)?cur:opts[0];sel.innerHTML=opts.map(o=>`<option ${o==newVal?'selected':''}>${o}</option>`).join('');}
+function calcHP(){let cash=parseFloat(document.getElementById('hpCash').value||0);let depP=parseFloat(document.getElementById('hpDep').value||0);let r=parseFloat(document.getElementById('hpInt').value||0)/100/12;let m=parseFloat(document.getElementById('hpMonths').value||0);let dep=cash*depP/100;let bal=cash-dep;let total=bal*Math.pow(1+r,m);let inst=total/m;document.getElementById('hpRes').innerHTML=`Deposit: R${dep.toFixed(2)}<br>Loan: R${bal.toFixed(2)}<br>Monthly: R${inst.toFixed(2)}<br>Total Paid: R${(dep+total).toFixed(2)}`;}
+function calcVAT2(){let amt=parseFloat(document.getElementById('vatAmt').value||0);let p=parseFloat(document.getElementById('vatPerc').value||0);let incl=amt*(1+p/100);let excl=amt/(1+p/100);document.getElementById('vatRes2').innerHTML=`${amt} + ${p}% = R${incl.toFixed(2)} incl<br>${amt} incl → R${excl.toFixed(2)} excl`;}
+function calcMap2(){let cm=parseFloat(document.getElementById('mapCm').value||0);let scale=parseInt(document.getElementById('mapScale').value);let km=cm*scale/100000;document.getElementById('mapRes2').innerHTML=`${cm}cm @1:${scale} = ${km.toFixed(2)} km real<br>= ${km*1000} m`;}
+function calcInt(){let P=parseFloat(document.getElementById('intP').value||0);let R=parseFloat(document.getElementById('intR').value||0);let T=parseFloat(document.getElementById('intT').value||0);let I=P*R/100*T;document.getElementById('intRes').innerHTML=`Interest: R${I.toFixed(2)}<br>Total: R${(P+I).toFixed(2)}`;}
+const allCaps=[{g:10,t:"Finance - VAT 15%",d:"VAT incl/excl"},{g:10,t:"Finance - Income & Budgets",d:"Salary, Budgets"},{g:10,t:"Measurement - Conversions",d:"m↔km, g↔kg"},{g:10,t:"Measurement - Area & Perimeter",d:"Rect, Circle"},{g:10,t:"Maps & Scale",d:"1:50000"},{g:10,t:"Data - Mean Median Mode",d:"Average"},{g:10,t:"Data - Graphs",d:"Bar, Pie"},{g:11,t:"Interest - Simple & Compound",d:"I=P×r×t"},{g:11,t:"Loans & Investments",d:"Repayments"},{g:11,t:"Inflation & CPI",d:"Inflation rate"},{g:11,t:"Tax - VAT & Income",d:"PAYE"},{g:12,t:"Tax - PAYE & UIF",d:"Tax brackets"},{g:12,t:"Growth Charts",d:"Compound growth"},{g:12,t:"Probability - Tree & Venn",d:"Dice, Cards"},{g:12,t:"Data - Box & Whisker",d:"Quartiles"}];
+function renderTracker(){let g=document.getElementById('gSel').value;let list=allCaps.filter(x=>x.g==g);let html="";let done=0;list.forEach(it=>{let k='trk_'+it.t;let isDone=localStorage.getItem(k)=='1';if(isDone)done++;html+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border:1.5px solid #e5e8f0;border-radius:16px;margin:8px 0;background:${isDone?'#e8f5e9':'white'}"><div><b>${it.t}</b><br><small>${it.d}</small></div><button onclick="toggleT('${it.t.replace(/'/g,"\\'")}')" style="border:none;width:44px;height:44px;border-radius:50%;background:${isDone?'#22c55e':'#0a194e'};color:white;">${isDone?'✓':'+'}</button></div>`;});document.getElementById('trackerList').innerHTML=html;let pct=list.length?Math.round(done/list.length*100):0;document.getElementById('progBar').style.width=pct+'%';document.getElementById('progText').innerText=pct+'% • '+done+'/'+list.length;}
+function toggleT(t){let k='trk_'+t;localStorage.getItem(k)=='1'?localStorage.removeItem(k):localStorage.setItem(k,'1');renderTracker();}renderTracker();
+function getKey(){return 'class_'+document.getElementById('gradeSel').value+'_'+document.getElementById('classSel').value;}function getPerfKey(){return 'perf_'+getKey();}function updateClassOptions(){let grade=document.getElementById('gradeSel').value;let sel=document.getElementById('classSel');let cur=sel.value;let opts=['A','B','C','D','E','F','G'].map(l=>grade+l);let newVal=opts.includes(cur)?cur:opts[0];sel.innerHTML=opts.map(o=>`<option ${o==newVal?'selected':''}>${o}</option>`).join('');}
 function loadClass(){updateClassOptions();document.getElementById('cdGrade').innerText=document.getElementById('gradeSel').value;document.getElementById('cdClass').innerText=document.getElementById('classSel').value;document.getElementById('ovGrade').innerText=document.getElementById('gradeSel').value;renderAttendance();renderPerf();renderOverview();}
-function addLearner(){let name=document.getElementById('newLearner').value.trim();if(!name)return;let key=getKey();let list=JSON.parse(localStorage.getItem(key)||'[]');if(list.length>=60)return alert('Max 60 learners per class');list.push({name,present:1});localStorage.setItem(key,JSON.stringify(list));document.getElementById('newLearner').value='';renderAttendance();renderOverview();}
+function addLearner(){let name=document.getElementById('newLearner').value.trim();if(!name)return;let key=getKey();let list=JSON.parse(localStorage.getItem(key)||'[]');if(list.length>=60)return alert('Max 60');list.push({name,present:1});localStorage.setItem(key,JSON.stringify(list));document.getElementById('newLearner').value='';renderAttendance();renderOverview();}
 function renderAttendance(){let key=getKey();let list=JSON.parse(localStorage.getItem(key)||'[]');document.getElementById('cdLearners').innerText=list.length;let d=new Date().toLocaleDateString();document.getElementById('attDate').innerText=d;document.getElementById('attDate2').innerText=d;let body=document.getElementById('attBody');body.innerHTML='';let p=0;list.forEach((s,i)=>{if(s.present)p++;body.innerHTML+=`<tr class="${s.present?'present':'absent'}"><td>${i+1}</td><td style="text-align:left;font-weight:700;">${s.name}</td><td>${s.present?'✅ Present':'❌ Absent'}</td><td><button onclick="toggleAtt(${i})" style="padding:6px 10px;border:none;border-radius:8px;background:${s.present?'#ffcc00':'#22c55e'};font-weight:700;">${s.present?'Absent':'Present'}</button> <button onclick="delLearner(${i})" style="background:#fee2e2;border:none;border-radius:8px;padding:6px;">✕</button></td></tr>`;});document.getElementById('presentCount').innerText=p;document.getElementById('totalCount').innerText=list.length;document.getElementById('absentCount').innerText=list.length-p;}
-function toggleAtt(i){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l[i].present=l[i].present?0:1;localStorage.setItem(k,JSON.stringify(l));renderAttendance();}
-function delLearner(i){if(!confirm('Delete learner?'))return;let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l.splice(i,1);localStorage.setItem(k,JSON.stringify(l));renderAttendance();renderOverview();}
-function markAll(){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l.forEach(x=>x.present=1);localStorage.setItem(k,JSON.stringify(l));renderAttendance();}
-function exportCSV(){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');if(!l.length)return alert('No learners');let csv='No,Name,Status,Date,Class\n'+l.map((x,i)=>`${i+1},"${x.name}",${x.present?'Present':'Absent'},${new Date().toLocaleDateString()},${k}`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`Attendance_${k}_${new Date().toISOString().split('T')[0]}.csv`;a.click();}
+function toggleAtt(i){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l[i].present=l[i].present?0:1;localStorage.setItem(k,JSON.stringify(l));renderAttendance();}function delLearner(i){if(!confirm('Delete?'))return;let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l.splice(i,1);localStorage.setItem(k,JSON.stringify(l));renderAttendance();renderOverview();}function markAll(){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');l.forEach(x=>x.present=1);localStorage.setItem(k,JSON.stringify(l));renderAttendance();}function exportCSV(){let k=getKey();let l=JSON.parse(localStorage.getItem(k)||'[]');if(!l.length)return alert('No learners');let csv='No,Name,Status,Date,Class\n'+l.map((x,i)=>`${i+1},"${x.name}",${x.present?'Present':'Absent'},${new Date().toLocaleDateString()},${k}`).join('\n');let b=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`Attendance_${k}_${new Date().toISOString().split('T')[0]}.csv`;a.click();}
 function addPerf(){let name=document.getElementById('perfName').value.trim();if(!name)return alert('Enter name');let d=Math.min(5,parseInt(document.getElementById('perfDaily').value||0));let w=Math.min(20,parseInt(document.getElementById('perfWeekly').value||0));let q=Math.min(10,parseInt(document.getElementById('perfQuiz').value||0));let g=Math.min(20,parseInt(document.getElementById('perfGame').value||0));let ex=Math.min(100,parseInt(document.getElementById('perfExam').value||0));let avg=((d/5*10)+(w/20*30)+(q/10*10)+(g/20*10)+(ex/100*40)).toFixed(1);let key=getPerfKey();let list=JSON.parse(localStorage.getItem(key)||'[]');let idx=list.findIndex(x=>x.name.toLowerCase()==name.toLowerCase());let level=avg>=80?'7 Outstanding':avg>=70?'6 Meritorious':avg>=60?'5 Substantial':avg>=50?'4 Adequate':avg>=40?'3 Moderate':avg>=30?'2 Elementary':'1 Not Achieved';let rec={name,d,w,q,g,ex,avg,level};if(idx>=0)list[idx]=rec;else list.push(rec);localStorage.setItem(key,JSON.stringify(list));['perfName','perfDaily','perfWeekly','perfQuiz','perfGame','perfExam'].forEach(id=>document.getElementById(id).value='');renderPerf();renderOverview();}
-function renderPerf(){let key=getPerfKey();let list=JSON.parse(localStorage.getItem(key)||'[]');let body=document.getElementById('perfBody');body.innerHTML='';list.sort((a,b)=>b.avg-a.avg).forEach(r=>{body.innerHTML+=`<tr><td style="text-align:left;font-weight:700;">${r.name}</td><td>${r.d}</td><td>${r.w}</td><td>${r.q}</td><td>${r.g}</td><td>${r.ex}</td><td><b>${r.avg}%</b></td><td style="font-size:10px;">${r.level}</td></tr>`;});if(list.length){let avgAll=(list.reduce((s,x)=>s+parseFloat(x.avg),0)/list.length).toFixed(1);let pass=list.filter(x=>parseFloat(x.avg)>=40).length;document.getElementById('classStats').innerHTML=`Class Avg: <b>${avgAll}%</b> • Pass: <b>${Math.round(pass/list.length*100)}%</b> (${pass}/${list.length}) • Top: <b>${list[0].name} ${list[0].avg}%</b>`;}else document.getElementById('classStats').innerHTML='No data yet - add marks above. Formula: Daily 10% + Weekly 30% + Quiz 10% + Game 10% + Exam 40%';}
+function renderPerf(){let key=getPerfKey();let list=JSON.parse(localStorage.getItem(key)||'[]');let body=document.getElementById('perfBody');body.innerHTML='';list.sort((a,b)=>b.avg-a.avg).forEach(r=>{body.innerHTML+=`<tr><td style="text-align:left;font-weight:700;">${r.name}</td><td>${r.d}</td><td>${r.w}</td><td>${r.q}</td><td>${r.g}</td><td>${r.ex}</td><td><b>${r.avg}%</b></td><td style="font-size:10px;">${r.level}</td></tr>`;});if(list.length){let avgAll=(list.reduce((s,x)=>s+parseFloat(x.avg),0)/list.length).toFixed(1);let pass=list.filter(x=>parseFloat(x.avg)>=40).length;document.getElementById('classStats').innerHTML=`Class Avg: <b>${avgAll}%</b> • Pass: <b>${Math.round(pass/list.length*100)}%</b> (${pass}/${list.length}) • Top: <b>${list[0].name} ${list[0].avg}%</b>`;}else document.getElementById('classStats').innerHTML='No data yet';}
 function renderOverview(){let grade=document.getElementById('gradeSel').value;let div=document.getElementById('overview');div.innerHTML='';['A','B','C','D','E','F','G'].forEach(l=>{let k='class_'+grade+'_'+grade+l;let list=JSON.parse(localStorage.getItem(k)||'[]');let pk='perf_'+k;let perf=JSON.parse(localStorage.getItem(pk)||'[]');let avg=perf.length?(perf.reduce((s,x)=>s+parseFloat(x.avg),0)/perf.length).toFixed(0)+'%':'--';div.innerHTML+=`<div class="card" style="margin:0;text-align:center;padding:10px;"><b>${grade+l}</b><br><small>${list.length} learners</small><br><b style="font-size:20px;">${avg}</b></div>`;});}
 loadClass();
-
-// DAILY & WEEKLY
-const dailyData={
-Finance:{Mon:{type:"THEORY",icon:"📖",title:"VAT 15%",task:"Incl=Excl×1.15, Excl=Incl÷1.15. Learn 2 formulas",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"R200 excl → R230 incl",task:"VAT=R30. Try R500 excl",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"10 Sums",task:"R100+15%, R250+15%, R230 incl→excl",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"VAT Speed Game",task:"Play Games tab, get 15/20",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Shop Challenge",task:"Take 3 items, calc incl price",time:"30m"}},
-Measurement:{Mon:{type:"THEORY",icon:"📖",title:"Conversions",task:"1000m=1km, 1000g=1kg, 1000ml=1L",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"5km to m",task:"5×1000=5000m",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"Area",task:"Rect, Triangle, Circle area",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"Measurement Quiz",task:"10 Qs",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Measure House",task:"Measure room area",time:"30m"}},
-Maps:{Mon:{type:"THEORY",icon:"📖",title:"Scale",task:"1:50000 means 1cm=50000cm=0.5km",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"3cm =?",task:"3×0.5=1.5km",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"Map Distance",task:"Measure 5 distances on map",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"Map Quiz",task:"5 Qs",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Walk & Map",task:"Map school to home",time:"30m"}},
-Data:{Mon:{type:"THEORY",icon:"📖",title:"Mean Median Mode",task:"Mean=avg, Median=middle, Mode=most",time:"15m"},Tue:{type:"EXAMPLE",icon:"✏️",title:"2,5,7,7,9",task:"Mean6 Median7 Mode7 Range7",time:"20m"},Wed:{type:"PRACTICE",icon:"💪",title:"Bar Graph",task:"Draw bar graph 5 friends ages",time:"25m"},Thu:{type:"QUIZ",icon:"🧠",title:"Data Quiz",task:"10 Qs",time:"10m"},Fri:{type:"REAL LIFE",icon:"🏪",title:"Survey",task:"Survey 10 learners fav subject",time:"30m"}}
-};
-function loadDaily(){let grade=document.getElementById('gradePick').value;let topic=document.getElementById('topicPick').value;document.getElementById('dg').innerText=grade;document.getElementById('dt').innerText=topic;let data=dailyData[topic]||dailyData['Finance'];let days=["Mon","Tue","Wed","Thu","Fri"];let full={Mon:"Monday - Theory",Tue:"Tuesday - Example",Wed:"Wednesday - Practice",Thu:"Thursday - Quiz",Fri:"Friday - Real Life"};let html="";days.forEach(d=>{let it=data[d]||data['Mon'];let isDone=localStorage.getItem('daily_'+topic+'_'+d)=='1';html+=`<div class="card" style="border-left:6px solid ${isDone?'#22c55e':'#ffcc00'};background:${isDone?'#e8f5e9':'white'}"><small style="background:#0a194e;color:#ffcc00;padding:3px 8px;border-radius:8px;font-weight:800;">${it.type}</small><br><b>${it.icon} ${full[d]}: ${it.title}</b><br><small>${it.task}</small><br><small>⏱ ${it.time}</small><br><button onclick="completeDaily('${topic}','${d}')" style="margin-top:8px;background:${isDone?'#22c55e':'#0a194e'};color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:800;">${isDone?'✓ Done':'Do Task'}</button></div>`;});document.getElementById('dailyList').innerHTML=html;updateBar(topic);}
-function completeDaily(t,d){let k='daily_'+t+'_'+d;localStorage.getItem(k)=='1'?localStorage.removeItem(k):localStorage.setItem(k,'1');loadDaily();}
-function updateBar(t){let c=0;["Mon","Tue","Wed","Thu","Fri"].forEach(d=>{if(localStorage.getItem('daily_'+t+'_'+d)=='1')c++;});document.getElementById('dp').innerText=c+'/5';document.getElementById('dbar').style.width=c/5*100+'%';}
-document.getElementById('dw').innerText=Math.ceil((Date.now()-new Date(new Date().getFullYear(),0,1))/604800000);
-loadDaily();
-
-// WEEKLY ACTIVITIES
-const bank=[{q:"Shirt R250 excl VAT 15%. Incl?",a:["R287.50","R265","R300"],c:0},{q:"Mean 5,7,8,10?",a:["7.5","8","7"],c:0},{q:"Map 1:50000 3cm=?km",a:["1.5km","15km"],c:0},{q:"R5000 @8% 2yrs Simple?",a:["R800","R400"],c:0},{q:"Dice even prob?",a:["1/2","1/3"],c:0}];
-let wBest=parseInt(localStorage.getItem('vp_best')||0);document.getElementById('wb').innerText=wBest+'/20';
-let curW=Math.ceil((Date.now()-new Date(new Date().getFullYear(),0,1))/604800000);if(curW>11)curW=11;document.getElementById('wn').innerText=curW;
-const capsSchedule=[{w:1,t:"Finance VAT"},{w:2,t:"Finance Budgets"},{w:3,t:"Measurement"},{w:4,t:"Maps Scale"},{w:5,t:"Data Handling"},{w:6,t:"Probability"},{w:7,t:"Interest Loans"},{w:8,t:"Inflation Tax"},{w:9,t:"Growth Charts"},{w:10,t:"Finance Gr12"},{w:11,t:"MOCK EXAM 100"}];
-document.getElementById('wt').innerText=capsSchedule[curW-1].t;
-document.getElementById('schedule').innerHTML=capsSchedule.map((it,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1.5px solid #e5e8f0;border-radius:12px;margin:5px 0;"><span>Week ${it.w} • ${it.t}</span><span style="${i+1==curW?'background:#ffcc00':'background:#e5e8f0'};padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">${i+1==curW?'Due Now':'Pending'}</span></div>`).join('');
-function startWeekly(){let sc=0;for(let i=0;i<10;i++){let b=bank[i%bank.length];let a=prompt((i+1)+'/10 Weekly Activity: '+b.q+'\n0='+b.a[0]+' 1='+b.a[1]+' 2='+(b.a[2]||''));if(parseInt(a)==b.c)sc+=2;}document.getElementById('ws').innerText=sc+'/20';if(sc>wBest){localStorage.setItem('vp_best',sc);document.getElementById('wb').innerText=sc+'/20';alert('🏆 New Best '+sc+'/20 saved!');}else alert('Score '+sc+'/20');}
-
-// GAMES
-let vScore=0,vTime=60,iv=null,vAns=0;
-function startVAT(){vScore=0;vTime=60;document.getElementById('vScore').innerText=vScore+'/20';nextVAT();clearInterval(iv);iv=setInterval(()=>{vTime--;document.getElementById('vTime').innerText=vTime;if(vTime<=0){clearInterval(iv);alert('Time up! Score '+vScore);let b=parseInt(localStorage.getItem('vBest')||0);if(vScore>b){localStorage.setItem('vBest',vScore);document.getElementById('vBest').innerText=vScore;}}},1000);}
-function nextVAT(){let base=Math.floor(Math.random()*900)+50;vAns=Math.round(base*1.15*100)/100;document.getElementById('vQ').innerText='R '+base+' + 15% =?';}
-function checkVAT(){let u=parseFloat(document.getElementById('vAns').value);if(Math.abs(u-vAns)<0.5){vScore++;document.getElementById('vScore').innerText=vScore+'/20';}document.getElementById('vAns').value='';nextVAT();}
-document.getElementById('vBest').innerText=localStorage.getItem('vBest')||0;
-
-// QUIZ
-let qi=0,qs=0;function startQuiz(){qi=0;qs=0;showQ();}function showQ(){if(qi>=bank.length){document.getElementById('quizQ').innerText="Done! Score "+qs+"/"+bank.length;let best=parseInt(localStorage.getItem('qBest')||0);if(qs>best){localStorage.setItem('qBest',qs);document.getElementById('qBest').innerText=qs;}return;}let it=bank[qi];document.getElementById('quizQ').innerText=it.q;let h="";it.a.forEach((op,i)=>{h+=`<button onclick="ansQ(${i})" class="btn" style="background:#f1f5f9;margin:4px 0;text-align:left;">${op}</button>`;});document.getElementById('quizOpts').innerHTML=h;}
-function ansQ(i){if(i==bank[qi].c)qs++;document.getElementById('qScore').innerText=qs;qi++;showQ();}
-document.getElementById('qBest').innerText=localStorage.getItem('qBest')||0;
+const dailyData={Finance:{Mon:{type:"THEORY",title:"VAT 15%",task:"Incl=Excl×1.15"},Tue:{type:"EXAMPLE",title:"R200 excl → R230 incl"},Wed:{type:"PRACTICE",title:"10 Sums"},Thu:{type:"QUIZ",title:"VAT Game"},Fri:{type:"REAL LIFE",title:"Shop Challenge"}},Measurement:{Mon:{type:"THEORY",title:"Conversions"},Tue:{type:"EXAMPLE",title:"5km to m"},Wed:{type:"PRACTICE",title:"Area"},Thu:{type:"QUIZ",title:"Quiz"},Fri:{type:"REAL LIFE",title:"Measure House"}},Maps:{Mon:{type:"THEORY",title:"Scale"}},Data:{Mon:{type:"THEORY",title:"Mean Median Mode"}}};
+function loadDaily(){let grade=document.getElementById('gradePick').value;let topic=document.getElementById('topicPick').value;document.getElementById('dg').innerText=grade;document.getElementById('dt').innerText=topic;let data=dailyData[topic]||dailyData['Finance'];let days=["Mon","Tue","Wed","Thu","Fri"];let html="";days.forEach(d=>{let it=data[d]||data['Mon'];let isDone=localStorage.getItem('daily_'+topic+'_'+d)=='1';html+=`<div class="card" style="border-left:6px solid ${isDone?'#22c55e':'#ffcc00'};background:${isDone?'#e8f5e9':'white'}"><b>${d}: ${it.title}</b><br><small>${it.type}</small><br><button onclick="completeDaily('${topic}','${d}')" style="margin-top:8px;background:${isDone?'#22c55e':'#0a194e'};color:white;border:none;padding:8px 16px;border-radius:20px;font-weight:800;">${isDone?'✓ Done':'Do Task'}</button></div>`;});document.getElementById('dailyList').innerHTML=html;}
+function completeDaily(t,d){let k='daily_'+t+'_'+d;localStorage.getItem(k)=='1'?localStorage.removeItem(k):localStorage.setItem(k,'1');loadDaily();}loadDaily();
+const bank=[{q:"Shirt R250 excl VAT 15%. Incl?",a:["R287.50","R265"],c:0},{q:"Mean 5,7,8,10?",a:["7.5","8"],c:0},{q:"Map 1:50000 3cm=?km",a:["1.5km","15km"],c:0}];
+let wBest=parseInt(localStorage.getItem('vp_best')||0);document.getElementById('wb').innerText=wBest+'/20';let curW=Math.ceil((Date.now()-new Date(new Date().getFullYear(),0,1))/604800000);if(curW>11)curW=11;document.getElementById('wn').innerText=curW;const capsSchedule=[{w:1,t:"Finance VAT"},{w:2,t:"Finance Budgets"},{w:3,t:"Measurement"},{w:4,t:"Maps Scale"},{w:5,t:"Data Handling"},{w:6,t:"Probability"},{w:7,t:"Interest Loans"},{w:8,t:"Inflation Tax"},{w:9,t:"Growth Charts"},{w:10,t:"Finance Gr12"},{w:11,t:"MOCK EXAM"}];document.getElementById('wt').innerText=capsSchedule[curW-1].t;document.getElementById('schedule').innerHTML=capsSchedule.map((it,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border:1.5px solid #e5e8f0;border-radius:12px;margin:5px 0;"><span>Week ${it.w} • ${it.t}</span><span style="${i+1==curW?'background:#ffcc00':'background:#e5e8f0'};padding:3px 10px;border-radius:12px;font-size:11px;font-weight:800;">${i+1==curW?'Due Now':'Pending'}</span></div>`).join('');
+function startWeekly(){let sc=0;for(let i=0;i<10;i++){let b=bank[i%bank.length];let a=prompt((i+1)+'/10: '+b.q+'\n0='+b.a[0]+' 1='+b.a[1]);if(parseInt(a)==b.c)sc+=2;}document.getElementById('ws').innerText=sc+'/20';if(sc>wBest){localStorage.setItem('vp_best',sc);document.getElementById('wb').innerText=sc+'/20';}alert('Score '+sc+'/20');}
+function showGame(g){document.querySelectorAll('.gameBox').forEach(b=>b.style.display='none');document.getElementById('game-'+g).style.display='block';}
+let vScore=0,vTime=60,iv=null,vAns=0;function startVAT(){vScore=0;vTime=60;document.getElementById('vScore').innerText=vScore+'/20';nextVAT();clearInterval(iv);iv=setInterval(()=>{vTime--;document.getElementById('vTime').innerText=vTime;if(vTime<=0){clearInterval(iv);let b=parseInt(localStorage.getItem('vBest')||0);if(vScore>b){localStorage.setItem('vBest',vScore);document.getElementById('vBest').innerText=vScore;}}},1000);}function nextVAT(){let base=Math.floor(Math.random()*900)+50;vAns=Math.round(base*1.15*100)/100;document.getElementById('vQ').innerText='R '+base+' + 15% =?';}function checkVAT(){let u=parseFloat(document.getElementById('vAns').value);if(Math.abs(u-vAns)<0.5){vScore++;document.getElementById('vScore').innerText=vScore+'/20';}document.getElementById('vAns').value='';nextVAT();}document.getElementById('vBest').innerText=localStorage.getItem('vBest')||0;
+let iScore=0,iTime=60,iv2=null,iAnsNum=0;function startInterest(){iScore=0;iTime=60;document.getElementById('iScore').innerText=iScore+'/20';nextInterest();clearInterval(iv2);iv2=setInterval(()=>{iTime--;document.getElementById('iTime').innerText=iTime;if(iTime<=0){clearInterval(iv2);let b=parseInt(localStorage.getItem('iBest')||0);if(iScore>b){localStorage.setItem('iBest',iScore);document.getElementById('iBest').innerText=iScore;}}},1000);}function nextInterest(){let P=Math.floor(Math.random()*9000)+1000;let r=[5,8,10,12][Math.floor(Math.random()*4)];let t=[1,2,3][Math.floor(Math.random()*3)];iAnsNum=P*r/100*t;document.getElementById('iQ').innerText=`R${P} @${r}% ${t}yrs =?`;}function checkInterest(){let u=parseFloat(document.getElementById('iAns').value);if(Math.abs(u-iAnsNum)<1){iScore++;document.getElementById('iScore').innerText=iScore+'/20';}document.getElementById('iAns').value='';nextInterest();}document.getElementById('iBest').innerText=localStorage.getItem('iBest')||0;
+let mScore=0,mTime=60,iv3=null,mAnsNum=0;function startMap(){mScore=0;mTime=60;document.getElementById('mScore').innerText=mScore+'/20';nextMap();clearInterval(iv3);iv3=setInterval(()=>{mTime--;document.getElementById('mTime').innerText=mTime;if(mTime<=0){clearInterval(iv3);let b=parseInt(localStorage.getItem('mBest')||0);if(mScore>b){localStorage.setItem('mBest',mScore);document.getElementById('mBest').innerText=mScore;}}},1000);}function nextMap(){let cm=Math.floor(Math.random()*9)+1;mAnsNum=cm*0.5;document.getElementById('mQ').innerText=`${cm}cm on map (1:50000) =? km`;}function checkMap(){let u=parseFloat(document.getElementById('mAns').value);if(Math.abs(u-mAnsNum)<0.01){mScore++;document.getElementById('mScore').innerText=mScore+'/20';}document.getElementById('mAns').value='';nextMap();}document.getElementById('mBest').innerText=localStorage.getItem('mBest')||0;
+let dScore=0,dTime=60,iv4=null,dAnsNum=0;function startData(){dScore=0;dTime=60;document.getElementById('dScore').innerText=dScore+'/20';nextData();clearInterval(iv4);iv4=setInterval(()=>{dTime--;document.getElementById('dTime').innerText=dTime;if(dTime<=0){clearInterval(iv4);let b=parseInt(localStorage.getItem('dBest')||0);if(dScore>b){localStorage.setItem('dBest',dScore);document.getElementById('dBest').innerText=dScore;}}},1000);}function nextData(){let sh=[2,5,7,7,9].sort(()=>0.5-Math.random()).slice(0,4);sh.push(Math.floor(Math.random()*10));dAnsNum=(sh.reduce((a,b)=>a+b,0)/sh.length).toFixed(1);document.getElementById('dQ').innerHTML=sh.join(', ')+' = Mean?';}function checkData(){let u=parseFloat(document.getElementById('dAns').value);if(Math.abs(u-parseFloat(dAnsNum))<0.6){dScore++;document.getElementById('dScore').innerText=dScore+'/20';}document.getElementById('dAns').value='';nextData();}document.getElementById('dBest').innerText=localStorage.getItem('dBest')||0;
+const probQs=[{q:"P(even) on dice =?",a:["1/2","0.5"]},{q:"P(6) on dice =?",a:["1/6","0.166"]},{q:"P(red card) =?",a:["1/2","0.5"]}];let pScore=0,pTime=60,iv5=null;function startProb(){pScore=0;pTime=60;document.getElementById('pScore').innerText=pScore+'/20';nextProb();clearInterval(iv5);iv5=setInterval(()=>{pTime--;document.getElementById('pTime').innerText=pTime;if(pTime<=0){clearInterval(iv5);let b=parseInt(localStorage.getItem('pBest')||0);if(pScore>b){localStorage.setItem('pBest',pScore);document.getElementById('pBest').innerText=pScore;}}},1000);}function nextProb(){let q=probQs[Math.floor(Math.random()*probQs.length)];document.getElementById('pQ').innerText=q.q;}function checkProb(){let u=document.getElementById('pAns').value.trim().toLowerCase();let cur=probQs.find(x=>x.q==document.getElementById('pQ').innerText);if(cur && cur.a.includes(u)){pScore++;document.getElementById('pScore').innerText=pScore+'/20';}document.getElementById('pAns').value='';nextProb();}document.getElementById('pBest').innerText=localStorage.getItem('pBest')||0;
+let tScore=0,tTime=60,iv6=null,tAnsNum=0;function startTax(){tScore=0;tTime=60;document.getElementById('tScore').innerText=tScore+'/20';nextTax();clearInterval(iv6);iv6=setInterval(()=>{tTime--;document.getElementById('tTime').innerText=tTime;if(tTime<=0){clearInterval(iv6);let b=parseInt(localStorage.getItem('tBest')||0);if(tScore>b){localStorage.setItem('tBest',tScore);document.getElementById('tBest').innerText=tScore;}}},1000);}function nextTax(){let inc=[237000,300000,400000][Math.floor(Math.random()*3)];let rate=inc<=237100?18:26;tAnsNum=Math.round(inc*rate/100);document.getElementById('tQ').innerText=`R${inc} @${rate}% =?`;}function checkTax(){let u=parseFloat(document.getElementById('tAns').value);if(Math.abs(u-tAnsNum)<100){tScore++;document.getElementById('tScore').innerText=tScore+'/20';}document.getElementById('tAns').value='';nextTax();}document.getElementById('tBest').innerText=localStorage.getItem('tBest')||0;
+let qi=0,qs=0;function startQuiz(){qi=0;qs=0;showQ();}function showQ(){if(qi>=bank.length){document.getElementById('quizQ').innerText="Done! Score "+qs+"/"+bank.length;let best=parseInt(localStorage.getItem('qBest')||0);if(qs>best){localStorage.setItem('qBest',qs);document.getElementById('qBest').innerText=qs;}return;}let it=bank[qi];document.getElementById('quizQ').innerText=it.q;let h="";it.a.forEach((op,i)=>{h+=`<button onclick="ansQ(${i})" class="btn" style="background:#f1f5f9;margin:4px 0;text-align:left;">${op}</button>`;});document.getElementById('quizOpts').innerHTML=h;}function ansQ(i){if(i==bank[qi].c)qs++;document.getElementById('qScore').innerText=qs;qi++;showQ();}document.getElementById('qBest').innerText=localStorage.getItem('qBest')||0;
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
-// INTEREST GAME
-let iScore=0,iTime=60,iv2=null,iAnsNum=0;
-function startInterest(){iScore=0;iTime=60;document.getElementById('iScore').innerText=iScore+'/20';nextInterest();clearInterval(iv2);iv2=setInterval(()=>{iTime--;document.getElementById('iTime').innerText=iTime;if(iTime<=0){clearInterval(iv2);let b=parseInt(localStorage.getItem('iBest')||0);if(iScore>b){localStorage.setItem('iBest',iScore);document.getElementById('iBest').innerText=iScore;}}},1000);}
-function nextInterest(){let P=Math.floor(Math.random()*9000)+1000;let r=[5,8,10,12][Math.floor(Math.random()*4)];let t=[1,2,3][Math.floor(Math.random()*3)];iAnsNum=P*r/100*t;document.getElementById('iQ').innerText=`R${P} @${r}% ${t}yrs =?`;}
-function checkInterest(){let u=parseFloat(document.getElementById('iAns').value);if(Math.abs(u-iAnsNum)<1){iScore++;document.getElementById('iScore').innerText=iScore+'/20';}document.getElementById('iAns').value='';nextInterest();}
-document.getElementById('iBest').innerText=localStorage.getItem('iBest')||0;
-
-// MAP GAME
-let mScore=0,mTime=60,iv3=null,mAnsNum=0;
-function startMap(){mScore=0;mTime=60;document.getElementById('mScore').innerText=mScore+'/20';nextMap();clearInterval(iv3);iv3=setInterval(()=>{mTime--;document.getElementById('mTime').innerText=mTime;if(mTime<=0){clearInterval(iv3);let b=parseInt(localStorage.getItem('mBest')||0);if(mScore>b){localStorage.setItem('mBest',mScore);document.getElementById('mBest').innerText=mScore;}}},1000);}
-function nextMap(){let cm=Math.floor(Math.random()*9)+1;mAnsNum=cm*0.5;document.getElementById('mQ').innerText=`${cm}cm on map (1:50000) =? km`;}
-function checkMap(){let u=parseFloat(document.getElementById('mAns').value);if(Math.abs(u-mAnsNum)<0.01){mScore++;document.getElementById('mScore').innerText=mScore+'/20';}document.getElementById('mAns').value='';nextMap();}
-document.getElementById('mBest').innerText=localStorage.getItem('mBest')||0;
-
-// DATA GAME
-let dScore=0,dTime=60,iv4=null,dAnsNum=0;
-function startData(){dScore=0;dTime=60;document.getElementById('dScore').innerText=dScore+'/20';nextData();clearInterval(iv4);iv4=setInterval(()=>{dTime--;document.getElementById('dTime').innerText=dTime;if(dTime<=0){clearInterval(iv4);let b=parseInt(localStorage.getItem('dBest')||0);if(dScore>b){localStorage.setItem('dBest',dScore);document.getElementById('dBest').innerText=dScore;}}},1000);}
-function nextData(){let nums=[2,5,7,7,9];let sh=nums.sort(()=>0.5-Math.random()).slice(0,4);sh.push(Math.floor(Math.random()*10));dAnsNum=(sh.reduce((a,b)=>a+b,0)/sh.length).toFixed(1);document.getElementById('dQ').innerHTML=sh.join(', ')+' = Mean?';}
-function checkData(){let u=parseFloat(document.getElementById('dAns').value);if(Math.abs(u-parseFloat(dAnsNum))<0.6){dScore++;document.getElementById('dScore').innerText=dScore+'/20';}document.getElementById('dAns').value='';nextData();}
-document.getElementById('dBest').innerText=localStorage.getItem('dBest')||0;
-
-// PROB GAME
-let pScore=0,pTime=60,iv5=null,pAnsStr="1/2";
-const probQs=[{q:"P(even) on dice =?",a:["1/2","0.5","3/6"]},{q:"P(6) on dice =?",a:["1/6","0.166"]},{q:"P(red card) =?",a:["1/2","0.5"]},{q:"P(Ace) =?",a:["1/13","4/52"]}];
-function startProb(){pScore=0;pTime=60;document.getElementById('pScore').innerText=pScore+'/20';nextProb();clearInterval(iv5);iv5=setInterval(()=>{pTime--;document.getElementById('pTime').innerText=pTime;if(pTime<=0){clearInterval(iv5);let b=parseInt(localStorage.getItem('pBest')||0);if(pScore>b){localStorage.setItem('pBest',pScore);document.getElementById('pBest').innerText=pScore;}}},1000);}
-function nextProb(){let q=probQs[Math.floor(Math.random()*probQs.length)];pAnsStr=q.a[0];document.getElementById('pQ').innerText=q.q;}
-function checkProb(){let u=document.getElementById('pAns').value.trim().toLowerCase();let cur=probQs.find(x=>x.q==document.getElementById('pQ').innerText);if(cur && cur.a.includes(u)){pScore++;document.getElementById('pScore').innerText=pScore+'/20';}document.getElementById('pAns').value='';nextProb();}
-document.getElementById('pBest').innerText=localStorage.getItem('pBest')||0;
-
-// TAX GAME
-let tScore=0,tTime=60,iv6=null,tAnsNum=0;
-function startTax(){tScore=0;tTime=60;document.getElementById('tScore').innerText=tScore+'/20';nextTax();clearInterval(iv6);iv6=setInterval(()=>{tTime--;document.getElementById('tTime').innerText=tTime;if(tTime<=0){clearInterval(iv6);let b=parseInt(localStorage.getItem('tBest')||0);if(tScore>b){localStorage.setItem('tBest',tScore);document.getElementById('tBest').innerText=tScore;}}},1000);}
-function nextTax(){let inc=[237000,300000,400000,500000][Math.floor(Math.random()*4)];let rate=inc<=237100?18:inc<=370500?26:31;tAnsNum=Math.round(inc*rate/100);document.getElementById('tQ').innerText=`R${inc} @${rate}% =?`;}
-function checkTax(){let u=parseFloat(document.getElementById('tAns').value);if(Math.abs(u-tAnsNum)<100){tScore++;document.getElementById('tScore').innerText=tScore+'/20';}document.getElementById('tAns').value='';nextTax();}
-document.getElementById('tBest').innerText=localStorage.getItem('tBest')||0;
-
-// UPDATE TOTAL GAMES SCORE FOR PERFORMANCE TRACKER
-setInterval(()=>{let total=(vScore||0)+(iScore||0)+(mScore||0)+(dScore||0)+(pScore||0)+(tScore||0);let el=document.getElementById('gamesTotal');if(el)el.innerText=`Total Games Score: ${total} | VAT:${vScore||0} Interest:${iScore||0} Map:${mScore||0} Data:${dScore||0} Prob:${pScore||0} Tax:${tScore||0}`;},1000);
 </script>
 </body>
 </html>
