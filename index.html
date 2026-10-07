@@ -1,119 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAKHANANI Maths Lit PRO - CAPS 2026</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0d47a1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAKHANANI v6.0 - CAPS 2026 Complete</title>
+<meta name="theme-color" content="#1a237e">
 <style>
-*{box-sizing:border-box;font-family:system-ui}body{margin:0;background:#f1f5f9}
-header{background:#0d47a1;color:white;padding:18px;text-align:center;position:sticky;top:0;z-index:10}
-.nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
-.nav button{padding:11px 16px;border:none;border-radius:10px;font-weight:800;cursor:pointer;color:white}
-.card{background:white;margin:12px;border-radius:14px;padding:14px;box-shadow:0 2px 8px #0001}
-input{width:100%;padding:12px;margin:6px 0;border:1.5px solid #cbd5e1;border-radius:10px}
-.btn{padding:12px;border:none;border-radius:10px;font-weight:800;width:100%;cursor:pointer;background:#0d47a1;color:white}
-.result{background:#dcfce7;padding:12px;border-radius:10px;margin-top:8px;font-weight:700}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-h3{margin:8px 0;color:#0d47a1}
+:root{--navy:#0a194e;--gold:#ffca28;--bg:#f5f7ff}
+*{box-sizing:border-box;font-family:Inter,Segoe UI,sans-serif}
+body{margin:0;background:var(--bg)}
+header{background:var(--navy);color:white;padding:16px;display:flex;justify-content:space-between;align-items:center}
+.nav{display:flex;gap:8px;overflow-x:auto;padding:12px;background:white;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:10}
+.nav button{border:none;padding:10px 16px;border-radius:20px;background:#e8eaf6;color:var(--navy);font-weight:700;white-space:nowrap}
+.nav button.active{background:var(--navy);color:white}
+.card{background:white;margin:12px;padding:16px;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+h2{color:var(--navy)} h3{color:#333;border-left:4px solid var(--gold);padding-left:8px}
+.topic{display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid #eee}
+.topic button{background:var(--gold);border:none;padding:6px 14px;border-radius:8px;font-weight:700;cursor:pointer}
+.badge{background:var(--gold);color:var(--navy);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:800}
 </style>
 </head>
 <body>
 <header>
-<h1 style="margin:0">MAKHANANI Maths Lit PRO - CAPS 2026</h1>
-<small>Vukona Press | Offline Ready | Paper 1 & 2 | v3.0 PRO | Vusi Chauke</small>
-<div class="row" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-<button onclick="location.href='./'" class="btn">🧮 Maths Lit</button>
-<button onclick="location.href='./health/'" class="btn">🏥 Health Monitor</button>
-<button onclick="location.href='./class-tracker/'" class="btn">📋 Class Tracker</button>
-<button onclick="location.href='./quiz/'" class="btn">🎓 Quiz 10-12</button>
-<button onclick="location.href='./games/'" class="btn">🎮 Games</button>
-</div>
+<h1>VUKONA PRESS <span style="color:var(--gold)">MAKHANANI v6.0</span></h1>
+<span class="badge">CAPS 2026 COMPLETE</span>
 </header>
-
-<!-- HIRE PURCHASE -->
-<div class="card">
-<h3>1. Hire Purchase & Loans</h3>
-<div class="grid2"><input id="price" type="number" placeholder="Cash Price e.g. 7999">
-<input id="depositP" type="number" placeholder="Deposit % e.g. 10"></div>
-<div class="grid2"><input id="interest" type="number" placeholder="Interest % p.a. e.g. 18">
-<input id="months" type="number" placeholder="Months e.g. 24"></div>
-<button class="btn" onclick="calcHP()">Calculate HP</button>
-<div id="hpRes" class="result" style="display:none"></div>
+<div class="nav">
+<button onclick="showTab('mathslit')" id="btn-mathslit" class="active">📐 Maths Lit</button>
+<button onclick="showTab('health')" id="btn-health">❤️ Health</button>
+<button onclick="showTab('tracker')" id="btn-tracker">📊 Tracker</button>
+<button onclick="showTab('quiz')" id="btn-quiz">📝 Quiz</button>
+<button onclick="showTab('games')" id="btn-games">🎮 Games</button>
 </div>
 
-<!-- VAT DISCOUNT -->
-<div class="card">
-<h3>2. VAT, Discount & Exchange</h3>
-<div class="grid2"><input id="vatPrice" type="number" placeholder="Price e.g. 965">
-<input id="vatRate" type="number" value="15"></div>
-<div class="grid2"><button class="btn" onclick="calcVAT()">Calc VAT 15%</button>
-<button class="btn" style="background:#64748b" onclick="calcDiscount()">Discount 20%</button></div>
-<div id="vatRes" class="result" style="display:none"></div>
+<div id="mathslit" class="card tab">
+<h2>📐 Maths Literacy CAPS 2026 - All Topics</h2>
+<input id="searchCaps" placeholder="Search topics... e.g VAT, Tax" onkeyup="renderCaps()" style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;margin-bottom:12px">
+<div id="caps-list"></div>
+<div style="background:#fff8e1;padding:12px;border-radius:12px;margin-top:12px">
+<h3>🧮 Calculators (Offline)</h3>
+<button onclick="calcVAT()">VAT 15%</button>
+<button onclick="calcInterest()">Interest</button>
+<button onclick="calcTax()">Income Tax</button>
+<div id="calc-result" style="margin-top:10px;font-weight:700"></div>
+</div>
 </div>
 
-<!-- BMI QUICK -->
-<div class="card">
-<h3>3. Quick BMI (Link to Health)</h3>
-<div class="grid2"><input id="w" type="number" placeholder="Weight kg">
-<input id="h" type="number" placeholder="Height m e.g. 1.75"></div>
-<button class="btn" style="background:#b71c1c" onclick="calcBMI()">Calc BMI</button>
-<div id="bmiRes" class="result" style="display:none"></div>
+<div id="health" class="card tab" style="display:none">
+<h2>❤️ Health Monitor - LO CAPS</h2>
+<ul>
+<li>✅ Development of self in society</li>
+<li>✅ Social & environmental responsibility</li>
+<li>✅ Physical Education & BMI</li>
+<li>✅ Study skills & exam stress</li>
+<li>✅ Nutrition & wellness</li>
+<li>✅ Substance abuse awareness</li>
+</ul>
+<p>BMI Calculator: <button onclick="calcBMI()">Calculate BMI</button></p>
 </div>
 
-<!-- MAPS -->
-<div class="card">
-<h3>4. Maps & Scale</h3>
-<div class="grid2"><input id="mapCm" type="number" placeholder="Map cm e.g. 3">
-<input id="scale" type="number" placeholder="Scale e.g. 50000"></div>
-<button class="btn" onclick="calcMap()">Calculate Real Distance</button>
-<div id="mapRes" class="result" style="display:none"></div>
+<div id="tracker" class="card tab" style="display:none">
+<h2>📊 Class Tracker PRO</h2>
+<p>Track all CAPS subjects</p>
+<select id="subject"><option>Maths Lit</option><option>Mathematics</option><option>English</option><option>Life Sciences</option><option>Physical Sciences</option><option>Geography</option><option>History</option><option>Accounting</option><option>Business Studies</option><option>Economics</option><option>LO</option></select>
+<input id="mark" type="number" placeholder="Mark %">
+<button onclick="addMark()" style="background:var(--navy);color:white;padding:8px 16px;border-radius:8px">Add Mark</button>
+<ul id="marks-list"></ul>
 </div>
 
-<!-- DATA -->
-<div class="card">
-<h3>5. Data - Mean / Median / Range</h3>
-<input id="data" placeholder="e.g. 2,3,5,5,6,8">
-<button class="btn" onclick="calcData()">Calculate Data</button>
-<div id="dataRes" class="result" style="display:none"></div>
+<div id="quiz" class="card tab" style="display:none">
+<h2>📝 Quiz 10-12 PRO - DBE Style</h2>
+<button onclick="startQuiz()" style="background:var(--gold);padding:10px 20px;border:none;border-radius:10px;font-weight:700">Start CAPS Quiz</button>
+<div id="quiz-box" style="margin-top:12px"></div>
 </div>
 
-<div class="card" style="background:#dbeafe;text-align:center">
-<b>MAKHANANI FINAL v3.0 PRO - 4 Apps in 1</b><br>
-<small>Maths Lit | Health | Class Tracker | Quiz 10-12<br>
-Tested Offline ✈️ Airplane Mode Works!<br>
-GitHub: vusichauke3037-glitch/MAKHANANI-FINAL</small><br><br>
-<button class="btn" style="width:auto;padding:8px 14px;background:#0d47a1" onclick="if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');alert('App ready offline! Now Install: Chrome ⋮ → Install app')">✅ Enable Offline Install</button>
+<div id="games" class="card tab" style="display:none">
+<h2>🎮 Games</h2>
+<button onclick="startGame()">Play 60-sec VAT Speed Game</button>
+<div id="game-box"></div>
 </div>
+
+<footer style="text-align:center;padding:20px;color:#777">Vukona Press • 100% Offline • Johannesburg • v6.0</footer>
 
 <script>
-function calcHP(){
-let p=parseFloat(price.value)||0; let dP=parseFloat(depositP.value)||0; let r=parseFloat(interest.value)||0; let m=parseFloat(months.value)||0;
-let dep=p*dP/100; let bal=p-dep; let intr=bal*r/100*(m/12); let tot=bal+intr; let mon=tot/m;
-hpRes.style.display='block'; hpRes.innerHTML=`Deposit: R${dep.toFixed(2)}<br>Loan: R${bal.toFixed(2)}<br>Interest: R${intr.toFixed(2)}<br>Total Payable: R${tot.toFixed(2)}<br>Monthly: R${mon.toFixed(2)}`;
+const CAPS={
+"Grade 10 - Foundation (40% Knowledge)": ["Numbers and calculations with numbers","Patterns, relationships and representations","Finance: Financial documents, Tariff systems, Income, Expenditure, Profit/Loss, Simple & compound interest, Exchange rates","Measurement: Conversions, Length, Distance, Perimeter, Area, Volume, Time","Maps, plans and other representations of physical world","Data handling: Collect, organise, summarise, interpret data","Probability"],
+"Grade 11 - Intermediate (40% Routine)": ["Finance: Interest, Banking, Loans, Taxation, Inflation, Break-even","Measurement: Length, Weight, Volume, Temperature, Perimeter/Area/Volume","Maps, plans and models: Scale, Maps, Plans, Models","Data handling: Questionnaires, Data collection, Classification, Mean/Median/Mode, Representation (bar/pie/line)","Probability: Expressions, Predictions, Evaluations"],
+"Grade 12 - FINAL EXAM (40% Complex + 30% Problem)": ["Finance: Financial docs, Tariff, Income/Expend, Cost & selling price, Break-even, Interest, Banking, Taxation, Exchange rates, Inflation","Measurement: Conversions, Time zones, Perimeter/Area/Volume of 2D/3D shapes","Maps and Plans: Scale, Maps, Plans, Models, Floor plans, Assembly diagrams","Data Handling: Data collection, Summarise, Representation (bar, pie, line, histogram), Mean/Median/Mode/Range, Interpretation","Probability: Probability scale, Predictions, Tree diagrams, Two-way tables, Venn diagrams"]
+};
+function renderCaps(){
+let search=(document.getElementById('searchCaps')?.value||'').toLowerCase();
+let html="";
+for(let g in CAPS){
+   let filtered=CAPS[g].filter(t=>t.toLowerCase().includes(search));
+   if(filtered.length==0) continue;
+   html+=`<h3>${g}</h3>`;
+   filtered.forEach(t=>{
+     let key=g+'_'+t; let done=localStorage.getItem(key)=='1';
+     html+=`<div class="topic"><span>${done?'✅':'⬜'} ${t}</span><button onclick="toggleDone('${key}')">${done?'Done':'Learn'}</button></div>`;
+   });
 }
-function calcVAT(){
-let pr=parseFloat(vatPrice.value)||0; let rate=parseFloat(vatRate.value)||15;
-let vat=pr*rate/100; let incl=pr+vat;
-vatRes.style.display='block'; vatRes.innerHTML=`VAT ${rate}%: R${vat.toFixed(2)} on R${pr}<br>Total incl: R${incl.toFixed(2)}<br>Excl from Incl R${pr}: R${(pr/1.15).toFixed(2)}`;
+document.getElementById('caps-list').innerHTML=html||'<p>No topics found</p>';
 }
-function calcDiscount(){
-let pr=parseFloat(vatPrice.value)||0; let disc=pr*0.2; vatRes.style.display='block'; vatRes.innerHTML=`Discount 20%: -R${disc.toFixed(2)}<br>Sale Price: R${(pr-disc).toFixed(2)}`;
-}
-function calcBMI(){
-let W=parseFloat(w.value)||0; let H=parseFloat(h.value)||0; if(!H)return; let bmi=W/(H*H); let s=bmi<18.5?'Underweight':bmi<25?'Normal':bmi<30?'Overweight':'Obese';
-bmiRes.style.display='block'; bmiRes.innerHTML=`BMI: ${bmi.toFixed(1)} - ${s}<br><small>Full check in Health PRO →</small>`;
-}
-function calcMap(){
-let cm=parseFloat(mapCm.value)||0; let sc=parseFloat(scale.value)||50000; let realCm=cm*sc; let km=realCm/100000;
-mapRes.style.display='block'; mapRes.innerHTML=`Real: ${realCm.toFixed(0)} cm = ${(realCm/100).toFixed(1)} m = ${km.toFixed(2)} km`;
-}
-function calcData(){
-let arr=data.value.split(',').map(x=>parseFloat(x.trim())).filter(x=>!isNaN(x)); if(!arr.length)return;
-let sum=arr.reduce((a,b)=>a+b,0); let mean=sum/arr.length; let sorted=[...arr].sort((a,b)=>a-b); let mid=Math.floor(sorted.length/2); let median=sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2; let range=Math.max(...arr)-Math.min(...arr);
-dataRes.style.display='block'; dataRes.innerHTML=`Mean: ${mean.toFixed(2)}<br>Median: ${median}<br>Range: ${range}<br>Count: ${arr.length}`;
-}
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+function toggleDone(k){ localStorage.setItem(k, localStorage.getItem(k)=='1'?'0':'1'); renderCaps(); }
+function showTab(id){ document.querySelectorAll('.tab').forEach(t=>t.style.display='none'); document.getElementById(id).style.display='block'; document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); document.getElementById('btn-'+id).classList.add('active'); }
+function calcVAT(){ let a=prompt('Amount excl VAT?'); if(a) document.getElementById('calc-result').innerText=`VAT 15%: R${(a*0.15).toFixed(2)} | Total incl: R${(a*1.15).toFixed(2)}`; }
+function calcInterest(){ let p=prompt('Principal R?'), r=prompt('Rate %?'), t=prompt('Years?'); if(p) document.getElementById('calc-result').innerText=`Interest: R${(p*r*t/100).toFixed(2)}`; }
+function calcTax(){ let inc=prompt('Annual Income R?'); if(inc) document.getElementById('calc-result').innerText=`Est Tax (SARS brackets): Calc module coming - Learn in Finance topic!`; }
+function calcBMI(){ let w=prompt('Weight kg?'), h=prompt('Height m?'); if(w) document.getElementById('calc-result').innerText=`BMI: ${(w/(h*h)).toFixed(1)}`; }
+function addMark(){ let s=document.getElementById('subject').value, m=document.getElementById('mark').value; if(s&&m){ let li=document.createElement('li'); li.textContent=`${s}: ${m}% - ${new Date().toLocaleDateString()}`; document.getElementById('marks-list').appendChild(li); localStorage.setItem('marks_'+Date.now(), s+':'+m);} }
+function startQuiz(){ document.getElementById('quiz-box').innerHTML=`<p><b>Q1 [Finance - VAT]:</b> Shirt R250 excl VAT. Incl VAT?<br><button onclick="alert('✅ Correct! R287.50')">R287.50</button> <button onclick="alert('❌ Try: R250 x 1.15')">R265</button></p><p><b>Q2 [Data]:</b> Mean of 5,7,8,10?<br><button onclick="alert('✅ 7.5')">7.5</button> <button onclick="alert('❌ (5+7+8+10)/4')">8</button></p>`; }
+function startGame(){ let sc=0, n=0; let iv=setInterval(()=>{ let a=Math.floor(Math.random()*200)+50; let u=prompt(`VAT Game ${++n}/20: ${a} +15% =? Score:${sc}`); if(u==Math.round(a*1.15)) sc++; if(n>=20){clearInterval(iv); alert('Final Score: '+sc+'/20');}},2500); }
+renderCaps();
 </script>
 </body>
 </html>
