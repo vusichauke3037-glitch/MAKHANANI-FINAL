@@ -31,6 +31,7 @@ h2{color:var(--navy)} h3{color:#333;border-left:4px solid var(--gold);padding-le
 <button onclick="showTab('tracker')" id="btn-tracker">📊 Tracker</button>
 <button onclick="showTab('quiz')" id="btn-quiz">📝 Quiz</button>
 <button onclick="showTab('games')" id="btn-games">🎮 Games</button>
+<button onclick="showTab('weekly')">📅 Weekly Tests</button>
 </div>
 
 <div id="mathslit" class="card tab">
@@ -112,6 +113,81 @@ function addMark(){ let s=document.getElementById('subject').value, m=document.g
 function startQuiz(){ document.getElementById('quiz-box').innerHTML=`<p><b>Q1 [Finance - VAT]:</b> Shirt R250 excl VAT. Incl VAT?<br><button onclick="alert('✅ Correct! R287.50')">R287.50</button> <button onclick="alert('❌ Try: R250 x 1.15')">R265</button></p><p><b>Q2 [Data]:</b> Mean of 5,7,8,10?<br><button onclick="alert('✅ 7.5')">7.5</button> <button onclick="alert('❌ (5+7+8+10)/4')">8</button></p>`; }
 function startGame(){ let sc=0, n=0; let iv=setInterval(()=>{ let a=Math.floor(Math.random()*200)+50; let u=prompt(`VAT Game ${++n}/20: ${a} +15% =? Score:${sc}`); if(u==Math.round(a*1.15)) sc++; if(n>=20){clearInterval(iv); alert('Final Score: '+sc+'/20');}},2500); }
 renderCaps();
+</script>
+<div id="weekly" class="tab" style="display:none;">
+  <h2>📝 Weekly CAPS Tests - Grade 10-12</h2>
+  <p><small>Vukona Press • Auto-marked • 100% Offline • DBE Style</small></p>
+ 
+  <div style="background:#0a194e;color:#ffcc00;padding:12px;border-radius:12px;margin:10px 0;">
+    <b>This Week: <span id="weekNo">Week 1</span> - <span id="weekTopic">Finance & VAT</span></b>
+    <br>Score: <span id="weeklyScore">0</span>/20 | Best: <span id="weeklyBest">0</span>/20
+  </div>
+
+  <div id="weeklyQ"></div>
+ 
+  <button onclick="startWeeklyTest()" style="background:#ffcc00;color:#0a194e;padding:12px 24px;border:none;border-radius:8px;font-weight:bold;width:100%;margin:10px 0;">Start This Week's Test (20 Marks)</button>
+ 
+  <button onclick="resetWeekly()" style="background:#ddd;padding:8px;border:none;border-radius:6px;">Reset Week</button>
+
+  <h3>📅 CAPS 2026 Test Schedule</h3>
+  <ul style="font-size:14px;">
+    <li><b>Week 1-2:</b> Finance - VAT, Income, Budgets (Gr 10)</li>
+    <li><b>Week 3-4:</b> Measurement & Maps (Gr 10-11)</li>
+    <li><b>Week 5-6:</b> Interest, Loans, Inflation (Gr 11)</li>
+    <li><b>Week 7-8:</b> Data & Probability (Gr 10-12)</li>
+    <li><b>Week 9-10:</b> Tax, Growth, Stats (Gr 12 Final)</li>
+    <li><b>Week 11:</b> MOCK EXAM - 100 Marks DBE Style</li>
+  </ul>
+</div>
+
+<script>
+// WEEKLY TESTS LOGIC - V6.1
+const weeklyBank = [
+  {q:"Week 1 - Shirt R250 excl VAT 15%. Incl?",a:["R287.50","R265","R300"],c:0,topic:"Finance"},
+  {q:"Mean of 5,7,8,10?",a:["7.5","8","7"],c:0,topic:"Data"},
+  {q:"VAT amount if price R230 incl 15%?",a:["R30","R34.50","R200"],c:0,topic:"Finance"},
+  {q:"Simple Interest: R5000 @ 8% for 2yrs?",a:["R800","R400","R8000"],c:0,topic:"Finance Gr11"},
+  {q:"Map scale 1:50000, 3cm = ? km",a:["1.5km","15km","0.15km"],c:0,topic:"Maps"},
+  {q:"Inflation 6% on R200. New price?",a:["R212","R206","R260"],c:0,topic:"Finance Gr11"},
+  {q:"Median of 2,5,7,7,9?",a:["7","5","6"],c:0,topic:"Data"},
+  {q:"Compound: R1000 @10% for 2yrs?",a:["R1210","R1200","R1100"],c:0,topic:"Gr12"},
+  {q:"Tax bracket R300k @ 18%?",a:["R54000","R30000","R18000"],c:0,topic:"Gr12 Tax"},
+  {q:"Probability: dice 1-6, even?",a:["1/2","1/3","1/6"],c:0,topic:"Probability"}
+];
+
+let weeklyScore = parseInt(localStorage.getItem('weeklyBest')||0);
+document.getElementById('weeklyBest').innerText = weeklyScore;
+
+function startWeeklyTest(){
+  let score=0, out="";
+  // Pick 10 random for this week
+  let shuffled = [...weeklyBank].sort(()=>0.5-Math.random()).slice(0,10);
+  shuffled.forEach((item,i)=>{
+    let ans = prompt(`Q${i+1}/10 [${item.topic}]: ${item.q}\nOptions: 0=${item.a[0]}, 1=${item.a[1]}, 2=${item.a[2]}\nEnter 0,1,2`);
+    if(parseInt(ans)==item.c) score+=2;
+  });
+  alert(`Weekly Test Done! Score: ${score}/20`);
+  document.getElementById('weeklyScore').innerText = score;
+  if(score>weeklyScore){
+    localStorage.setItem('weeklyBest',score);
+    document.getElementById('weeklyBest').innerText = score;
+    alert("🏆 New Best! CAPS Progress Saved!");
+  }
+  // Set week number
+  let week = Math.ceil((new Date() - new Date(new Date().getFullYear(),0,1))/604800000);
+  document.getElementById('weekNo').innerText = "Week "+week;
+  localStorage.setItem('lastWeekly',new Date().toISOString());
+}
+
+function resetWeekly(){
+  localStorage.removeItem('weeklyBest');
+  document.getElementById('weeklyBest').innerText=0;
+  document.getElementById('weeklyScore').innerText=0;
+}
+
+// Auto set week
+let w = Math.ceil((new Date() - new Date(new Date().getFullYear(),0,1))/604800000);
+document.getElementById('weekNo').innerText = "Week "+w;
 </script>
 </body>
 </html>
