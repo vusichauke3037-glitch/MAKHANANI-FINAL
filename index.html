@@ -20,6 +20,105 @@ h2{color:var(--navy)} h3{color:#333;border-left:4px solid var(--gold);padding-le
 .badge{background:var(--gold);color:var(--navy);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:800}
 </style>
 </head>
+<!-- DAILY ACTIVITIES PER TOPIC v6.2 - VUKONA PRESS -->
+<div id="daily" class="tabcontent" style="display:none;padding:16px;background:#f5f7ff;">
+
+  <div style="background:#0a194e;color:white;padding:14px;border-radius:16px;display:flex;justify-content:space-between;align-items:center;">
+    <div><b style="color:#ffcc00;">Grade <span id="dg">10</span> • <span id="dt">Finance VAT</span></b><br><small>Week <span id="dw">1</span> • Mon-Fri</small></div>
+    <div style="background:#ffcc00;color:#0a194e;padding:6px 12px;border-radius:20px;font-weight:bold;">⭐ CAPS 2026</div>
+  </div>
+
+  <div style="background:white;border-radius:16px;padding:12px;margin:12px 0;">
+    <label>Select Grade & Topic:</label><br>
+    <select id="gradePick" onchange="loadDaily()" style="width:48%;padding:8px;border-radius:8px;">
+      <option value="10">Grade 10</option><option value="11">Grade 11</option><option value="12">Grade 12</option>
+    </select>
+    <select id="topicPick" onchange="loadDaily()" style="width:48%;padding:8px;border-radius:8px;">
+      <option value="Finance">Finance - VAT</option>
+      <option value="Interest">Interest & Loans</option>
+      <option value="Measurement">Measurement</option>
+      <option value="Maps">Maps & Scale</option>
+      <option value="Data">Data Handling</option>
+      <option value="Probability">Probability</option>
+      <option value="Tax">Tax & Inflation</option>
+    </select>
+  </div>
+
+  <div id="dailyList"></div>
+
+  <div style="text-align:center;margin:12px;">
+    <small>Progress: <span id="dp">0/5</span> completed today</small>
+    <div style="background:#ddd;height:8px;border-radius:10px;"><div id="dbar" style="background:#0a194e;height:8px;width:0%;border-radius:10px;"></div></div>
+  </div>
+</div>
+
+<script>
+const dailyData = {
+  Finance: {
+    Mon:{type:"THEORY",icon:"📖",title:"What is VAT?",task:"VAT is 15% in SA. Formula: Incl = Excl x 1.15. Excl = Incl ÷ 1.15. Learn 2 formulas.",time:"15 min"},
+    Tue:{type:"EXAMPLE",icon:"✏️",title:"Worked Example",task:"Shirt R200 excl. Incl = 200 x 1.15 = R230. VAT amount = R30. Try: R500 excl =?",time:"20 min"},
+    Wed:{type:"PRACTICE",icon:"💪",title:"10 Sums - No Calc",task:"1) R100+15% 2) R250+15% 3) R230 incl, find excl 4) R1150 incl, VAT? 5-10 in app Quiz",time:"25 min"},
+    Thu:{type:"QUIZ",icon:"🧠",title:"Speed Quiz 60s",task:"Play VAT Game: Get 15/20 to pass. 73 +15% =? is example. Beat your best!",time:"10 min"},
+    Fri:{type:"REAL LIFE",icon:"🏪",title:"Shop Challenge",task:"Go to shop, take 3 items, calculate incl price from excl. Photo your work. Share with class.",time:"30 min"}
+  },
+  Interest: {
+    Mon:{type:"THEORY",icon:"📖",title:"Simple vs Compound",task:"Simple: I = P×r×t. Compound: A = P(1+r)^n. Difference = interest on interest.",time:"15 min"},
+    Tue:{type:"EXAMPLE",icon:"✏️",title:"R5000 @8% 2yrs",task:"Simple: 5000x0.08x2=R800. Compound: 5000x1.08²=R5832. Which bigger? Why?",time:"20 min"},
+    Wed:{type:"PRACTICE",icon:"💪",title:"Loan Tables",task:"Calculate monthly repayment: R10000 loan, 12% pa, 12 months. Use: PMT formula",time:"25 min"},
+    Thu:{type:"QUIZ",icon:"🧠",title:"Interest Quiz",task:"Weekly Test Week 2 - 10 Qs. Need 12/20 to pass Gr11",time:"15 min"},
+    Fri:{type:"REAL LIFE",icon:"🏪",title:"Bank Visit",task:"Ask Capitec/Shoprite rates. Compare loan cost R2000 for 6 months.",time:"30 min"}
+  },
+  Data: {
+    Mon:{type:"THEORY",icon:"📖",title:"Mean Median Mode",task:"Mean = average. Median = middle. Mode = most frequent. Range = max-min.",time:"15 min"},
+    Tue:{type:"EXAMPLE",icon:"✏️",title:"Data: 2,5,7,7,9",task:"Mean=6, Median=7, Mode=7, Range=7. Calculate all 4.",time:"20 min"},
+    Wed:{type:"PRACTICE",icon:"💪",title:"Bar Graph Draw",task:"Draw bar graph of 5 friends ages. Label x,y axes. 100% CAPS Gr10.",time:"25 min"},
+    Thu:{type:"QUIZ",icon:"🧠",title:"Data Quiz",task:"Start Daily Quiz - 10 Qs on mean/median",time:"10 min"},
+    Fri:{type:"REAL LIFE",icon:"🏪",title:"Survey",task:"Survey 10 learners: favourite subject. Tally, bar graph, mean.",time:"30 min"}
+  }
+};
+
+function loadDaily(){
+  let grade=document.getElementById('gradePick').value;
+  let topic=document.getElementById('topicPick').value;
+  document.getElementById('dg').innerText=grade;
+  document.getElementById('dt').innerText=topic;
+  let data = dailyData[topic] || dailyData['Finance'];
+  let days=["Mon","Tue","Wed","Thu","Fri"];
+  let fullNames={Mon:"Monday - Theory",Tue:"Tuesday - Example",Wed:"Wednesday - Practice",Thu:"Thursday - Quiz",Fri:"Friday - Real Life"};
+  let html="";
+  let done=parseInt(localStorage.getItem('dailyDone_'+topic)||0);
+
+  days.forEach((d,i)=>{
+    let item=data[d] || data['Mon'];
+    let isDone = localStorage.getItem('daily_'+topic+'_'+d)=='1';
+    html+=`<div style="background:${isDone?'#e8f5e9':'white'};border-radius:14px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;border-left:5px solid ${isDone?'#4caf50':'#ffcc00'};">
+      <div><small style="background:#0a194e;color:#ffcc00;padding:2px 6px;border-radius:6px;">${item.type}</small><br><b>${item.icon} ${fullNames[d]}: ${item.title}</b><br><small>${item.task}</small><br><small>⏱ ${item.time}</small></div>
+      <button onclick="completeDaily('${topic}','${d}')" style="background:${isDone?'#4caf50':'#0a194e'};color:white;border:none;padding:8px 14px;border-radius:20px;">${isDone?'✓ Done':'Do'}</button>
+    </div>`;
+  });
+  document.getElementById('dailyList').innerHTML=html;
+  updateBar(topic);
+}
+
+function completeDaily(topic,day){
+  let key='daily_'+topic+'_'+day;
+  if(localStorage.getItem(key)=='1'){localStorage.removeItem(key);} else {localStorage.setItem(key,'1');}
+  loadDaily();
+}
+
+function updateBar(topic){
+  let days=["Mon","Tue","Wed","Thu","Fri"];
+  let c=0; days.forEach(d=>{if(localStorage.getItem('daily_'+topic+'_'+d)=='1')c++;});
+  document.getElementById('dp').innerText=c+"/5";
+  document.getElementById('dbar').style.width=(c/5*100)+"%";
+}
+
+// INIT
+loadDaily();
+let w=Math.ceil((Date.now()-new Date(new Date().getFullYear(),0,1))/604800000);
+document.getElementById('dw').innerText=w;
+</script>
+
 <body>
 <header>
 <h1>VUKONA PRESS <span style="color:var(--gold)">MAKHANANI v6.0</span></h1>
@@ -40,6 +139,7 @@ h2{color:var(--navy)} h3{color:#333;border-left:4px solid var(--gold);padding-le
 <div id="caps-list"></div>
 <div style="background:#fff8e1;padding:12px;border-radius:12px;margin-top:12px">
 <h3>🧮 Calculators (Offline)</h3>
+<button onclick="openTab(event,'daily')" style="background:#0a194e;color:#ffcc00;">📅 Daily</button>
 <button onclick="calcVAT()">VAT 15%</button>
 <button onclick="calcInterest()">Interest</button>
 <button onclick="calcTax()">Income Tax</button>
